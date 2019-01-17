@@ -1,0 +1,59 @@
+http://localhost:8000/myapp/students/
+
+
+git@github.com:disenQF/xpy05.git
+
+git clone https://github.com/disenQF/xpy05.git
+
+git clone https://github.com/disenQF/05data.git
+
+610039018@qq.com,狄老师的邮箱
+
+diyuhuan@1000phone.com狄老师的邮箱
+
+
+jupyter notebook
+
+
+"longen0707"
+it
+
+
+
+2010年的老号，之前也是在网上买的，游戏qq没聊过天，绝对安全，狂战一身无期限天域，荒古，圣剑，国庆套，各种黄金仓库，还有账号仓库，每个角色也开了装备栏，还有两件天空在修罗上，都是极品搬砖号，单刷各种秒，诚信出售。
+
+
+
+a1 = LinkExtractor('/html/gndy/dyzz/\d{8}/\d+?.html')
+
+a3 = LinkExtractor(restrict_xpaths='//div[@class="x"]')
+
+
+a1.extract_links(response)
+
+scrapy crawl guoxue -o guoxue.json
+
+
+ctrl+alt+l 去黄
+
+数据库索引怎么存，有什么作用
+
+课上问题：
+1.scoket的粘包和拆包
+2.wsgi和uwsgi与django之间的关系
+
+r+b w+b a+b 之间的区别
+
+
+
+
+
+http://www.xinpianchang.com/channel/index/id-31/sort-like
+
+vue.js
+reies为啥快
+
+
+RabbitMQ
+
+1
