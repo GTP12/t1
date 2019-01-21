@@ -1,0 +1,32 @@
+
+1.git分支
+实现自己模块时，建议创建一个新的分支，在此分支开发，测试.
+当测试ok时，向团队其他人员沟通是否可以合并到主分支。
+可能存在的问题：
+a.修改了公共的配置文件，如数据库连接，缓存等。 ----冲突问题
+主管或组长：在主分支去修改
+
+b.在自己的模块中，重复的创建其他模块的类或py脚本。----冲突
+组员： 事先沟通，独立一个文件目录
+实战命令：
+a. git checkout -b order
+创建order分支，并切换到order上
+b.git branch 查看分支
+c.git status 查看跟踪文件的状态
+d.git log 查看日志
+e.git merge master
+将master的分支合并到当前分支
+f.git reset --hard 分支编号（前几位）
+回退到指定的版本
+7）git rebase master 
+将主分支的代码衍和到当前的分支
+8）git checkout分支名
+切换分支
+
+pycharm的项目，需要在.gitignore文件中增加以下内容：
+__pycache__
+.idea
+venv
+lib
+.DS_Store
+*.log
