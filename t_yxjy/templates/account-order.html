@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+	<meta name="keywords" content=" " />
+	<meta name="description" content=" " />
+	<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'css/common.css' %}">
+	<link rel="stylesheet" href="{% static 'css/account-deal.css' %}">
+	<script src="{% static 'js/jquery-1.8.1.min.js' %}"></script>
+	<title>账号订单</title>
+</head>
+<body>
+     <div class="header">
+		<div class="wrapper clearfix">
+			<ul class="nav">
+				<li><a target="_blank" href="index.html">首页</a></li>
+				<li class="active"><a target="_parent" href="{% url 'yxjy:deal' %}">账号交易</a></li>
+				<li><a target="_blank" href="{% url 'yxjy:pur' %}">账号求购</a></li>
+				<li><a target="_blank" href="material-deal.html">材料交易</a></li>
+				<li><a target="_blank" href="material-purchase.html">材料求购</a></li>
+				<li><a target="_blank" href="">金币交易</a></li>
+			</ul>
+
+			<div class="user-info">
+
+				<!-- 我的订单 -->
+				<div class="register">
+					<a href=""><p>免费注册</p></a>
+				</div>
+				<div class="login">
+					<a href=""><p>登录</p></a>
+				</div>
+				<div class="order">
+					<a href="center.html"><p>个人中心</p></a>
+				</div>
+			</div>
+		</div>
+	</div>
+     <ul>
+			<li><span>购买数量：<strong style="color:#F00">* </strong></span><input type="text" id="stock" name="goodsPurchaseBean.stock" maxval="1" size="5" desc="购买数量" regexp="^[1-9]\d*$" regexp_desc="购买数量必须大于0" value="1" readonly="readonly"/> (可购 1 件)</li>
+			<li>
+				<span>收货方式：<strong style="color:#F00">* </strong></span> 账号交易
+			</li>
+			<li><span>所在区服：<strong style="color:#F00">* </strong></span>地下城与勇士 /西南区 /西南1区
+
+					<label style="color: #ff6700;">（跨三B账号）</label>
+
+			</li>
+			<input type="hidden" id="serviceprice" name="goodsPurchaseBean.serviceprice"  value="" />
+			<input type="hidden" id="addservicecost" name="goodsPurchaseBean.addservicecost" value=""/>
+			<input type="hidden" id="addservicename" name="goodsPurchaseBean.addservicename" value=""/>
+			<input type="hidden" id="addproperties" name="goodsPurchaseBean.addproperties" value=""/>
+
+
+			<li><span>电话号码：<strong style="color:#F00">* </strong></span><input type="text" name="goodsPurchaseBean.phone" maxlength="11" desc="电话号码" regexp="^1[0-9]{10}$" regexp_desc="无效的手机号码" value="18710958657" /></li>
+			<li><span>联系QQ：<strong style="color:#F00">* </strong></span><input type="text" name="goodsPurchaseBean.qq" maxlength="12" desc="联系QQ" regexp="^[0-9]{5,12}$" regexp_desc="无效的QQ号" value="" /></li>
+			<li><span>推广码：<strong style="color:#F00">&nbsp;&nbsp;</strong></span><input type="text" id="tgm" name="goodsPurchaseBean.promocode" maxlength="12" required="true" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,'') "  /></li>
+
+
+		</ul>
+		<div class="buy-btn"><a target="_blank" href="{% url 'yxjy:p_code' %}">确认购买</a></div>
+
+</body>
+</html>
