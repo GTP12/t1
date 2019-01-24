@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />  
 	<meta name="keywords" content=" " />  
 	<meta name="description" content=" " />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'css/common.css' %}">
+	<link rel="stylesheet" href="{% static 'css/center.css' %}">
+	<script src="{% static 'js/jquery-1.8.1.min.js' %}"></script>
+	<!-- <script src="js/Popt.js"></script>
+	<script src="js/cityJson.js"></script>
+	<script src="js/citySet.js"></script> -->
+	<script src="{% static 'js/center.js' %}"></script>
+
 	<link rel="stylesheet" href="../static/css/reset.css">
 	<link rel="stylesheet" href="../static/css/common.css">
 	<link rel="stylesheet" href="../static/css/details.css">

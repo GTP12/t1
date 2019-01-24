@@ -1,0 +1,65 @@
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+	<meta name="keywords" content="买卖发布 " />
+	<meta name="description" content=" 买卖发布" />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap-theme.min.css' %}">
+
+    <script src="{% static 'js/jquery-1.8.1.min.js' %}"></script>
+	<script src="{% static 'js/center.js' %}"></script>
+	<title>买卖发布</title>
+</head>
+<body>
+	<!-- 顶部导航 -->
+<div class="header">
+		<div class="wrapper clearfix">
+			<ul class="nav">
+				<li><a target="_blank" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_blank" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+				<li><a target="_blank" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li><a target="_blank" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
+				<li><a target="_blank" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
+{#                <li class="active"><a target="_parent" href="{% url 'transaction:Add' %}">买卖发布</a></li>#}
+
+			</ul>
+
+			<div class="user-info">
+
+				<!-- 我的订单 -->
+				<div class="register">
+					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
+				</div>
+				<div class="login">
+					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+				</div>
+				<div class="order">
+					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div style="width:100%;height: 300px;background-color: white;border: white"></div>
+{#    <link href="{% static 'bootstrap-3.3.7-dist' %}" rel="stylesheet">#}
+            <div align="center"><a href="#" class="btn btn-primary btn-lg active " role="button">发布账号</a>
+                <a href="{% url 'transaction:AddCount' %}" class="btn btn-default btn-lg active" role="button">点击发布</a><br>
+                <div style="width:100%;height: 100px;background-color: white;border: white"></div>
+                 <a href="#" class="btn btn-primary btn-lg active" role="button">发布材料</a>
+                    <a href="{% url 'transaction:stuff_add' %}" class="btn btn-default btn-lg active" role="button">点击发布</a><br>
+                <div style="width:100%;height: 100px;background-color: white;border: white"></div>
+                <a href="#" class="btn btn-primary btn-lg active" role="button">发布金币</a>
+                    <a href="{% url 'transaction:gold_add' %}" class="btn btn-default btn-lg active" role="button">点击发布</a><br>
+                <div style="width:100%;height: 100px;background-color: white;border: white"></div>
+                <a href="#" class="btn btn-primary btn-lg active" role="button">收购账号</a>
+                    <a href="{% url 'transaction:add_buy' %}" class="btn btn-default btn-lg active" role="button">点击发布</a><br>
+
+            </div>
+</body>
+</html>

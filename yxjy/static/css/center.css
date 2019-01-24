@@ -1142,10 +1142,20 @@
 	width: 184px;
 	text-align: center;
 }
-.publishBtn{
-	float: right;
+.publishBtn1{
+	/*float: right;*/
 	background-color: #6a9ce4;
-	margin-left: 570px;
+	margin-left: 300px;
+}
+.publishBtn2{
+	/*float: right;*/
+	background-color: #6a9ce4;
+	margin-left: 340px;
+}
+.publishBtn3{
+	/*float: right;*/
+	background-color: #6a9ce4;
+	margin-left: 380px;
 }
 .binding-buyer .b-i-status{
 	position: relative;cursor: pointer;

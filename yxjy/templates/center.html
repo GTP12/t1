@@ -8,39 +8,42 @@
 	<meta name="description" content=" " />
 	<link rel="stylesheet" href="{% static 'css/reset.css' %}">
 	<link rel="stylesheet" href="{% static 'css/common.css' %}">
-	<link rel="stylesheet" href="../static/css/center.css">
-	<script src="../static/js/jquery-1.8.1.min.js"></script>
+	<link rel="stylesheet" href="{% static 'css/center.css' %}">
+	<script src="{% static 'js/jquery-1.8.1.min.js' %}"></script>
 	<!-- <script src="js/Popt.js"></script>
 	<script src="js/cityJson.js"></script>
 	<script src="js/citySet.js"></script> -->
-	<script src="../static/js/center.js"></script>
+	<script src="{% static 'js/center.js' %}"></script>
+
 	<title>个人中心</title>
 </head>
 <body>
 	<!-- 顶部导航 -->
+
 	<div class="header">
 		<div class="wrapper clearfix">
 			<ul class="nav">
-				<li><a href="">首页</a></li>
-				<li><a target="_blank" href="account-deal.html">账号交易</a></li>
-				<li><a target="_blank" href="account-purchase.html">账号求购</a></li>
-				<li><a target="_blank" href="material-deal.html">材料交易</a></li>
-				<li><a target="_blank" href="material-purchase.html">材料求购</a></li>
-				<li><a target="_blank" href="">金币交易</a></li>
-				<li><a target="_blank" href="">二手电脑</a></li>
+				<li><a target="_blank" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_blank" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+				<li><a target="_blank" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li><a target="_blank" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
+				<li><a target="_blank" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
+                <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+
 			</ul>
 
 			<div class="user-info">
-				
+
 				<!-- 我的订单 -->
 				<div class="register">
-					<a href=""><p>免费注册</p></a>
+					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
 				</div>
 				<div class="login">
-					<a href=""><p>登录</p></a>
+					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
 				</div>
-				<div class="order">
-					<a href=""><p>个人中心</p></a>
+				<div class="order active">
+{#                    <a target="_parent" href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>#}
+					<a target="_blank" href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
 				</div>
 			</div>
 		</div>
@@ -53,7 +56,7 @@
 				<!-- 用户信息 -->
 				<div class="user-card">
 					<div class="user-profile fl">
-						<img src="../static/images/icon/profile.png" alt="">
+						<img src="{% static 'images/icon/profile.png' %}" alt="无图片">
 					</div>
 					<div class="user-name fl">
 						1475304386@qq.com
@@ -526,7 +529,6 @@
 								<input type="checkbox" name="" id="">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
-								<div class=" o-btn publishBtn">立即发布</div>
 							</div>
 							<div class="m-order-list">
 								<ul class="list-wrapper">
@@ -573,8 +575,8 @@
 								<input type="checkbox" name="" id="">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
-								<div class=" o-btn publishBtn">立即发布</div>
-							</div>
+
+                            </div>
 							<div class="m-order-list">
 								<ul class="list-wrapper">
 									<li class="item-order">
@@ -620,7 +622,7 @@
 								<input type="checkbox" name="" id="">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
-								<div class=" o-btn publishBtn">立即发布</div>
+
 							</div>
 							<div class="m-order-list">
 								<ul class="list-wrapper">
@@ -746,7 +748,7 @@
 								<input type="checkbox" name="" id="">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
-								<div class=" o-btn publishBtn">立即发布</div>
+
 							</div>
 							<div class="m-order-list">
 								<ul class="list-wrapper">
@@ -795,8 +797,8 @@
 								<input type="checkbox" name="" id="">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
-								<div class=" o-btn publishBtn">立即发布</div>
-							</div>
+								<div><a class=" o-btn publishBtn1" href="{% url 'transaction:AddCount' %}">重新发布</a></div>
+                            </div>
 							<div class="m-order-list">
 								<ul class="list-wrapper">
 									<li class="item-order">
@@ -1370,7 +1372,7 @@
 					</div>
 				</div>
 
-			</div>
-		</div>
-	</body>
-	</html>
+            </div>
+        </div>
+</body>
+</html>
