@@ -23,12 +23,12 @@
 	<div class="header">
 		<div class="wrapper clearfix">
 			<ul class="nav">
-				<li><a target="_blank" href="{% url 'transaction:index' %}">首页</a></li>
-				<li><a target="_blank" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-				<li><a target="_blank" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
 				<li class="active"><a target="_parent" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
-				<li><a target="_blank" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
-                <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
+                <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 
 			</ul>
 
@@ -50,7 +50,7 @@
 {#<div class="header-02-box boxshadow">#}
 {#    <div class="header-02 clearfix">#}
 {#        <h1 class="logo"><a href="http://www.7881.com/" title="游戏金币交易平台"><img src="http://pic.7881.com/7881-2016/images/logo-small.png" alt="7881logo" /></a><em></em><span>收银台</span></h1>#}
-{#        <h3><a href="http://www.7881.com/personal.html" target="_blank">个人中心</a><em>|</em><a href="http://www.7881.com/procurement/queryMyProcureOrder.action" target="_blank">我的订单</a></h3>#}
+{#        <h3><a href="http://www.7881.com/personal.html" target="_self">个人中心</a><em>|</em><a href="http://www.7881.com/procurement/queryMyProcureOrder.action" target="_self">我的订单</a></h3>#}
 {#    </div>#}
 {#</div>#}
 <!-- 通用头部02 End -->
@@ -225,15 +225,15 @@
     <div class="footer-link-box">
         <div class="footer-link">
             <div class="footer-link-a">
-                <a href="http://www.7881.com/aboutus.html" target="_blank" rel="nofollow">关于7881</a><em>|</em>
-                <a href="http://www.7881.com/contactus.html" target="_blank" rel="nofollow">联系我们</a><em>|</em>
-                <a href="http://www.7881.com/copyright.html" target="_blank" rel="nofollow">免责声明</a><em>|</em>
-                <a href="http://www.7881.com/hr.html" target="_blank" rel="nofollow">诚聘英才</a><em>|</em>
-                <a href="http://www.7881.com/ParentalControls.jsp" target="_blank" rel="nofollow">家长监护</a><em>|</em>
-                <a href="http://www.7881.com/cooperation.html" target="_blank" rel="nofollow">商户合作</a><em>|</em>
-                <a href="http://www.7881.com/sitemap.html" target="_blank">网站地图</a>
+                <a href="http://www.7881.com/aboutus.html" target="_self" rel="nofollow">关于7881</a><em>|</em>
+                <a href="http://www.7881.com/contactus.html" target="_self" rel="nofollow">联系我们</a><em>|</em>
+                <a href="http://www.7881.com/copyright.html" target="_self" rel="nofollow">免责声明</a><em>|</em>
+                <a href="http://www.7881.com/hr.html" target="_self" rel="nofollow">诚聘英才</a><em>|</em>
+                <a href="http://www.7881.com/ParentalControls.jsp" target="_self" rel="nofollow">家长监护</a><em>|</em>
+                <a href="http://www.7881.com/cooperation.html" target="_self" rel="nofollow">商户合作</a><em>|</em>
+                <a href="http://www.7881.com/sitemap.html" target="_self">网站地图</a>
             </div>
-            <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文 〔2018〕9230-174号</p>
+            <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_self">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文 〔2018〕9230-174号</p>
         </div>
     </div>
 </div>
