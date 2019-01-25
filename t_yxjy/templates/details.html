@@ -2,44 +2,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes"/>
-    <meta name="keywords" content=" "/>
-    <meta name="description" content=" "/>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />  
+	<meta name="keywords" content=" " />  
+	<meta name="description" content=" " />
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-    <link rel="stylesheet" href="{% static 'css/common.css' %}">
-    <link rel="stylesheet" href="{% static 'css/details.css' %}">
-    <script src="{% static 'js/jquery-1.8.1.min.js' %}"></script>
-    <title>商品详情</title>
+	<link rel="stylesheet" href="{% static 'css/common.css' %}">
+	<link rel="stylesheet" href="{% static 'css/center.css' %}">
+	<script src="{% static 'js/jquery-1.8.1.min.js' %}"></script>
+	<!-- <script src="js/Popt.js"></script>
+	<script src="js/cityJson.js"></script>
+	<script src="js/citySet.js"></script> -->
+	<script src="{% static 'js/center.js' %}"></script>
+
+	<link rel="stylesheet" href="../static/css/reset.css">
+	<link rel="stylesheet" href="../static/css/common.css">
+	<link rel="stylesheet" href="../static/css/details.css">
+	<script src="../static/js/jquery-1.8.1.min.js"></script>
+	<title>商品详情</title>
 </head>
 <body>
-<!-- 顶部导航 -->
-<div class="header">
-    <div class="wrapper clearfix">
-        <ul class="nav">
-           <li><a target="_blank" href="index.html">首页</a></li>
-				<li class="active"><a target="_parent" href="{% url 'yxjy:deal' %}">账号交易</a></li>
-				<li><a target="_blank" href="{% url 'yxjy:pur' %}">账号求购</a></li>
-				<li><a target="_blank" href="material-deal.html">材料交易</a></li>
-				<li><a target="_blank" href="material-purchase.html">材料求购</a></li>
-				<li><a target="_blank" href="">金币交易</a></li>
-        </ul>
+	<!-- 顶部导航 -->
+	<div class="header">
+		<div class="wrapper clearfix">
+			<ul class="nav">
+				<li class="active"><a href="">首页</a></li>
+				<li><a href="">账号交易</a></li>
+				<li><a href="">账号求购</a></li>
+				<li><a href="">材料交易</a></li>
+				<li><a href="">材料求购</a></li>
+				<li><a href="">金币交易</a></li>
+				<li><a href="">二手电脑</a></li>
+			</ul>
 
-        <div class="user-info">
-            <!-- 头像 -->
-            <div class="profile">
-                <a href=""><img src="images/icon/profile.png" alt=""></a>
-            </div>
-            <!-- 我的订单 -->
-            <div class="order">
-                <a href=""><p>我的订单</p></a>
-            </div>
-        </div>
-    </div>
-</div>
+			<div class="user-info">
+				<!-- 头像 -->
+				<div class="profile">
+					<a href=""><img src="../static/images/icon/profile.png" alt=""></a>
+				</div>
+				<!-- 我的订单 -->
+				<div class="order">
+					<a href=""><p>我的订单</p></a>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<div class="content fl">
+	<div class="content fl">
 		<div class="wrapper detail-wrapper clearfix">
 			<!-- 商品详情 -->
 			<div class="details fl">
@@ -52,9 +61,9 @@
 						</div>
 						<div class="img-sm">
 							<ul>
-								<li class="active"><img src="{% static 'images/test.jpg' %}" alt=""></li>
-								<li><img src="{% static 'images/detail-img.jpg' %}" alt=""></li>
-								<li><img src="{% static 'images/tes.jpg' %}" alt=""></li>
+								<li class="active"><img src="../static/images/test.jpg" alt=""></li>
+								<li><img src="../static/images/detail-img.jpg" alt=""></li>
+								<li><img src="../static/images/tes.jpg" alt=""></li>
 							</ul>
 						</div>
 					</div>
@@ -90,22 +99,22 @@
 								<span  class="amount-btn" id="plus">+</span>
 							</div>
 							<a href="" >
-								<div class="buy-btn"><a target="_blank" href="{% url 'yxjy:a_order' %}">
+								<div class="buy-btn">
 									立即购买
-								</a></div>
+								</div>
 							</a>
 						</div>
 					</div>
 				</div>
 				<!-- 商品介绍 -->
-
+				
 			</div>
 			<!-- 卖家信息 -->
 			<div class="right-panel fr">
 				<div class="seller fl">
-					<div class="seller-info">
+					<div class="seller-info">	
 						<div class="seller-profile">
-							<img src="{% static 'images/icon/profile.png' %}" alt="">
+							<img src="../static/images/icon/profile.png" alt="">
 						</div>
 						<div class="seller-credit">
 							<span>卖家信誉：</span>
@@ -140,8 +149,8 @@
 				</div>
 				<div class="intro-tabs">
 					<div class="tab tab1">
-						<img src="{% static 'images/TB2Z_1YcfQs8KJjSZFEXXc9RpXa-126446588.jpg' %}" alt="">
-						<img src="{% static 'images/TB2lOARhmfD8KJjSszhXXbIJFXa-126446588.jpg' %}" alt="">
+						<img src="../static/images/TB2Z_1YcfQs8KJjSZFEXXc9RpXa-126446588.jpg" alt="">
+						<img src="../static/images/TB2lOARhmfD8KJjSszhXXbIJFXa-126446588.jpg" alt="">
 					</div>
 					<div class="tab tab2" style="display: none;">
 						tab2
@@ -157,7 +166,7 @@
 				</div>
 				<div class="r-list fl">
 					<div class="r-img fl">
-						<img src="{% static 'images/wbm.png' %}" alt="">
+						<img src="../static/images/wbm.png" alt="">
 					</div>
 					<div class="r-text-c fr">
 						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
@@ -166,7 +175,7 @@
 				</div>
 				<div class="r-list fl">
 					<div class="r-img fl">
-						<img src="{% static 'images/wbm.png' %}" alt="">
+						<img src="../static/images/wbm.png" alt="">
 					</div>
 					<div class="r-text-c fr">
 						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
@@ -175,7 +184,7 @@
 				</div>
 				<div class="r-list fl">
 					<div class="r-img fl">
-						<img src="{% static 'images/wbm.png' %}" alt="">
+						<img src="../static/images/wbm.png" alt="">
 					</div>
 					<div class="r-text-c fr">
 						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
@@ -184,7 +193,7 @@
 				</div>
 				<div class="r-list fl">
 					<div class="r-img fl">
-						<img src="{% static 'images/wbm.png' %}" alt="">
+						<img src="../static/images/wbm.png" alt="">
 					</div>
 					<div class="r-text-c fr">
 						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
@@ -211,9 +220,9 @@
 
 		var plus = $('#plus');
 		var minus = $('#minus');
-
+		
 		var amountNum = $('#amount').text();
-
+		
 		plus.click(function(event) {
 			amountNum++;
 			$('#amount').text(amountNum);
@@ -240,8 +249,8 @@
 			});
 		});
 
-
-
+		
+		
 	</script>
 </body>
 </html>

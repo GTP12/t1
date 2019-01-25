@@ -1,0 +1,579 @@
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <title>地下城与勇士游戏账号发布页</title>
+    <meta name="keywords" content="地下城与勇士游戏账号发布页" />
+    <meta name="description" content="地下城与勇士游戏账号发布页" />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'css/common.css' %}">
+
+    <link type="text/css" rel="stylesheet" href="http://pic.7881.com/7881-2016/common/common-2016.css?v=20180329" />
+    <link type="text/css" rel="stylesheet" href="http://pic.7881.com/7881-2016/css/goods-publish/publish.css?v=20180321" />
+            <link rel="stylesheet" type="text/css" href="http://pic.7881.com/7881-2016/css/goods-publish/publish-type-02.css?v=0.0.1"/>
+        <link rel="icon" type="image/png" href="/static/favicon.ico">
+</head>
+<body>
+	<!-- 顶部导航 -->
+	<div class="header" style="width: 100%">
+		<div class="wrapper clearfix">
+			<ul class="nav">
+				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li><a target="_self" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
+                <li class="active"><a target="_parent" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+
+			</ul>
+
+			<div class="user-info">
+
+				<!-- 我的订单 -->
+				<div class="register">
+					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
+				</div>
+				<div class="login">
+					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+				</div>
+				<div class="order">
+					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div style="width:100%;height: 100px;background-color: white;border: white"></div>
+<div class="publish-header w980">
+
+    <p class="orange-stip">
+        <span>4396温馨提示：</span><br/>
+                    1、为保障地下城与勇士帐号交易安全，您出售的帐号将进行延迟7天打款，此期间请勿修改帐号资料，否则将号财两空。</br>
+2、如果您出售的帐号出现找回情况，我们将把您在7881登记的所有信息提供给公安机关和买家。</br>
+3、被骗用户都有出现被假客服联系的情况，因此有客服联系时，可点击【 客服验证中心】验证客服真假或者联系首页客服，为您验证客服真假。
+
+    </p>
+</div>
+            <div class="publish-step-01 fill-goods-info">
+                <div class="pub-tit">
+                    <div class="line-left"></div>
+                    <div class="steptit">01-填写商品信息</div>
+                    <div class="line-right"></div>
+                </div>
+                <div class="one-step-con">
+                    <div class="title-group-box common-form height-30 clearfix" id="vProps">
+
+</div>
+                    <div class="goods-box common-form height-36 clearfix">
+                        <div class="form-item clearfix" style="z-index: 1;">
+    <div class="form-item-l"><i>*</i><span>商品标题：</span></div>
+    <div class="form-item-r" style="z-index: 1;">
+        <p class="goods-title" name="spellTitle"><em>【</em><span></span><em>】</em></p>
+        <p class="goods-title-extra"><em class="iconfont"></em><input placeholder="您可以写填写个性化商品标题，吸引买家眼球" datatype="*" type="text" class="common-input w768 h-36" name="inputTitle" id="" value="" maxlength="50"><span><i>0</i>/50</span><span class="Validform_checktip"></span></p>
+    </div>
+    <input name="title" type="hidden" />
+    <p class="goods-title-extra aftertit">
+            </p>
+</div>
+<div class="form-item clearfix" style="z-index: 1;">
+    <div class="form-item-l"><i>*</i><span>卖多少钱：</span></div>
+    <div class="form-item-r" style="z-index: 1;">
+        <input maxlength="12" datatype="*,howmuch" type="text" class="common-input w100 h-36 wntsell onlynums" name="price" id="" value="">
+        <span class="val-unit">元</span>
+        <em class="serfee">需要收取手续费<i>0.0</i>元<a href="http://www.7881.com/helpcenter/73790970494518017.html" target="_self">[了解更多]</a></em>
+    </div>
+</div>
+<div class="form-item mrg-b-38 clearfix" style="z-index: 1;">
+    <div class="form-item-l"><span>账号描述：</span></div>
+    <div class="form-item-r" style="z-index: 1;">
+        <textarea placeholder="描述一下您的账号情况，丰富详细的描述将更有利于帮助您尽快找到合适的买家。" maxlength="1000" name="description"></textarea>
+        <p class="form-tips-b">请您将不出售的商品转移出账号，如未转移，则视为与账号一起出售</p>
+    </div>
+</div>
+                        <div class="form-item twochose clearfix" style="z-index: 1;">
+    <div class="form-item-l"><i>*</i><span>账号截图服务：</span></div>
+    <div class="form-item-r" datatype="onetwo" style="z-index: 1;">
+        <input type="hidden" id="hideList" value="[{&quot;machineUploadList&quot;:[],&quot;picType&quot;:&quot;0&quot;,&quot;serviceCost&quot;:0,&quot;userUploadList&quot;:[{&quot;sort&quot;:2,&quot;typeName&quot;:&quot;&#20010;&#20154;&#20449;&#24687;&quot;,&quot;urlList&quot;:[&quot;http://userimg.7881.com/2121/2017-11-28/65ee3113a45a47628c07fed7cf90e609.jpg&quot;]},{&quot;sort&quot;:3,&quot;typeName&quot;:&quot;&#32972;&#21253;&quot;,&quot;urlList&quot;:[&quot;http://userimg.7881.com/2121/2017-09-07/b9cbfd3ecdd44398804ed6a6816c4fc1.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/946b8229e0534982a8bc2e9154da2314.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/512b5e9affa5411ba7143243f9a472cb.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/d96caf47de8f4c13af3adaae0d0d91f6.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/e0535532410349bf885c46dec850a02a.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/cc81d4bb4d8e442ea31dba1629eaf3f9.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/d2431eed2ce14beabef38504091c7781.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/0c0d83ef003048fc98e79325381cbdba.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/a95fb7d4077248b6be1925c919020987.jpg&quot;]},{&quot;sort&quot;:4,&quot;typeName&quot;:&quot;&#25216;&#33021;&#26639;&quot;,&quot;urlList&quot;:[&quot;http://userimg.7881.com/2121/2017-11-28/3215474de0df4cd2b756240b677ea4d5.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-11-28/8c962576b34b4552b3ce04941002df01.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-11-28/63fa0b07cdb84bcd87d56f13a7ce89f1.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-11-28/628469da83b245ed8af1f7b5379c1e04.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-11-28/94c6ffff528d4f399ed68922fd2990cf.jpg&quot;]},{&quot;sort&quot;:5,&quot;typeName&quot;:&quot;&#20179;&#24211;&quot;,&quot;urlList&quot;:[&quot;http://userimg.7881.com/2121/2017-09-07/7f32840e342b43499796bf6bf0d88fbc.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/b3533b8833b34a14aa7469886ced9caa.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/7fb641c5aa564bc3a940169e411496dc.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/d014bf448e504da884ea98cce2e26b91.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/31a97259ce93460bba842f3e232cd835.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/abc595ce3a6744569959f11d3bc4f559.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/38e38d7b963842faafd4047fa62dd830.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/4a74850094884a758c07d35f927c5063.jpg&quot;,&quot;http://userimg.7881.com/2121/2017-09-07/36134f51d62547099e6928aa83d0cab8.jpg&quot;]},{&quot;sort&quot;:7,&quot;typeName&quot;:&quot;&#28216;&#25103;&#20027;&#30028;&#38754;&quot;,&quot;urlList&quot;:[&quot;http://userimg.7881.com/2121/2017-11-28/e6688924c78b426986670fefd2a124f0.jpg&quot;]}]},{&quot;machineUploadList&quot;:[&quot;http://userimg.7881.com/2121/2017-09-07/741969bde52f4e90ad1d14229e36d4a7.png&quot;],&quot;picType&quot;:&quot;1&quot;,&quot;serviceCost&quot;:5,&quot;userUploadList&quot;:[]}]">
+        <input type="hidden" name="goodsImages">
+        <input type="hidden" name="transVoucherImages">
+        <input type="hidden" name="machinePrintScreenCert">
+        <input type="hidden" name="userPrintScreenCert">
+        <input type="hidden" name="passwordcard">
+        <input type="hidden" name="hasUploadIdcard">
+        <input type="hidden" name="supportRoleSeparation">
+        <input type="hidden" name="supportAccountTransfer">
+        <input type="hidden" name="needUploadTransVoucher">
+                                                                <div class="upload-box" filenumlimit="30">
+                        <div class="upload-title">
+                            <label class="title-left">
+                                <input type="checkbox" id="userCertCbox">
+                                <span>自行上传截图  </span>
+                            </label>
+                            <p><span>免费</span>，可以上传您认为有卖点的账号图片</p>
+                        </div>
+                        <div class="upload-content">
+                            <p class="orange-stip">
+                                1.如您的帐号有密保手机，手机令牌或者安全锁，请解除以便账号能够顺利交易，否则可能无法通过审核；<br>
+                                2.截图中不能带有人物角色名、QQ号、联系方式、广告等违规信息(违规将被删除)，支持jpg、png格式；<br>
+                                3.上传装备、人物属性等图片建议800×800以上，单张图片需小于2M，买家购买时可大图查看，更利于出售。
+                            </p>
+
+                                                            <div class="upload-tabs clearfix">
+                                    <ul>
+                                        <li class="on" >个人信息<em></em></li>
+                                    </ul>
+                                </div>
+
+                            <p class="upload-tips"><span><em class="iconfont"></em>请自行登录账号截图上传，合计最多上传30张，每张图片的大小不能超过2M</span><b>还能上传<em id="residueNum">30</em>张</b></p>
+                            <div class="upload-area printScreen" datatype="acc_nopic">
+                                <div id="uploader" class="bl-uploader-box clearfix">
+                                    <!--用来存放文件信息-->
+                                    <div id="thelist" class="uploader-list"></div>
+                                    <div class="btns">
+                                        <div id="picker" class="tppicker">
+                                            <em class="iconfont"></em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="Validform_checktip"></span>
+                        </div>
+                    </div>
+                                                                                        <div class="upload-box">
+                            <div class="upload-title">
+                                <label>
+                                    <input type="checkbox" id="machineCertCbox">
+                                    <span>上号截图认证</span>
+                                </label>
+                                                                    <p><span>5元/次</span>，费用将在交易成功后自动扣除</p>
+                                                            </div>
+                            <div class="upload-content">
+                                <p class="orange-stip">
+                                    1.据7881准确数据统计，选择“上号截图认证”服务，可以有效的将出售成功率提升80%以上；<br>
+                                    2.为保证客服顺利上号截图，请您提供正确的密码及密保卡信息，并在发布后半小时内不要登录游戏或修改相关密码；<br>
+                                    3.如您的帐号有密保手机，手机令牌或者安全锁，请解除以便账号能够顺利交易，否则可能无法通过审核。
+                                </p>
+                                <div class="imgs-exp">
+                                                                                                                        <img src="http://userimg.7881.com/2121/2017-09-07/741969bde52f4e90ad1d14229e36d4a7.png" width="100%" height="112">
+                                                                                                            </div>
+                            </div>
+                        </div>
+
+
+    </div>
+    <span class="Validform_checktip"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="publish-step-02 fill-account-info">
+                <div class="pub-tit">
+                    <div class="line-left"></div>
+                    <div class="steptit">02-填写账号资料</div>
+                    <div class="line-right"></div>
+                </div>
+                    <div class="account-info-con">
+        <div class="common-form height-30" id="gameAccountInfo">
+            <div class="form-item clearfix" style="z-index: 1;">
+                <div class="form-item-l"><i>*</i><span>所在大区：</span></div>
+                <div class="form-item-r" style="z-index: 1;">
+                    <div class="game-ipt">
+                        <input type="text" class="common-input h-30 Validform_error" name="parameters[54]" value="" datatype="gameAccount,checkTransVoucher" placeholder="请输入游戏账号" nullmsg="请输入游戏账号">
+                        <span class="Validform_checktip Validform_wrong">请填写正确的信息</span>
+                    </div><em class="form-tips-r">游戏区应真实存在。</em>
+                </div>
+             </div>
+
+            <div class="form-item clearfix" style="z-index: 1;">
+                <div class="form-item-l"><i>*</i><span>交易类型：</span></div>
+                <div class="form-item-r" style="z-index: 1;">
+                    <div class="game-ipt">
+                        <input type="text" class="common-input h-30 Validform_error" name="parameters[55]" value="" datatype="gameAccount,checkTransVoucher" placeholder="请输入游戏账号" nullmsg="请输入游戏账号">
+                        <span class="Validform_checktip Validform_wrong">请填写正确的信息</span>
+                    </div><em class="form-tips-r">请选择账号交易或者金币材料交易。</em>
+                </div>
+             </div>
+
+            <div class="form-item clearfix" style="z-index: 1;">
+                <div class="form-item-l"><i>*</i><span>游戏账号：</span></div>
+                <div class="form-item-r" style="z-index: 1;">
+                    <div class="game-ipt">
+                        <input type="text" class="common-input h-30 Validform_error" name="parameters[56]" value="" datatype="gameAccount,checkTransVoucher" placeholder="请输入游戏账号" nullmsg="请输入游戏账号">
+                        <span class="Validform_checktip Validform_wrong">游戏账号不能包含中文！</span>
+                    </div><em class="form-tips-r">游戏账号不要与7881账号一致，以避免资金被盗的风险。</em>
+                </div>
+             </div>
+            <div class="form-item clearfix" style="z-index: 1;">
+                <div class="form-item-l"><i>*</i><span>游戏密码：</span></div>
+                <div class="form-item-r" style="z-index: 1;"><div class="game-ipt">
+                    <input type="password" class="common-input h-30" name="parameters[57]" value="" datatype="*|hideYs" placeholder="请输入游戏密码" nullmsg="请输入游戏密码"><span class="Validform_checktip Validform_right">通过信息验证！</span>
+                    </div><em class="form-tips-r">腾讯异地登录会出现冻结保护，请您先到QQ安全中心绑定手机后再发布。</em>
+                </div>
+            </div>
+            <div class="form-item clearfix" style="z-index: 1;">
+                <div class="form-item-l"><i>*</i><span>确认输入密码：</span></div>
+                <div class="form-item-r" style="z-index: 1;">
+                    <div class="game-ipt">
+                        <input type="password" class="common-input h-30 Validform_error" name="parameters[59]" value="" datatype="*|hideYs" recheck="parameters[57]" errormsg="您两次输入的信息不一致" placeholder="请输入确认输入密码" nullmsg="请输入确认输入密码">
+                        <span class="Validform_checktip Validform_wrong">您两次输入的信息不一致</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-item clearfix" style="z-index: 1;">
+                <div class="form-item-l"><i>*</i><span>游戏角色名：</span></div>
+                <div class="form-item-r" style="z-index: 1;">
+                    <div class="game-ipt">
+                        <input type="text" class="common-input h-30" name="parameters[58]" value="" datatype="*|hideYs" placeholder="请输入游戏角色名" nullmsg="请输入游戏角色名">
+                        <span class="Validform_checktip Validform_right">通过信息验证！</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-item clearfix" style="z-index: 1;">
+                <div class="form-item-l"><span>身份证号码：</span></div>
+                <div class="form-item-r" style="z-index: 1;">
+                    <div class="game-ipt">
+                        <input type="text" class="common-input h-30 Validform_error" name="parameters[59828]" value="" datatype="idcard|orNull" placeholder="请输入身份证号码" nullmsg="请输入身份证号码">
+                        <span class="Validform_checktip Validform_wrong">请填写正确信息！</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+                <div class="account-info-con" style="display: none;">
+                    <div class="common-form height-30">
+
+                        <div class="form-item clearfix">
+                            <div class="form-item-l"><span>安全交易码：</span></div>
+                            <div class="form-item-r">
+                                <div class="game-ipt">
+                                    <input type="text" class="common-input h-30" name="tradeCode" id="" value="" placeholder="请输入安全交易码" nullmsg="请输入安全交易码" maxlength="16"/>
+                                </div>
+                                <em class="form-tips-r">请填写您的安全交易码。</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="publish-step-03 perfect-deal-info">
+                <div class="pub-tit">
+                    <div class="line-left"></div>
+                    <div class="steptit">03-完善交易选项</div>
+                    <div class="line-right"></div>
+                </div>
+                <div class="deal-info-con">
+    <div class="common-form height-30">
+        <div class="form-item clearfix">
+    <div class="form-item-l"><i>*</i><span>指定卖家购买：</span></div>
+    <div class="form-item-r">
+        <div class="yesorno"><label><input type="radio" name="designatedPurchase"  value="1"/>是</label><label><input type="radio" name="designatedPurchase"  value="2" checked="checked"/>否</label><span>指定买家购买商品有效期为30分钟</span></div>
+    </div>
+</div>
+<div class="form-item clearfix detacode">
+    <div class="form-item-l"><i>*</i><span>交易暗码：</span></div>
+    <div class="form-item-r">
+        <div class="game-ipt">
+            <input type="text" class="common-input h-30 codeipt"  placeholder="请输入交易码" maxlength="6" name="transKey" id="" value="" datatype="haszd" nullmsg="请输入正确的交易码" errormsg="请输入正确的交易码"/>
+        </div>
+        <em class="form-tips-r">指定卖家购买商品下单时需要填写交易暗码方可购买，交易暗码最多可输入6位数字</em>
+    </div>
+</div>        <div class="form-item clearfix">
+    <div class="form-item-l"><i>*</i><span>商品有效期：</span></div>
+    <div class="form-item-r">
+        <div class="comselect h-30">
+            <div class="comselect-val">
+                                    <input type="text" readonly="readonly" class="comselect-input" placeholder="选择有效期" value="30天" data-value="30" />
+                    <input datatype="comselect" type="hidden" name="effectiveDays" value="30" class="value"  nullmsg="请选择有效期" />
+                    <div class="comselect-icon"><em class="iconfont icon-down">&#xe60f;</em><em class="iconfont icon-up">&#xe604;</em></div>
+                            </div>
+            <ul class="comselect-menu">
+                <li data-value="">选择有效期</li>
+                                    <li data-value="180">180天</li>
+                                    <li data-value="120">120天</li>
+                                    <li data-value="90">90天</li>
+                                    <li data-value="60">60天</li>
+                                    <li data-value="30">30天</li>
+                            </ul>
+        </div>
+    </div>
+</div>
+        <div class="form-item clearfix timefb"
+     style="display: block"  >
+    <div class="form-item-l"><i>*</i><span>交易方便时间：</span></div>
+    <div class="form-item-r">
+        <div class="yesorno">每天
+            <div class="comselect w90 h-30">
+                <div class="comselect-val">
+                    <input type="text" readonly="readonly" class="comselect-input" placeholder="00:00" value="00:00" data-value="00:00" />
+                    <input type="hidden" datatype="comselect|hideTe" name="tradeStartTime" value="00:00" class="value" />
+                    <div class="comselect-icon"><em class="iconfont icon-down">&#xe60f;</em><em class="iconfont icon-up">&#xe604;</em></div>
+                </div>
+                <ul class="comselect-menu">
+                    <li data-value="00:00">00:00</li>
+                    <li data-value="01:00">01:00</li>
+                    <li data-value="02:00">02:00</li>
+                    <li data-value="03:00">03:00</li>
+                    <li data-value="04:00">04:00</li>
+                    <li data-value="05:00">05:00</li>
+                    <li data-value="06:00">06:00</li>
+                    <li data-value="07:00">07:00</li>
+                    <li data-value="08:00">08:00</li>
+                    <li data-value="09:00">09:00</li>
+                    <li data-value="10:00">10:00</li>
+                    <li data-value="11:00">11:00</li>
+                    <li data-value="12:00">12:00</li>
+                    <li data-value="13:00">13:00</li>
+                    <li data-value="14:00">14:00</li>
+                    <li data-value="15:00">15:00</li>
+                    <li data-value="16:00">16:00</li>
+                    <li data-value="17:00">17:00</li>
+                    <li data-value="18:00">18:00</li>
+                    <li data-value="19:00">19:00</li>
+                    <li data-value="20:00">20:00</li>
+                    <li data-value="21:00">21:00</li>
+                    <li data-value="22:00">22:00</li>
+                    <li data-value="23:00">23:00</li>
+                </ul>
+            </div>
+            到
+            <div class="comselect w90 h-30">
+                <div class="comselect-val">
+                    <input type="text" readonly="readonly" class="comselect-input" placeholder="24:00" value="24:00" data-value="24:00" />
+                    <input type="hidden" datatype="comselect|hideTe" name="tradeEndTime" value="24:00" class="value" />
+                    <div class="comselect-icon"><em class="iconfont icon-down">&#xe60f;</em><em class="iconfont icon-up">&#xe604;</em></div>
+                </div>
+                <ul class="comselect-menu">
+                    <li data-value="01:00">01:00</li>
+                    <li data-value="02:00">02:00</li>
+                    <li data-value="03:00">03:00</li>
+                    <li data-value="04:00">04:00</li>
+                    <li data-value="05:00">05:00</li>
+                    <li data-value="06:00">06:00</li>
+                    <li data-value="07:00">07:00</li>
+                    <li data-value="08:00">08:00</li>
+                    <li data-value="09:00">09:00</li>
+                    <li data-value="10:00">10:00</li>
+                    <li data-value="11:00">11:00</li>
+                    <li data-value="12:00">12:00</li>
+                    <li data-value="13:00">13:00</li>
+                    <li data-value="14:00">14:00</li>
+                    <li data-value="15:00">15:00</li>
+                    <li data-value="16:00">16:00</li>
+                    <li data-value="17:00">17:00</li>
+                    <li data-value="18:00">18:00</li>
+                    <li data-value="19:00">19:00</li>
+                    <li data-value="20:00">20:00</li>
+                    <li data-value="21:00">21:00</li>
+                    <li data-value="22:00">22:00</li>
+                    <li data-value="23:00">23:00</li>
+                    <li data-value="24:00">24:00</li>
+                </ul>
+            </div>
+            <span>请选择交易方便时间，商品只在该时间内上架出售。如不选择，系统默认为24小时方便交易</span></div>
+    </div>
+</div>        <div class="form-item clearfix">
+    <div class="form-item-l"><i>*</i><span>使用置顶卡：</span></div>
+    <div class="form-item-r">
+        <div class="yesorno">
+            <input type="hidden" datatype="topic_card"/>
+            <label><input type="radio" class="yes" name="useTopicCard" value="1"/>是</label><label><input type="radio" class="no" name="useTopicCard" checked="checked" value="0"/>否</label><span>使用置顶卡，您的商品将会被放置到列表页最顶部，提高商品曝光度</span>
+            <em class="errtip" style="color: #ff0000; display: none; margin-left: 10px;">请选择置顶卡</em>
+        </div>
+        <div class="zdkch hidediv">
+            <h3><span>友情提醒：</span>1.置顶卡可预约时间最长不超过30天；2.由于置顶卡支持预约，因此在使用时请确认您的置顶卡开始时间与结束时间</h3>
+            <table>
+                <tr>
+                    <th style="width: 50px;"></th>
+                    <th style="width: 50px;">序号</th>
+                    <th style="width:200px;">置顶卡有效截至时间</th>
+                    <th style="width: 100px;">时长（h）</th>
+                    <th style="width:180px;">预约开始时间</th>
+                    <th style="width:180px;">预约结束时间</th>
+                </tr>
+                                     <tr>
+                        <td colspan="6">未查到可用的置顶卡</td>
+                    </tr>
+                            </table>
+        </div>
+    </div>
+    <div class="form-item-l"><i>*</i><span>联系手机：</span></div>
+    <div class="form-item-r w170">
+        <div class="game-ipt">
+            <input type="text" class="common-input h-30"  placeholder="请输入手机号码" name="phone" id="" value="13123240069" datatype="m" nullmsg="请留下可以联系到您的手机号码" errormsg="请留下可以联系到您的手机号码"/>
+        </div>
+    </div>
+    <div class="form-item-l w110"><i>*</i><span>联系QQ：</span></div>
+    <div class="form-item-r game-ipt w170">
+        <div class="game-ipt">
+            <input type="text" class="common-input h-30" placeholder="请输入QQ号码" name="qq" id="" value="1359785501" datatype="n4-12" nullmsg="请留下可以联系到您的QQ号" errormsg="请留下可以联系到您的QQ号"/>
+        </div>
+    </div>
+</div>    </div>
+</div>
+            </div>
+            <div class="publish-btn">
+                <p><input id="agreeMe" type="checkbox" checked="checked" />我同意<a href="http://www.7881.com/account_pro.html" target="_self">《帐号交易服务协议》</a></p>
+                <a href="{% url 'transaction:success' %}" class="com-btn-01 color01 btn-pub">确认无误，立即发布</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+    <!-- 预览图片 -->
+    <div id="big-img" class="hide" ><img /></div>
+
+    <div class="wxts01" style="display: none;">
+        <div class="hasmoney">
+            <a class="closebtn" href="javascript:layer.closeAll()"></a>
+            <h3>温馨提示</h3>
+            <p>当前类目需要缴纳0.0元押金才能发布，确认发布，将从您的余额中扣除0.0元押金。</p>
+            <p><span>注：</span>商品下架且删除或订单完成，押金会退还。</p>
+            <h4>
+                <a href="javascript:void(0)" class="surepub">确认发布</a>
+                <a href="javascript:void(0)" class="clepub">取消发布</a>
+            </h4>
+        </div>
+    </div>
+
+
+
+
+
+    <input type="hidden" id="newUserFlag" value="0"/>
+
+    <!-- 通用底部 Start -->
+<div class="footer-content footer-01">
+    <div class="footer-server-box">
+        <div class="footer-server">
+            <div class="footer-server-dl">
+                <dl>
+                    <dt><em class="iconfont">&#xe62b;</em></dt>
+                    <dd>
+                        <h2>游戏交易 应有尽有</h2>
+                        <p>关于游戏你想要的，这里都有</p>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><em class="iconfont">&#xe62e;</em></dt>
+                    <dd>
+                        <h2>交易安全 资金保障</h2>
+                        <p>保障交易安全的事，我们都做</p>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><em class="iconfont">&#xe62d;</em></dt>
+                    <dd>
+                        <h2>7*24小时 专属客服</h2>
+                        <p>时时刻刻想联系我，客服都在</p>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><em class="iconfont">&#xe62c;</em></dt>
+                    <dd>
+                        <h2>权威认证 安全可靠</h2>
+                        <p>我是值得信赖平台，大家都造</p>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="footer-link">
+        <div class="footer-link-a">
+            <a href="http://www.7881.com/aboutus.html" target="_self" rel="nofollow">关于7881</a><em>|</em>
+            <a href="http://www.7881.com/contactus.html" target="_self" rel="nofollow">联系我们</a><em>|</em>
+            <a href="http://www.7881.com/copyright.html" target="_self" rel="nofollow">免责声明</a><em>|</em>
+            <a href="http://www.7881.com/hr.html" target="_self" rel="nofollow">诚聘英才</a><em>|</em>
+            <a href="http://www.7881.com/ParentalControls.jsp" target="_self" rel="nofollow">家长监护</a><em>|</em>
+            <a href="http://www.7881.com/cooperation.html" target="_self" rel="nofollow">商户合作</a><em>|</em>
+            <a href="http://www.7881.com/sitemap.html" target="_self">网站地图</a>
+        </div>
+        <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_self">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文[2018]9230-174号</p>
+    </div>
+</div>
+<!-- 通用底部 End -->
+    <!-- 通用Js库 Start -->
+    <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/jquery-1.8.3.min.js"></script>
+    <!–[if lt IE 7]>
+    <script  type="text/javascript" src="http://pic.7881.com/7881-2016/common/json2.js"></script>
+    <![endif]–>
+    <script type="text/javascript" src="http://pic.7881.com/7881-2016/js/7881-2016.js?v=0.0.1"></script>
+    <!-- 通用Js库 End -->
+    <!-- 可选Js库 Start -->
+    <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/jquery.cookie.js"></script>
+    <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/Validform-v5.3.2.min.js"></script>
+    <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/popup-new/popup.js"></script>
+    <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/datepicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="http://pic.7881.com/7881-2016/js/goods-publish/publish-type-01.js?v=20181102.1"></script>
+    <script type="text/javascript" src="/scripts/pc-common.js?v=20180413"></script>
+    <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/kf.js"></script>
+
+        <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/uploader/webuploader.min.js"></script>
+        <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/slide.js"></script>
+        <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/uploader/upload-common.js"></script>
+        <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/uploader/upload-many.js"></script>
+        <script type="text/javascript" src="http://pic.7881.com/7881-2016/js/float-menu.js?v=20180329"></script>
+        <script type="text/javascript" src="http://pic.7881.com/7881-2016/common/kf.js"></script>
+        <script type="text/javascript" src="http://pic.7881.com/7881-2016/js/goods-publish/publish-type-01.js?v=20181102.1"></script>
+        <script type="text/javascript" src="/scripts/publish/publish_base.js?v=20190115"></script>
+        <script type="text/javascript" src="/scripts/publish/publish_account.js?v=20180808"></script>
+        <script>
+        $(function () {
+            $.getJSON("//gw.7881.com/api/getTopNav?ip="+
+                    Math.round(Math.random()*10000)+"&callback=?",function(data) {
+                $(".top-common-box").html(data);
+            });
+        });
+
+        function layer_open(img_url){
+            $("#big-img").find("img").attr("src",img_url);
+            layer.open({
+                type: 1,
+                title: false,
+                area: ['790px','600px'],
+                shadeClose: true,
+                content: $("#big-img")
+            });
+        };
+
+        function beforeFill(){
+            var html1 = $(".wxts03").html();
+            layer.open({
+                type: 1,
+                title:'',
+                skin: 'pop-money',
+                area:['400px','250px'],
+                closeBtn:0,
+                content: html1,
+                success: function(){
+                    $(".layui-layer").find(".surepub").click(function(){
+                        if($(".layui-layer").find("input[type='checkbox']").prop("checked")){
+                            $.cookie('notips', 'true', { expires: 7 });
+                        }
+                        layer.closeAll();
+                    });
+                    $(".layui-layer").find(".clepub").click(function(){
+                        layer.closeAll();
+                    });
+                }
+            });
+        }
+
+        /*弹出提示框的判断*/
+        function alertTips(){
+            var newUserFlag = $("#newUserFlag").val();
+            var value = $.cookie('notips')
+            if(newUserFlag == '1' && value != 'true'){
+                beforeFill();
+            };
+        }
+        alertTips();
+
+    </script>
+</body>
+</html>

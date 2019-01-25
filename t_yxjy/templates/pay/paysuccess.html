@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付成功</title>
+    <style>
+        .payalipay{
+            align-content: center;
+            height: content-box;
+            margin-bottom: 1000px;
+        }
+    </style>
+</head>
+<body>
+<div class="payalipay" style="align-content: center">
+    <div class="succpic">
+        <img src="http://pic.7881.com/7881-2016/images/cashier/sucicon.gif"/>
+        <h3>支付成功</h3>
+        <p>支付成功，<span><em class="todjs">5</em>秒</span>后自动跳转<br>点击<a href="{% url 'transaction:person_center' %}">返回个人中心</a></p>
+    </div>
+</div>
+</body>
+</html>
