@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'yxjy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '4396',
+        'USER':'xpy1805',
+        'PASSWORD':'xpy1805',
+        'HOST':'47.94.239.114',
+        'POST':3306
     }
 }
 
