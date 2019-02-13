@@ -20,8 +20,8 @@
 				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
 				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
 				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
-				<li class="active"><a target="_parent" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
+				<li class="active"><a target="_parent" href="{% url 'transaction:material_deal' 10000 20000 1%}">材料交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' 10000 1 %}">金币交易</a></li>
                 <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 
 			</ul>
@@ -51,48 +51,41 @@
 					<!-- 左侧商品图片 -->
 					<div class="item-img fl">
 						<div class="img-big">
-							<img src="" alt="">
-						</div>
-						<div class="img-sm">
-							<ul>
-								<li class="active"><img src="" alt=""></li>
-								<li><img src="" alt=""></li>
-								<li><img src="" alt=""></li>
-							</ul>
+							<img src="{{ material.image }}" alt="">
 						</div>
 					</div>
 					<!-- 右侧商品详情 -->
 					<div class="item-info-panel fl">
 						<!-- 商品名称 -->
 						<div class="item-title">
-							安徽三区搬砖号
+							{{ material.goodinfo }}
 						</div>
 						<div class="item-info-wrapper">
 							<div class="alert">
 								凡商品的信息，图片中带联系信息的均是骗子，请谨慎防范！
 							</div>
 							<div class="price">
-								<span>商品价格:</span><span>￥488</span>
+								<span>商品价格:</span><span>{{ material.price }}</span>
 							</div>
 							<div class="item-i-list">
-								<span>商品编号：</span><span>95655</span>
+								<span>商品编号：</span><span>{{ material.productid }}</span>
 							</div>
 							<div class="item-i-list">
-								<span>游戏区服：</span><span>安徽区/安徽3区（跨四）</span>
+								<span>游戏区服：</span><span>{{ material.gamearea }}</span>
 							</div>
 							<div class="item-i-list">
-								<span>诚信保证：</span><span>账号商品</span>
+								<span>诚信保证：</span><span>材料商品</span>
 							</div>
 							<div class="item-i-list">
 								<span>交易前请认准官方联系方式</span>
 							</div>
-							<div class="amount">
-								<span>购买数量：</span>
-								<span class="amount-btn " id="minus">-</span>
-								<span id="amount">1</span>
-								<span  class="amount-btn" id="plus">+</span>
-							</div>
-							<a target="_self" href="{% url 'transaction:materialPurchase' %}" >
+{#							<div class="amount">#}
+{#								<span>购买数量：</span>#}
+{#								<span class="amount-btn " id="minus">-</span>#}
+{#								<span id="amount">1</span>#}
+{#								<span  class="amount-btn" id="plus">+</span>#}
+{#							</div>#}
+							<a target="_self" href="{% url 'transaction:materialPurchase' material.id %}" >
 								<div class="buy-btn">
 									立即购买
 								</div>
@@ -143,15 +136,17 @@
 				</div>
 				<div class="intro-tabs">
 					<div class="tab tab1">
+						<img src="{{ material.image }}" alt="">
 						<img src="" alt="">
-						<img src="" alt="">
-                        该商品。。。。
+
 					</div>
 					<div class="tab tab2" style="display: none;">
 						已通过审核
 					</div>
 					<div class="tab tab3" style="display: none;">
-                      购买后24小时内可进行技术指导
+                        购买后24小时内可进行技术指导 <br>
+                        购买后24小时内商家未进行处理可联系客服 <br>
+                        客服电话： 0911-3838438
 					</div>
 				</div>
 			</div>
@@ -159,65 +154,36 @@
 				<div class="r-tit">
 					商品推荐
 				</div>
-				<div class="r-list fl">
-					<div class="r-img fl">
-						<img src="{% static 'details/images/wbm.png' %} " alt="">
-					</div>
-					<div class="r-text-c fr">
-						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
-						<span class="r-price">￥2588</span>
-					</div>
-				</div>
-				<div class="r-list fl">
-					<div class="r-img fl">
-						<img src="{% static 'details/images/wbm.png' %}" alt="">
-					</div>
-					<div class="r-text-c fr">
-						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
-						<span class="r-price">￥2588</span>
-					</div>
-				</div>
-				<div class="r-list fl">
-					<div class="r-img fl">
-						<img src="{% static 'details/images/wbm.png' %}" alt="">
-					</div>
-					<div class="r-text-c fr">
-						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
-						<span class="r-price">￥2588</span>
-					</div>
-				</div>
-				<div class="r-list fl">
-					<div class="r-img fl">
-						<img src="{% static 'details/images/wbm.png' %}" alt="">
-					</div>
-					<div class="r-text-c fr">
-						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
-						<span class="r-price">￥2588</span>
-					</div>
-				</div>
+                    {% for material in materials %}
+                        <div class="r-list fl">
+                            <div class="r-img fl">
+                                <img src="{{ material.image }}" alt="">
+                            </div>
+                            <div class="r-text-c fr">
+                                <span><a href="">{{ material.goodinfo }}</a></span>
+                                <span class="r-price">{{ material.price }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
 			</div>
 		</div>
 	</div>
 	<script>
-		var imgBig =$('.img-big').children('img');
-		var imgSm = $('.img-sm ul li');
-
-		imgSm.each(function() {
-			var imgSmUrl = $(this).children('img').attr('src');
-			if($(this).hasClass('active')){
-				imgBig.attr('src', imgSmUrl);
-			}
-			$(this).click(function(event) {
-				$(this).addClass('active').siblings().removeClass('active');
-				imgBig.attr('src', imgSmUrl);
-			});
-		});
-
+		{#var imgBig =$('.img-big').children('img');#}
+		{#var imgSm = $('.img-sm ul li');#}
+		{#imgSm.each(function() {#}
+		{#	var imgSmUrl = $(this).children('img').attr('src');#}
+		{#	if($(this).hasClass('active')){#}
+		{#		imgBig.attr('src', imgSmUrl);#}
+		{#	}#}
+		{#	$(this).click(function(event) {#}
+		{#		$(this).addClass('active').siblings().removeClass('active');#}
+		{#		imgBig.attr('src', imgSmUrl);#}
+		{#	});#}
+		{#{);#}
 		var plus = $('#plus');
 		var minus = $('#minus');
-		
 		var amountNum = $('#amount').text();
-		
 		plus.click(function(event) {
 			amountNum++;
 			$('#amount').text(amountNum);
@@ -229,12 +195,9 @@
 				return false;
 			}
 			amountNum--;
-
 			$('#amount').text(amountNum);
-
 			event.stopPropagation();
 		});
-
 		var tabList = $('.tab');
 		$('.nav-wrapper li').each(function(index, el) {
 			$(this).click(function(event) {
@@ -243,9 +206,6 @@
 				tabList.eq(tabIndex).fadeIn(200).siblings().hide();
 			});
 		});
-
-		
-		
 	</script>
 </body>
 </html>

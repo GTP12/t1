@@ -10,37 +10,35 @@
     <link rel="stylesheet" href="{% static 'gold/css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'gold/css/common.css' %}">
     <link rel="stylesheet" href="{% static 'gold/css/gold-deal.css' %}">
-    <script src="{% static 'material/js/jquery-1.8.1.min.js' %}"></script>
+    <script src="{% static 'gold/js/jquery-1.8.1.min.js' %}"></script>
     <title>金币交易</title>
 </head>
 <body>
 <div class="header">
-		<div class="wrapper clearfix">
-			<ul class="nav">
-				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
-				<li><a target="_self" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
-				<li class="active"><a target="_parent" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
-                <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+    <div class="wrapper clearfix">
+        <ul class="nav">
+            <li><a target="_blank" href="{% url 'transaction:index' %}">首页</a></li>
+            <li><a target="_blank" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+            <li><a target="_blank" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+            <li><a target="_blank" href="{% url 'transaction:material_deal' 10000 20000 1%}">材料交易</a></li>
+            <li class="active"><a target="_parent" href="{% url 'transaction:gold_deal' 10000 '1' %}">金币交易</a></li>
+            <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+        </ul>
+        <div class="user-info">
 
-			</ul>
-
-			<div class="user-info">
-
-				<!-- 我的订单 -->
-				<div class="register">
-					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
-				</div>
-				<div class="login">
-					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
-				</div>
-				<div class="order">
-					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
-				</div>
-			</div>
-		</div>
-	</div>
+            <!-- 我的订单 -->
+            <div class="register">
+                <a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
+            </div>
+            <div class="login">
+                <a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+            </div>
+            <div class="order">
+                <a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="content">
     <div class="wrapper">
         <div class="select fl">
@@ -54,212 +52,119 @@
                     </div>
                     <div class="area-con fl">
                         <ul>
-                            <li><span class="border-s ">广东区</span></li>
-                            <li><span class="border-s ">北京区</span></li>
-                            <li><span class="border-s">四川区</span></li>
-                            <li><span class="border-s">江苏区</span></li>
-                            <li><span class="border-s">湖北区</span></li>
-                            <li><span class="border-s">广西区</span></li>
-                            <li><span class="border-s">东北区</span></li>
-                            <li><span class="border-s">浙江区</span></li>
-                            <li><span class="border-s">山东区</span></li>
-                            <li><span class="border-s">上海区</span></li>
-                            <li><span class="border-s">西南区</span></li>
-                            <li><span class="border-s">安徽区</span></li>
+                            {% for game in game_type %}
+                                <li>
+                                    {% if game.gameareaid == area %}
+                                        <span class="border-s .selected" style="color: #5bc0de"></span>
+                                        <span>😀</span>
+                                        <span style="display: none" id='gameareaid'>{{ game.gameareaid }}</span>
+                                    {% endif %}
+                                    <a href="{% url 'transaction:gold_deal' game.gameareaid 1 %}"><span
+                                            class="border-s ">{{ game.areaname }}</span></a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="sort ">
                 <div class="sort-tab fl">
-                    <div class="default-sort active sort-list">
+                    <div class="default-sort active sort-list" id="default">
                         默认排序
                     </div>
-                    <div class="price sort-list sort-tri">
-                        <span class="text">价格</span>
+                    <div class="price sort-list sort-tri" id="price">
+                        <span class="text" id="tri">价格</span>
+                        <span class="tri-top" id="top"></span>
+                    </div>
+                    <div class="price sort-list sort-tri" id="price1">
+                        <span id="tri">价格</span>
+                        <span class="tri-bottom" id="bottom"></span>
+                    </div>
+                    <div class="time sort-list sort-tri" id="time">
+                        <span id="datetime">发布时间</span>
                         <span class="tri-top"></span>
+                    </div>
+                    <div class="time1 sort-list sort-tri" id="time1">
+                        <span id="datetime">发布时间</span>
                         <span class="tri-bottom"></span>
-
                     </div>
-                    <div class="time sort-list sort-tri">
-                        <span class="text">发布时间</span>
-                        <span class="tri-top"></span>
-                        <span class="tri-bottom"></span>
-
-                    </div>
-                    <div class="timeavg sort-list sort-tri">
-                        <span class="text">发货均时</span>
-
-                    </div>
-                </div>
-                <div class="s-check fr">
-                    <input type="checkbox" class="sort-input" name="" id="">
-                    <span>平台代发</span>
-                    <input type="checkbox" class="sort-input" name="" id="">
-                    <span>卖家发货</span>
-                </div>
-                <div class="page">
-                    <span class="back arrow"></span>
-                    <span class="page-num"><span class="page-cur">1</span>/20</span>
-                    <span class="next arrow"></span>
                 </div>
             </div>
             <div class="search">
-                <div class="left-search s-f fl">
-                    <p>关键字：</p>
-                    <input type="text" name="" id="keywords" placeholder="请输入您要搜索的关键字">
-                    <div class="s-btn">确定</div>
-                </div>
+                <form action="{% url 'transaction:gold_default' 10000 1 %}" method="get">
+                    <div class="left-search s-f fl">
+                        <p>关键字：</p>
+                        <input type="text" name="keywords" id="keywords" placeholder="请输入您要搜索的关键字">
+                        <input type="submit" class="s-btn" value="确定">
+
+                    </div>
                 <div class="right-search s-f fr">
                     <p>价格筛选：</p>
-                    <input type="text" id="minPrice" class="p-input" placeholder="￥">
+                    <input type="text" id="minPrice" class="p-input" placeholder="￥" name="minPrice">
                     <span>&nbsp;-&nbsp;</span>
-                    <input type="text" name="" id="maxPrice" class="p-input" placeholder="￥">
-                    <div class="s-btn">确定</div>
+                    <input type="text" name="maxPrice" id="maxPrice" class="p-input" placeholder="￥">
+                    <input type="submit" class="s-btn" value="确定">
                 </div>
+                </form>
             </div>
         </div>
-        <div class="item fl">
+        <div class="item fl" id="f1">
             <ul class="item-list">
-                <li class="item-con">
-                    <div class="item-img fl">
-                        <a href="{% url 'transaction:gold_details' %}"><img src="{% static 'material/images/图层 67.png' %}" alt=""></a>
-                    </div>
-                    <div class="item-tit fl">
-                        <div class="item-tit-d">
-                            <span class="item-tag ">卖家发货</span>
-                            <span class="tit-text "><a href="{% url 'transaction:gold_details' %}">5000个【矛盾的结晶体】增幅红字装备的材料，五年老店信誉第一【7881】平台强化增幅卷火爆交易，即买即发</a></span>
+                {% for gold in golds %}
+                    <li class="item-con">
+                        <div class="item-img fl">
+                            <a href="{% url 'transaction:gold_details' gold.id %}"><img src="{{ gold.image }}"
+                                                                                        alt=""></a>
                         </div>
-                        <div class="district fl">
-                            <span>游戏区服：</span><span>天津区/天津1区</span>
-                        </div>
-                        <div class="stock fl">
-                            <span>商品库存：</span><span class="st-num">100</span>
-                        </div>
-                    </div>
-                    <div class="item-price fl">
-                        ￥3900
-                    </div>
-                    <div class="buy fl">
-                        <a target="_self" href="{% url 'transaction:goldPurchase' %}">
-                            <div class="buy-btn">
-                                立即抢购
+                        <div class="item-tit fl">
+                            <div class="item-tit-d">
+                                <span class="item-tag ">{{ gold.delivery }}</span>
+                                <span class="tit-text "><a
+                                        href="{% url 'transaction:gold_details' gold.id %}">{{ gold.goodinfo }}</a></span>
                             </div>
-                        </a>
-                    </div>
-                </li>
-                <li class="item-con">
-                    <div class="item-img fl">
-                        <a href=""><img src="{% static 'material/images/图层 67.png' %}" alt=""></a>
-                    </div>
-                    <div class="item-tit fl">
-                        <div class="item-tit-d">
-                            <span class="item-tag ">卖家发货</span>
-                            <span class="tit-text "><a href="">5000个【矛盾的结晶体】增幅红字装备的材料，五年老店信誉第一【7881】平台强化增幅卷火爆交易，即买即发</a></span>
-                        </div>
-                        <div class="district fl">
-                            <span>游戏区服：</span><span>天津区/天津1区</span>
-                        </div>
-                        <div class="stock fl">
-                            <span>商品库存：</span><span class="st-num">100</span>
-                        </div>
-                    </div>
-                    <div class="item-price fl">
-                        ￥3900
-                    </div>
-                    <div class="buy fl">
-                        <a href="{% url 'transaction:gold_details' %}">
-                            <div class="buy-btn">
-                                立即抢购
+                            <div class="district fl">
+                                <span>游戏区服：</span><span>{{ gold.gamearea }}</span>
                             </div>
-                        </a>
-                    </div>
-                </li>
-                <li class="item-con">
-                    <div class="item-img fl">
-                        <a href=""><img src="{% static 'material/images/图层 67.png' %}" alt=""></a>
-                    </div>
-                    <div class="item-tit fl">
-                        <div class="item-tit-d">
-                            <span class="item-tag ">卖家发货</span>
-                            <span class="tit-text "><a href="">5000个【矛盾的结晶体】增幅红字装备的材料，五年老店信誉第一【7881】平台强化增幅卷火爆交易，即买即发</a></span>
-                        </div>
-                        <div class="district fl">
-                            <span>游戏区服：</span><span>天津区/天津1区</span>
-                        </div>
-                        <div class="stock fl">
-                            <span>商品库存：</span><span class="st-num">100</span>
-                        </div>
-                    </div>
-                    <div class="item-price fl">
-                        ￥3900
-                    </div>
-                    <div class="buy fl">
-                        <a href="">
-                            <div class="buy-btn">
-                                立即抢购
+                            <div class="stock fl">
+                                <span>商品库存：</span><span class="st-num">{{ gold.goodsnum }}</span>
                             </div>
-                        </a>
-                    </div>
-                </li>
-                <li class="item-con">
-                    <div class="item-img fl">
-                        <a href=""><img src="{% static 'material/images/图层 67.png' %}" alt=""></a>
-                    </div>
-                    <div class="item-tit fl">
-                        <div class="item-tit-d">
-                            <span class="item-tag ">卖家发货</span>
-                            <span class="tit-text "><a href="">5000个【矛盾的结晶体】增幅红字装备的材料，五年老店信誉第一【7881】平台强化增幅卷火爆交易，即买即发</a></span>
                         </div>
-                        <div class="district fl">
-                            <span>游戏区服：</span><span>天津区/天津1区</span>
+                        <div class="item-price fl">
+                            ￥{{ gold.price }}
                         </div>
-                        <div class="stock fl">
-                            <span>商品库存：</span><span class="st-num">100</span>
+                        <div class="buy fl">
+                            <a target="_self" href="{% url 'transaction:goldPurchase' gold.id %}">
+                                <div class="buy-btn">
+                                    立即抢购
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                    <div class="item-price fl">
-                        ￥3900
-                    </div>
-                    <div class="buy fl">
-                        <a href="">
-                            <div class="buy-btn">
-                                立即抢购
-                            </div>
-                        </a>
-                    </div>
-                </li>
-                <li class="item-con">
-                    <div class="item-img fl">
-                        <a href=""><img src="{% static 'material/images/图层 67.png' %}" alt=""></a>
-                    </div>
-                    <div class="item-tit fl">
-                        <div class="item-tit-d">
-                            <span class="item-tag ">卖家发货</span>
-                            <span class="tit-text "><a href="">5000个【矛盾的结晶体】增幅红字装备的材料，五年老店信誉第一【7881】平台强化增幅卷火爆交易，即买即发</a></span>
-                        </div>
-                        <div class="district fl">
-                            <span>游戏区服：</span><span>天津区/天津1区</span>
-                        </div>
-                        <div class="stock fl">
-                            <span>商品库存：</span><span class="st-num">100</span>
-                        </div>
-                    </div>
-                    <div class="item-price fl">
-                        ￥3900
-                    </div>
-                    <div class="buy fl">
-                        <a href="">
-                            <div class="buy-btn">
-                                立即抢购
-                            </div>
-                        </a>
-                    </div>
-                </li>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
 </div>
+<div class="page">
+    {% for game in game_type %}
+        {% if game.gameareaid == area %}
+            <a href="{% url 'transaction:gold_deal' game.gameareaid 1 %}">首页</a>
+            {% if golds.has_previous %}
+                <a href="{% url 'transaction:gold_deal' game.gameareaid golds.previous_page_number %}">上一页</a>
+            {% else %}
+                <a href="javascript:alert('已经是第一页了')">上一页</a>
+            {% endif %}
+            <a href="{% url 'transaction:gold_deal' game.gameareaid 1 %}">{{ page }}/{{ paginator.num_pages }}</a>
+            {% if golds.has_next %}
+                <a href="{% url 'transaction:gold_deal' game.gameareaid golds.next_page_number %}">下一页</a>
+            {% else %}
+                <a href="javascript:alert('已经是最后一页了')">下一页</a>
+            {% endif %}
+            <a href="{% url 'transaction:gold_deal' game.gameareaid paginator.num_pages %}">末页</a>
+        {% endif %}
+    {% endfor %}
+</div>
+
 <script type="text/javascript" src="{% static 'material/js/jquery-1.8.1.min.js' %}"></script>
 <script type="text/javascript">
     // 页面跳转选中
@@ -283,6 +188,59 @@
             });
         });
     });
+    {#// 价格排序#}
+    {#                    <span class="tri-top"></span>#}
+    {#                    <span class="tri-bottom"></span>#}
+    var price = document.getElementById("price");
+    var f1 = document.getElementById("f1");
+    price.addEventListener("click", function () {
+        var gameareaid = document.getElementById('gameareaid');
+        var id = gameareaid.textContent;
+        $.get("/games_deal/checkmaxprice/", {"top": id}, function (html) {
+            f1.innerHTML = html;
+        })
+    });
+    $(document).click(function () {
+        var top1 = document.getElementById('price1');
+        var f2 = document.getElementById("f1");
+        top1.addEventListener("click", function () {
+            var gameareaid = document.getElementById('gameareaid');
+            var id = gameareaid.textContent;
+            $.get("/games_deal/checkminprice/", {"top": id}, function (html) {
+                f2.innerHTML = html;
+            })
+        })
+    });
+    // 日期排序
+    var datetime = document.getElementById('time');
+    var f3 = document.getElementById("f1");
+    datetime.addEventListener("click", function () {
+        var gameareaid = document.getElementById('gameareaid');
+        var id = gameareaid.textContent;
+        $.get("/games_deal/checkmaxtime/", {"top": id}, function (html) {
+            f3.innerHTML = html
+        })
+    });
+    var time1 = document.getElementById('time1');
+    var f4 = document.getElementById("f1");
+    time1.addEventListener("click", function () {
+        var gameareaid = document.getElementById('gameareaid');
+        var id = gameareaid.textContent;
+        $.get("/games_deal/checkmintime/", {"top": id}, function (html) {
+            f4.innerHTML = html
+        })
+    });
+    //默认排序
+    var defsort = document.getElementById('default');
+    var f5 = document.getElementById("f1");
+    defsort.addEventListener("click", function () {
+        var gameareaid = document.getElementById('gameareaid');
+        var id = gameareaid.textContent;
+        $.get("/games_deal/checkdefault/", {"top": id}, function (html) {
+            f5.innerHTML = html
+        })
+    });
+
 </script>
 </body>
 </html>

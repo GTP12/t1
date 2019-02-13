@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <meta name="renderer" content="webkit"/>
     <title>支付成功</title>
+    <link rel="stylesheet" href="{% static 'gold/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'gold/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'gold/css/gold-deal.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/purchase.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/Public.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/buy.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/popLayer.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="http://www.7881.com/market/css/sell.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/goldPurchase.css' %}">
+    <script type="text/javascript" src="{% static 'goldPurchase/js/kefu.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/jquery-1.8.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/restrict_input.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/webuploader.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/lightbox-plus-jquery.min.js' %}"></script>
     <style>
         .payalipay{
             align-content: center;
-            height: content-box;
             margin-bottom: 1000px;
+            padding-top: 150px;
+            background: #c4e3f3;
+            height: 800px;
+        }
+        img{
+            width: 150px;
+            height: 150px;
         }
     </style>
 </head>
 <body>
+<div class="header">
+    <div class="wrapper clearfix">
+        <ul class="nav">
+            <li><a target="_blank" href="{% url 'transaction:index' %}">首页</a></li>
+            <li><a target="_blank" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+            <li><a target="_blank" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+            <li><a target="_blank" href="{% url 'transaction:material_deal' 10000 20000 1%}">材料交易</a></li>
+            <li class="active"><a target="_parent" href="{% url 'transaction:gold_deal' 10000 1 %}">金币交易</a></li>
+            <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+        </ul>
+        <div class="user-info">
+            <!-- 我的订单 -->
+            <div class="register">
+                <a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
+            </div>
+            <div class="login">
+                <a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+            </div>
+            <div class="order">
+                <a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="payalipay" style="align-content: center">
     <div class="succpic">
         <img src="http://pic.7881.com/7881-2016/images/cashier/sucicon.gif"/>
-        <h3>支付成功</h3>
-        <p>支付成功，<span><em class="todjs">5</em>秒</span>后自动跳转<br>点击<a href="{% url 'transaction:person_center' %}">返回个人中心</a></p>
+        <b><h3 style="padding: 20px; font-size: 20px;color: crimson">支付成功</h3></b>
+{#        <p>支付成功，<span><em class="todjs">5</em>秒</span>后自动跳转<br>点击<a href="{% url 'transaction:person_center' %}">返回个人中心</a></p>#}
+        <p>点击返回 <a href="{% url 'transaction:person_center' %}" style="font-size: 20px; color: crimson">个人中心</a></p>
     </div>
 </div>
 </body>

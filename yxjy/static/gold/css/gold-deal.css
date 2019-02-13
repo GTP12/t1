@@ -41,6 +41,9 @@
 	padding: 3px 7px;
 	/*border: 1px solid red;*/
 }
+/*.border-s {*/
+	/*background-color: greenyellow;*/
+/*}*/
 .area-con .selected{
 	background-color: #689adf;
 	color: #fff;
@@ -96,11 +99,44 @@
 	line-height: 28px;
 
 }
+.sort-list2{
+	background-color: #fff;
+	font-size: 14px;
+	color: #2e2e2e;
+	cursor: pointer;
+	float: left;
+	line-height: 28px;
+
+}
+.sort-list3{
+	background-color: #fff;
+	font-size: 14px;
+	color: #2e2e2e;
+	cursor: pointer;
+	float: left;
+	line-height: 28px;
+
+}
+.sort-list4{
+	background-color: #fff;
+	font-size: 14px;
+	color: #2e2e2e;
+	cursor: pointer;
+	float: left;
+	line-height: 28px;
+
+}
 .sort-tab .active{
 	background-color: #2e2e2e;
 	color: #fff;
 }
 .price{
+	position: relative;
+	width: 70px;
+	border-left: 1px solid #d0d0d0;
+	padding-left: 14px;
+}
+.price1{
 	position: relative;
 	width: 70px;
 	border-left: 1px solid #d0d0d0;
@@ -135,6 +171,17 @@
 	top: 16px;
 	left: 48px;
 }
+.price1>.tri-top{
+	position: absolute;
+	top: 1px;
+	left: 48px;
+
+}
+.price1>.tri-bottom{
+	position: absolute;
+	top: 16px;
+	left: 48px;
+}
 .time{
 	border-left: 1px solid #d0d0d0;
 	border-right:  1px solid #d0d0d0;
@@ -150,6 +197,25 @@
 	
 }
 .time>.tri-bottom{
+	position: absolute;
+	top: 16px;
+	left: 70px;
+}
+.time1{
+	border-left: 1px solid #d0d0d0;
+	border-right:  1px solid #d0d0d0;
+
+	padding-left: 7px;
+	position: relative;
+	width: 92px;
+}
+.time1>.tri-top{
+	position: absolute;
+	top: 1px;
+	left: 70px;
+
+}
+.time1>.tri-bottom{
 	position: absolute;
 	top: 16px;
 	left: 70px;
@@ -206,18 +272,23 @@
 }
 .page{
 	position: relative;
-	left: 510px;
-	width: 105px;
-}
-.page-num{
+	/*align-content: center;*/
+	left: 550px;
+	width: 500px;
+	height: 20px;
+	/*padding:px;*/
 	font-size: 15px;
-	margin: 0 5px;
+	color: silver;
 }
-.page-cur{
-	color: #fc4e4e;
-	font-size: 15px;
+/*.page-num{*/
+	/*font-size: 15px;*/
+	/*margin: 0 5px;*/
+/*}*/
+/*.page-cur{*/
+	/*color: #fc4e4e;*/
+	/*font-size: 15px;*/
 
-}
+/*}*/
 .search{
 	height: 41px;
 	padding: 0 25px;
@@ -291,6 +362,7 @@
 	height: 45px;
 }
 .item-tag{
+	background-color: green;
 	display: inline-block;
 	width: 58px;
 	height: 21px;
@@ -298,7 +370,7 @@
 	font-size: 12px;
 	text-align: center;
 	line-height: 21px;
-	color: #2e2e2e;
+	color: ghostwhite;
 	margin-right: 6px;
 }
 .tit-text a{
@@ -323,8 +395,8 @@
 	color: #689adf;
 }
 .item-price{
-	height: 140px;
-	width: 314px;
+	height: 130px;
+	width: 300px;
 	display: flex;
 	display: -webkit-flex;
 	align-items: center;
@@ -352,3 +424,11 @@
 	line-height: 29px;
 	border-radius: 10px;
 }
+.yellowSlide {
+  background: yellow;
+  width: 0.1rem;
+  height: 0.7rem;
+  position: absolute;
+  left: 0;
+  top: 0.3rem;
+  display: block; }

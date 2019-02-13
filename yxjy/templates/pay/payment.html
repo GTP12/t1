@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <meta name="renderer" content="webkit" />
-    <title>收银台 - 7881代练交易平台</title>
+    <title>收银台 - 4396代练交易平台</title>
     <meta name="keywords" content="充值页面-7881代练交易平台" />
     <meta name="description" content="充值页面-7881代练交易平台" />
     <script src="{% static 'material/js/jquery-1.8.1.min.js' %}"></script>
@@ -26,14 +26,11 @@
 				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
 				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
 				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
-				<li class="active"><a target="_parent" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
+				<li><a target="_parent" href="{% url 'transaction:material_deal' 10000 20000 1%}">材料交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' 10000 1%}">金币交易</a></li>
                 <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
-
 			</ul>
-
 			<div class="user-info">
-
 				<!-- 我的订单 -->
 				<div class="register">
 					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
@@ -47,37 +44,21 @@
 			</div>
 		</div>
 	</div>
-{#<div class="header-02-box boxshadow">#}
-{#    <div class="header-02 clearfix">#}
-{#        <h1 class="logo"><a href="http://www.7881.com/" title="游戏金币交易平台"><img src="http://pic.7881.com/7881-2016/images/logo-small.png" alt="7881logo" /></a><em></em><span>收银台</span></h1>#}
-{#        <h3><a href="http://www.7881.com/personal.html" target="_self">个人中心</a><em>|</em><a href="http://www.7881.com/procurement/queryMyProcureOrder.action" target="_self">我的订单</a></h3>#}
-{#    </div>#}
-{#</div>#}
-<!-- 通用头部02 End -->
-<!-- 主体区域 Start -->
-<div class="panel-body">
+
+<body class="panel-body">
     <div class="main-con">
         <div class="waitpay-info">
             <div class="waitpay-top">
                 <div class="waitleft">
                     <h3>订单提交成功，请您尽快付款！</h3>
-                    <p>请您再三核对订单信息，并在<span>15分钟</span>内完成支付，否则订单将会取消</p>
+                    <p>请您再三核对订单信息</p>
                 </div>
                 <div class="waitright">
                     <h3>应付金额：<span class="allprice">
-                        100.00</span><em>元</em></h3>
-                    <p><a href="javascript:void(0)" class="ordetail">订单详情</a></p>
+                        {{ payprice }}</span><em>元</em></h3>
                 </div>
             </div>
-            <div class="waitpay-bot">
-                <p><span>订单编号：</span><em class="ordid">129012215481609562765122</em></p>
-                <p><span>订单金额：</span> <em class="price orderPrice">
-                    100.00</em></p>
-                <p><span>商品名称：</span>
-                    【拍卖交易】4700万金=100.0元地下城与勇士</p>
-                <p><span>游戏区服：</span>
-                    云贵区云南1区</p>
-            </div>
+
         </div>
         <div class="type-pay">
             <div class="paytit">
@@ -85,33 +66,13 @@
                 <p></p>
             </div>
             <div class="allpayway">
-                <div class="redpack nochose">
-                    <div class="cbt cb checkbox" name="check" type="checkbox" val="1"></div>
-                    <dl>
-                        <dt class="nored"><img src="http://pic.7881.com/7881-2016/images/cashier/redpackgrey.png"/></dt>
-                        <dt class="havered"><img src="http://pic.7881.com/7881-2016/images/cashier/redpack.png"/></dt>
-                        <dd class="nored">红包优惠<span>暂无可用红包</span></dd>
-                        <dd class="havered">红包优惠
-                            <div class="packcon">
-                                <h3><span>可用红包 4 个</span><em>优惠</em>请选择红包类型</h3>
-                                <ul class="chredpack">
-                                    <li><p>6元</p><em>即将过期</em></li>
-                                    <li class="on"><p>20元</p><em>即将过期(荐)</em></li>
-                                    <li><p>30元</p><em>2018-09-29过期</em></li>
-                                    <li><p>50元</p><em>2018-09-29过期</em></li>
-                                </ul>
-                            </div>
-                        </dd>
-                    </dl>
-                    <div class="btline"></div>
-                </div>
                 <div class="balance">
                     <div class="cbt cb checkbox" name="check" type="checkbox" val="2"></div>
                     <dl>
                         <dt class="nored"><img src="http://pic.7881.com/7881-2016/images/cashier/balancegrey.png"/></dt>
                         <dt class="havered"><img src="http://pic.7881.com/7881-2016/images/cashier/balance.png"/></dt>
-                        <dd class="nored">余额支付<span>可用金额不足</span></dd>
-                        <dd class="havered">余额支付<span>可用金额<em class="canuse">0.00</em>元</span></dd>
+                        <dd class="nored">余额支付<span></span></dd>
+                        <dd class="havered">余额支付<span><em class="canuse"></em>元</span></dd>
                     </dl>
                     <div class="maypay">
                         <p>支付：<span class="balause money">0</span><em>元</em></p>
@@ -128,62 +89,10 @@
                                 <em class="serfee"><i class="bord">手续费</i><i class="payname">微信支付</i>官方手续费<i class="feemoney">0.01</i>元</em>
                             </dd>
                         </dl>
-                        <div class="maypay">
-                            <p>支付：<span class="needpay money">0</span><em>元</em></p>
-                        </div>
                         <div class="btline"></div>
                     </div>
-                    <div class="thirdpart">
-                        <div class="platform">
-                            <h3>第三方平台充值</h3>
-                            <ul class="allplat">
-                                <li data-value="9110" data-name="支付宝">
-                                        <h3><img src="http://pic.7881.com/7881-2016/images/cashier/3002.jpg" /></h3>
-                                        </li>
-                                <li data-value="9003" data-name="微信">
-                                        <h3><img src="http://pic.7881.com/7881-2016/images/cashier/9003.jpg" /></h3>
-                                        <p>支付手续费<span>1%</span></p>
-                                        </li>
-                                <li data-value="2999" data-name="易宝网银">
-                                        <h3><img src="http://pic.7881.com/7881-2016/images/cashier/2999.jpg" /></h3>
-                                        </li>
-                                </ul>
-                        </div>
-                        <div class="webbank">
-                            <h3>借记卡支付</h3>
-                            <div class="allbank">
-                                <ul>
-                                    <li data-value="2903" data-name="中国工商银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2005.jpg" /></li>
-                                        <li data-value="2902" data-name="中国农业银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2007.jpg" /></li>
-                                        <li data-value="2910" data-name="招商银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2006.jpg" /></li>
-                                        <li data-value="2911" data-name="中国民生银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2009.jpg" /></li>
-                                        <li data-value="2905" data-name="上海浦东发展银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2013.jpg" /></li>
-                                        <li data-value="2908" data-name="兴业银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2014.jpg" /></li>
-                                        <li data-value="2907" data-name="中国邮政储蓄银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2021.jpg" /></li>
-                                        <li data-value="2912" data-name="中国光大银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2017.jpg" /></li>
-                                        <li data-value="2909" data-name="交通银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2008.jpg" /></li>
-                                        <li data-value="2904" data-name="广发银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2012.jpg" /></li>
-                                        <li data-value="2906" data-name="中国银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2011.jpg" /></li>
-                                        <li data-value="2913" data-name="北京银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2018.jpg" /></li>
-                                        <li data-value="2914" data-name="平安银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2010.jpg" /></li>
-                                        </ul>
-                            </div>
-                        </div>
-                        <div class="webbank">
-                            <h3>信用卡支付</h3>
-                            <div class="allbank">
-                                <ul>
-                                    <li data-value="2903" data-name="中国工商银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2005.jpg" /></li>
-                                        <li data-value="2902" data-name="中国农业银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2007.jpg" /></li>
-                                        <li data-value="2910" data-name="招商银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2006.jpg" /></li>
-                                        <li data-value="2906" data-name="中国银行"><img src="http://pic.7881.com/7881-2016/images/cashier/2011.jpg" /></li>
-                                        </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="paysubmit">
-                    <a href="{% url 'transaction:paysuccess' %}" class="submita">立即支付</a>
+                    <a href="{% url 'transaction:paysuccess' order_time %}" class="submita">立即支付</a>
                 </div>
             </div>
         </div>
@@ -225,147 +134,26 @@
     <div class="footer-link-box">
         <div class="footer-link">
             <div class="footer-link-a">
-                <a href="http://www.7881.com/aboutus.html" target="_self" rel="nofollow">关于7881</a><em>|</em>
-                <a href="http://www.7881.com/contactus.html" target="_self" rel="nofollow">联系我们</a><em>|</em>
-                <a href="http://www.7881.com/copyright.html" target="_self" rel="nofollow">免责声明</a><em>|</em>
-                <a href="http://www.7881.com/hr.html" target="_self" rel="nofollow">诚聘英才</a><em>|</em>
-                <a href="http://www.7881.com/ParentalControls.jsp" target="_self" rel="nofollow">家长监护</a><em>|</em>
-                <a href="http://www.7881.com/cooperation.html" target="_self" rel="nofollow">商户合作</a><em>|</em>
-                <a href="http://www.7881.com/sitemap.html" target="_self">网站地图</a>
+                <a href="http://www.7881.com/aboutus.html" target="_blank" rel="nofollow">关于7881</a><em>|</em>
+                <a href="http://www.7881.com/contactus.html" target="_blank" rel="nofollow">联系我们</a><em>|</em>
+                <a href="http://www.7881.com/copyright.html" target="_blank" rel="nofollow">免责声明</a><em>|</em>
+                <a href="http://www.7881.com/hr.html" target="_blank" rel="nofollow">诚聘英才</a><em>|</em>
+                <a href="http://www.7881.com/ParentalControls.jsp" target="_blank" rel="nofollow">家长监护</a><em>|</em>
+                <a href="http://www.7881.com/cooperation.html" target="_blank" rel="nofollow">商户合作</a><em>|</em>
+                <a href="http://www.7881.com/sitemap.html" target="_blank">网站地图</a>
             </div>
-            <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_self">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文 〔2018〕9230-174号</p>
+            <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文 〔2018〕9230-174号</p>
         </div>
     </div>
 </div>
-<!-- 通用底部 End --><!--余额支付弹窗 Start-->
-<div class="yueopen" style="display: none;">
-	<div class="yuepay">
-		<a href="javascript:void(0)" class="closebtn"></a>
-		<h3>使用余额</h3>
-		<div class="paypass password">
-			<p>您正在使用<span>余额支付</span>请输入支付密码</p>
-			<div class="iptpwd">
-				<input type="password" class="passwd" maxlength="20" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
-				<a href="javascript:void(0)">确 认</a>
-				<span>请输入支付密码</span>
-				<em>密码错误</em>
-			</div>
-			<a href="javascript:void(0)" class="fgetpwd">使用手机短信验证码</a>
-		</div>
-		<div class="paypass yzphone">
-			<p>向<span class="phone">132***75253</span>发送验证码</p>
-			<div class="iptpwd">
-				<input type="text" class="yzcode" maxlength="6" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
-				<a href="javascript:void(0)">确 认</a>
-				<span>请输入6位短信验证码</span>
-				<em>验证码错误</em>
-			</div>
-			<h4><a href="javascript:void(0)" class="ret-sent">发送验证码</a><span class="ret-djs"><em class="djs-s">59s</em>后再次发送</span></h4>
-		</div>
-	</div>
-</div>
-<!--余额支付弹窗 End-->
-<!--微信支付弹窗 Start-->
-<div class="weixinopen" style="display: none;">
-	<div class="ewmpay">
-		<a href="javascript:void(0)" class="closebtn"></a>
-		<div class="ewmleft">
-			<h3>本次扫码需支付</h3>
-			<h4><span class="payMoney_span">0</span>元</h4>
-			<p>请扫码右侧二维码完成本次交易</p>
-			<p>完成交易后，我们可能需要<span>几分钟</span>的时间来确认支付是否完成，请耐心等待</p>
-		</div>
-		<div class="ewmright">
-			<div class="scanpic">
-				<iframe src="" scrolling="no"></iframe>
-				<p>为确保资金安全，支付二维码会<span>自动刷新</span><br>请您放心扫码</p>
-					<h3 style="display: none"></h3>
-			</div>
-			<div class="succpic">
-				<img src="http://pic.7881.com/7881-2016/images/cashier/sucicon.gif"/>
-				<h3>支付成功</h3>
-				<p>支付成功，<span><em class="todjs">5</em>秒</span>后自动跳转<br>点击<a href="/procurement/queryMyProcureOrder.action">直接进入</a></p>
-			</div>
-		</div>
-	</div>
-</div>
-<!--微信支付弹窗 End-->
-<!--支付宝支付弹窗 Start-->
-<div class="payalipay" style="display: none;">
-	<div class="ewmpay">
-		<a href="javascript:void(0)" class="closebtn"></a>
-		<div class="ewmleft">
-			<h3>本次扫码需支付</h3>
-			<h4><span class="payMoney_span">0</span>元</h4>
-			<p>请扫码右侧二维码完成本次交易</p>
-			<p>完成交易后，我们可能需要<span>几分钟</span>的时间来确认支付是否完成，请耐心等待</p>
-		</div>
-		<div class="ewmright">
-			<div class="scanpic">
-				<iframe src="" scrolling="no"></iframe>
-				<p>为确保资金安全，支付二维码会<span>自动刷新</span><br>请您放心扫码</p>
-					<h3 style="display: none"></h3>
-			</div>
-			<div class="succpic">
-				<img src="http://pic.7881.com/7881-2016/images/cashier/sucicon.gif"/>
-				<h3>支付成功</h3>
-				<p>支付成功，<span><em class="todjs">5</em>秒</span>后自动跳转<br>点击<a href="/procurement/queryMyProcureOrder.action">直接进入</a></p>
-			</div>
-		</div>
-	</div>
-</div>
-{#</div><form id="payForm" method="post">#}
-{#    <input type="hidden" id="fptname" name="financeChargeBean.fptname" />#}
-{#    <input type="hidden" name="financeChargeBean.orderid" value="129012215481609562765122" />#}
-{#    <input type="hidden" name="financeChargeBean.backurl" value="/payment/endPayout.action?orderid=129012215481609562765122&from=" />#}
-{#    <input type="hidden" id="amount" name="financeChargeBean.amount" value="10000" />#}
-{#    <input type="hidden" id="amountyuan" name="financeChargeBean.amountyuan" value="100.00" />#}
-{#    <input type="hidden" id="hdn_useBalance" name="financeChargeBean.useBalance" value="-1" />#}
-{#    <input type="hidden" id="hdn_redEnvelopid" name="financeChargeBean.vouchersid" />#}
-{#    <input type="hidden" id="hdn_redEnvelopdeduct" name="financeChargeBean.vouchersmoney" value="0" />#}
-{#    <input type="hidden" id="validway" name="userRegisterBean.validway" />#}
-{#    <input type="hidden" id="yefalg" name="yefalg" value="0" />#}
-{#    <input type="hidden" name="financeChargeBean.deliverroleid" value="" />#}
-{#    <input type="hidden" name="financeChargeBean.payway" id="payway" />#}
-{#    <input type="hidden"  value="" id="marketflag" />#}
-{#    <input type="hidden"  value="" id="marketflag_" />#}
-{#    <input type="hidden"  value="1" id="mobilechecked" />#}
-{#    <input type="hidden" id="transactionpass" name="userRegisterBean.transactionpass" />#}
-{#    <input type="hidden" id="verificationcode" name="userRegisterBean.verificationcode" />#}
-{##}
-{##}
-{#</form>#}
-{#<!--微信支付弹窗 End-->#}
-{#<!-- 通用Js库 Start -->#}
-{#<script type="text/javascript" src="{% static 'payment/js/jquery-1.8.3.min.js' %}"></script>#}
-{#<script type="text/javascript" src="{% static 'payment/js/7881-2016.js' %}"></script>#}
-{#<script type="text/javascript" src="{% static 'payment/js/validateLogin.js' %}"></script>#}
-{#<!-- 通用Js库 End -->#}
-{#<!-- 可选Js库 Start -->#}
-{#<script type="text/javascript" src="{% static 'payment/js/layer.js' %}"></script>#}
-{#<script type="text/javascript" src="{% static 'payment/js/7881-2016.js' %}"></script>#}
-{#<script type="text/javascript" src="{% static 'payment/js/jquery-1.8.3.min.js' %}"></script>#}
-{#<script type="text/javascript" src="{% static 'payment/js/purchase_pay_cashier.js' %}"></script>#}
-{#<!-- 可选Js库 Start -->#}
-{#<script type="text/javascript">#}
-{#    var orderPrice = parseFloat($(".orderPrice").text());#}
-{#    var allprice = parseFloat($(".allprice").text()); //总金额#}
-{#    var balance = parseFloat("0.00"); //账户余额#}
-{#    var feemoney = 0; //手续费#}
-{#    var haspay = 0; //余额支付金额#}
-{#    var needpay = 0; //在线支付金额#}
-{#    var payTypeName = "";#}
-{#    var from='';#}
-{#    var oid;#}
-{#    var payoutResultData;#}
-{#    var payUrl = "http://newpay.7881.com";#}
-{#    var payoutBackUrl = "";#}
-{#    var payoutUseBalanceUrl = '/payment/payoutUseBalance.action?from='+from;#}
-{#    var payoutAjaxUrl = "/payment/payoutAjax.action";#}
-{#    var payoutUrl = '/payment/payout.action?from='+from;#}
-{#    var phone = "132***75253";#}
-{#    var qrCodeRefreshTime = 5000;#}
-{##}
-{#</script>#}
+
+<script type="text/javascript" src="{% static 'payment/js/jquery-1.8.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'payment/js/7881-2016.js' %}"></script>
+<script type="text/javascript" src="{% static 'payment/js/validateLogin.js' %}"></script>
+<script type="text/javascript" src="{% static 'payment/js/layer.js' %}"></script>
+<script type="text/javascript" src="{% static 'payment/js/7881-2016.js' %}"></script>
+<script type="text/javascript" src="{% static 'payment/js/jquery-1.8.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'payment/js/purchase_pay_cashier.js' %}"></script>
+</body>
 </body>
 </html>

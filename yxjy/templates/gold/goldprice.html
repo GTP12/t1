@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <ul class="item-list">
+       {% for gold in goods %}
+                        <li class="item-con">
+                            <div class="item-img fl">
+                                <a href="{% url 'transaction:gold_details' gold.id %}"><img src="{{ gold.image }}" alt=""></a>
+                            </div>
+                            <div class="item-tit fl">
+                                <div class="item-tit-d">
+                                    <span class="item-tag ">{{ gold.delivery }}</span>
+                                    <span class="tit-text "><a
+                                            href="{% url 'transaction:gold_details' gold.id %}">{{ gold.goodinfo }}</a></span>
+                                </div>
+                                <div class="district fl">
+                                    <span>游戏区服：</span><span>{{ gold.gamearea }}</span>
+                                </div>
+                                <div class="stock fl">
+                                    <span>商品库存：</span><span class="st-num">{{ gold.goodsnum }}</span>
+                                </div>
+                            </div>
+                            <div class="item-price fl">
+                                ￥{{ gold.price }}
+                            </div>
+                            <div class="buy fl">
+                                <a target="_self" href="{% url 'transaction:goldPurchase' gold.id %}">
+                                    <div class="buy-btn">
+                                        立即抢购
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+ </ul>
+<div class="page">
+
+</div>
+</body>
+</html>

@@ -21,12 +21,13 @@
 	<div class="header" style="width: 100%">
 		<div class="wrapper clearfix">
 			<ul class="nav">
-				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
-				<li><a target="_self" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
-                <li class="active"><a target="_parent" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+				<li><a href="games-deal/index/">首页</a></li>
+				<li><a target="_blank" href="../account/account-deal.html">账号交易</a></li>
+				<li><a target="_blank" href="../account/account-purchase.html">账号求购</a></li>
+				<li><a target="_blank" href="../material/material-deal.html">材料交易</a></li>
+				<li><a target="_blank" href="../not_do/material-purchase.html">材料求购</a></li>
+				<li><a target="_blank" href="">金币交易</a></li>
+                <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 
 			</ul>
 
@@ -34,18 +35,17 @@
 
 				<!-- 我的订单 -->
 				<div class="register">
-					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
+					<a href=""><p>免费注册</p></a>
 				</div>
 				<div class="login">
-					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+					<a href=""><p>登录</p></a>
 				</div>
 				<div class="order">
-					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+					<a href=""><p>个人中心</p></a>
 				</div>
 			</div>
 		</div>
-	</div>
-
+    </div>
 <div style="width:100%;height: 100px;background-color: white;border: white"></div>
 <div class="publish-header w980">
 
@@ -83,7 +83,7 @@
     <div class="form-item-r" style="z-index: 1;">
         <input maxlength="12" datatype="*,howmuch" type="text" class="common-input w100 h-36 wntsell onlynums" name="price" id="" value="">
         <span class="val-unit">元</span>
-        <em class="serfee">需要收取手续费<i>0.0</i>元<a href="http://www.7881.com/helpcenter/73790970494518017.html" target="_self">[了解更多]</a></em>
+        <em class="serfee">需要收取手续费<i>0.0</i>元<a href="http://www.7881.com/helpcenter/73790970494518017.html" target="_blank">[了解更多]</a></em>
     </div>
 </div>
 <div class="form-item mrg-b-38 clearfix" style="z-index: 1;">
@@ -281,7 +281,7 @@
 </div>
             </div>
             <div class="publish-btn">
-                <p><input id="agreeMe" type="checkbox" checked="checked" />我同意<a href="http://www.7881.com/account_pro.html" target="_self">《帐号交易服务协议》</a></p>
+                <p><input id="agreeMe" type="checkbox" checked="checked" />我同意<a href="http://www.7881.com/account_pro.html" target="_blank">《帐号交易服务协议》</a></p>
                 <a href="{% url 'transaction:success' %}" class="com-btn-01 color01 btn-pub">确认无误，立即发布</a>
             </div>
         </div>
@@ -295,7 +295,7 @@
         <p>为了加强您的安全意识，请正确回答以下测试问题</p>
     </div>
     <div class="red-font">
-        <p>如有疑问，请立即 <a href="http://www.7881.com/tradesafe/safeCenter.html" target="_self">验证客服真假</a>，谨防受骗！任何疑问请点击<a href="javascript:live800Dialog()">联系客服</a></p>
+        <p>如有疑问，请立即 <a href="http://www.7881.com/tradesafe/safeCenter.html" target="_blank">验证客服真假</a>，谨防受骗！任何疑问请点击<a href="javascript:live800Dialog()">联系客服</a></p>
     </div>
     <div class="help-area">
         <div class="test-area">
@@ -387,15 +387,15 @@
     </div>
     <div class="footer-link">
         <div class="footer-link-a">
-            <a href="http://www.7881.com/aboutus.html" target="_self" rel="nofollow">关于7881</a><em>|</em>
-            <a href="http://www.7881.com/contactus.html" target="_self" rel="nofollow">联系我们</a><em>|</em>
-            <a href="http://www.7881.com/copyright.html" target="_self" rel="nofollow">免责声明</a><em>|</em>
-            <a href="http://www.7881.com/hr.html" target="_self" rel="nofollow">诚聘英才</a><em>|</em>
-            <a href="http://www.7881.com/ParentalControls.jsp" target="_self" rel="nofollow">家长监护</a><em>|</em>
-            <a href="http://www.7881.com/cooperation.html" target="_self" rel="nofollow">商户合作</a><em>|</em>
-            <a href="http://www.7881.com/sitemap.html" target="_self">网站地图</a>
+            <a href="http://www.7881.com/aboutus.html" target="_blank" rel="nofollow">关于7881</a><em>|</em>
+            <a href="http://www.7881.com/contactus.html" target="_blank" rel="nofollow">联系我们</a><em>|</em>
+            <a href="http://www.7881.com/copyright.html" target="_blank" rel="nofollow">免责声明</a><em>|</em>
+            <a href="http://www.7881.com/hr.html" target="_blank" rel="nofollow">诚聘英才</a><em>|</em>
+            <a href="http://www.7881.com/ParentalControls.jsp" target="_blank" rel="nofollow">家长监护</a><em>|</em>
+            <a href="http://www.7881.com/cooperation.html" target="_blank" rel="nofollow">商户合作</a><em>|</em>
+            <a href="http://www.7881.com/sitemap.html" target="_blank">网站地图</a>
         </div>
-        <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_self">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文[2018]9230-174号</p>
+        <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文[2018]9230-174号</p>
     </div>
 </div>
 <!-- 通用底部 End -->

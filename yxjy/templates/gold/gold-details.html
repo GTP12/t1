@@ -17,17 +17,14 @@
 	<div class="header">
 		<div class="wrapper clearfix">
 			<ul class="nav">
-				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
-				<li><a target="_self" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
-				<li class="active"><a target="_parent" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
-                <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
-
+				<li><a target="_blank" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_blank" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+				<li><a target="_blank" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li><a target="_self" href="{% url 'transaction:material_deal' 10000 20000 1%}">材料交易</a></li>
+				<li class="active"><a target="_parent" href="{% url 'transaction:gold_deal' 10000 '1' %}">金币交易</a></li>
+                <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 			</ul>
-
 			<div class="user-info">
-
 				<!-- 我的订单 -->
 				<div class="register">
 					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
@@ -41,7 +38,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="content fl">
 		<div class="wrapper detail-wrapper clearfix">
 			<!-- 商品详情 -->
@@ -51,41 +47,41 @@
 					<!-- 左侧商品图片 -->
 					<div class="item-img fl">
 						<div class="img-big">
-							<img src="" alt="">
+							<img src="{{ gold.image }}" alt="">
 						</div>
 					</div>
 					<!-- 右侧商品详情 -->
 					<div class="item-info-panel fl">
 						<!-- 商品名称 -->
 						<div class="item-title">
-							安徽三区搬砖号
+							{{ gold.goodinfo }}
 						</div>
 						<div class="item-info-wrapper">
 							<div class="alert">
 								凡商品的信息，图片中带联系信息的均是骗子，请谨慎防范！
 							</div>
 							<div class="price">
-								<span>商品价格:</span><span>￥488</span>
+								<span>商品价格:</span><span>￥{{ gold.price }}</span>
 							</div>
 							<div class="item-i-list">
-								<span>商品编号：</span><span>95655</span>
+								<span>商品编号：</span><span>{{ gold.productid }}</span>
 							</div>
 							<div class="item-i-list">
-								<span>游戏区服：</span><span>安徽区/安徽3区（跨四）</span>
+								<span>游戏区服：</span><span>{{ gold.gamearea }}</span>
 							</div>
 							<div class="item-i-list">
-								<span>诚信保证：</span><span>账号商品</span>
+								<span>诚信保证：</span><span>金币商品</span>
 							</div>
 							<div class="item-i-list">
 								<span>交易前请认准官方联系方式</span>
 							</div>
-							<div class="amount">
-								<span>购买数量：</span>
-								<span class="amount-btn " id="minus">-</span>
-								<span id="amount">1</span>
-								<span  class="amount-btn" id="plus">+</span>
-							</div>
-							<a target="_self" href="{% url 'transaction:goldPurchase' %}" >
+{#							<div class="amount">#}
+{#								<span>购买数量：</span>#}
+{#								<span class="amount-btn " id="minus">-</span>#}
+{#								<span id="amount">1</span>#}
+{#								<span  class="amount-btn" id="plus">+</span>#}
+{#							</div>#}
+							<a target="_self" href="{% url 'transaction:goldPurchase' gold.id %}" >
 								<div class="buy-btn">
 									立即购买
 								</div>
@@ -100,26 +96,40 @@
 				<div class="seller fl">
 					<div class="seller-info">	
 						<div class="seller-profile">
-							<img src="{% static 'details/images/icon/profile.png' %}" alt="">
+							<img src="{{ user.photo }}" alt="" >
 						</div>
 						<div class="seller-credit">
 							<span>卖家信誉：</span>
 							<ul class="seller-comment ">
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
+                                {% if credit.credit == 5%}
+                                    <li></li>
+								    <li></li>
+								    <li></li>
+								    <li></li>
+								    <li></li>
+                                {% elif credit.credit == 4%}
+                                    <li></li>
+								    <li></li>
+								    <li></li>
+								    <li></li>
+                                {% elif credit.credit == 3 %}
+                                    <li></li>
+								    <li></li>
+								    <li></li>
+                                {% else %}
+                                    <li></li>
+								    <li></li>
+                                {% endif %}
 							</ul>
 						</div>
 						<div class="success-order status">
-							<span>成交订单：&nbsp;&nbsp;</span><span>258笔</span>
+							<span>成交订单：&nbsp;&nbsp;</span><span>{{ credit.finishorder }}</span>
 						</div>
 						<div class="cancel-order status">
-							<span>取消订单 &nbsp;&nbsp;</span><span>11笔</span>
+							<span>取消订单 &nbsp;&nbsp;</span><span>{{ credit.cancelorder }}</span>
 						</div>
 						<div class="percent status">
-							<span>成交概率 &nbsp;&nbsp;</span><span>99%</span>
+							<span>成交概率 &nbsp;&nbsp;</span><span>{{ credit.okpercent }}%</span>
 						</div>
 					</div>
 				</div>
@@ -135,15 +145,16 @@
 				</div>
 				<div class="intro-tabs">
 					<div class="tab tab1">
+						<img src="{{ gold.image }}" alt="">
 						<img src="" alt="">
-						<img src="" alt="">
-                        该商品。。。。
+
 					</div>
 					<div class="tab tab2" style="display: none;">
 						已通过审核
 					</div>
 					<div class="tab tab3" style="display: none;">
-                      购买后24小时内可进行技术指导
+                      购买后24小时内商家未进行处理可联系客服 <br>
+                        客服电话： 0911-3838438
 					</div>
 				</div>
 			</div>
@@ -151,42 +162,19 @@
 				<div class="r-tit">
 					商品推荐
 				</div>
-				<div class="r-list fl">
-					<div class="r-img fl">
-						<img src="{% static 'details/images/wbm.png' %} " alt="">
-					</div>
-					<div class="r-text-c fr">
-						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
-						<span class="r-price">￥2588</span>
-					</div>
-				</div>
-				<div class="r-list fl">
-					<div class="r-img fl">
-						<img src="{% static 'details/images/wbm.png' %}" alt="">
-					</div>
-					<div class="r-text-c fr">
-						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
-						<span class="r-price">￥2588</span>
-					</div>
-				</div>
-				<div class="r-list fl">
-					<div class="r-img fl">
-						<img src="{% static 'details/images/wbm.png' %}" alt="">
-					</div>
-					<div class="r-text-c fr">
-						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
-						<span class="r-price">￥2588</span>
-					</div>
-				</div>
-				<div class="r-list fl">
-					<div class="r-img fl">
-						<img src="{% static 'details/images/wbm.png' %}" alt="">
-					</div>
-					<div class="r-text-c fr">
-						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
-						<span class="r-price">￥2588</span>
-					</div>
-				</div>
+				{% for good in goods %}
+
+				    <div class="r-list fl">
+                        <div class="r-img fl">
+                            <img src="{{ good.image }}" alt="">
+                        </div>
+                        <div class="r-text-c fr">
+                            <span><a href=" {% url 'transaction:gold_details' good.id %}">{{ good.goodinfo }}</a></span>
+                            <span class="r-price">￥{{ good.price }}</span>
+                        </div>
+				    </div>
+				{% endfor %}
+
 			</div>
 		</div>
 	</div>

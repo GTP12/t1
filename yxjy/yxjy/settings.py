@@ -42,10 +42,11 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middlewares.yxjy_middleware.LoginMiddleware',
 ]
 
 ROOT_URLCONF = 'yxjy.urls'
@@ -77,10 +78,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': '4396',
-        'USER':'xpy1805',
-        'PASSWORD':'xpy1805',
-        'HOST':'47.94.239.114',
-        'POST':3306
+        'USER': 'xpy1805',
+        'PASSWORD': 'xpy1805',
+        'PORT': 3306,
+        'HOST': '47.94.239.114',
     }
 }
 

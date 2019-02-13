@@ -35,7 +35,7 @@
 	height: 88px;
 	width: 88px;
 	border-radius: 50%;
-	/*border: 1px solid #979797;*/
+	border: 1px solid #979797;
 }
 .seller-credit{
 	display: flex;
@@ -137,7 +137,7 @@
 .price{
 	margin-top: 20px;
 	height: 22px;
-	line-height: 22px;、
+	line-height: 22px;
 
 }
 .price span:nth-child(1){
@@ -255,8 +255,11 @@
 	width: 700px;
 	margin-top: 20px;
 	margin-left: 10px;
+	font-size: 20px;
+	color: darkolivegreen;
 }
 .tab img{
+	height:500px;
 	float: left;
 	width: 100%;
 }

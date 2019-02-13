@@ -21,30 +21,29 @@
 	<div class="header" style="width: 100%">
 		<div class="wrapper clearfix">
 			<ul class="nav">
-				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
-				<li><a target="_self" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
-                <li class="active"><a target="_parent" href="{% url 'transaction:Add' %}">买卖发布</a></li>
-
+				<li><a href="games-deal/index/">首页</a></li>
+				<li><a target="_blank" href="../account/account-deal.html">账号交易</a></li>
+				<li><a target="_blank" href="../account/account-purchase.html">账号求购</a></li>
+				<li><a target="_blank" href="../material/material-deal.html">材料交易</a></li>
+				<li><a target="_blank" href="../not_do/material-purchase.html">材料求购</a></li>
+				<li><a target="_blank" href="">金币交易</a></li>
+                <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 			</ul>
-
 			<div class="user-info">
 
 				<!-- 我的订单 -->
 				<div class="register">
-					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
+					<a href=""><p>免费注册</p></a>
 				</div>
 				<div class="login">
-					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+					<a href=""><p>登录</p></a>
 				</div>
 				<div class="order">
-					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+					<a href=""><p>个人中心</p></a>
 				</div>
 			</div>
 		</div>
-	</div>
+    </div>
     <div style="width:100%;height: 300px;background-color: white;border: white"></div>
 <div class="publish-header w980">
 
@@ -110,7 +109,7 @@
         </div>
         <div class="sxf-div">
             <p class="sxfp">手续费<em>0.0</em> 元 </p>
-            <p class="sxftip"><a href="http://www.7881.com/helpcenter/73790970494518017.html" target="_self">了解手续费规则</a></p>
+            <p class="sxftip"><a href="http://www.7881.com/helpcenter/73790970494518017.html" target="_blank">了解手续费规则</a></p>
         </div>
         <div class="case-num">
             <span><i>*</i>想卖多少钱：</span>
@@ -123,7 +122,7 @@
         <h3>
             <span><i>*</i>发布件数：</span>
             <input maxlength="6" type="text" name="stock" class="common-input onlynum" datatype="n,howmany" value="1" />
-            <em class="zhu">注:为确保成功出售，请勿超库存发布，如有疑问请查看<a href="http://www.7881.com/helpcenter/365809715870535056.html" target="_self">《发布件数说明》</a></em>        </h3>
+            <em class="zhu">注:为确保成功出售，请勿超库存发布，如有疑问请查看<a href="http://www.7881.com/helpcenter/365809715870535056.html" target="_blank">《发布件数说明》</a></em>        </h3>
     </div>
     <div class="goods-title">
         <h3>
@@ -530,15 +529,15 @@
     </div>
     <div class="footer-link">
         <div class="footer-link-a">
-            <a href="http://www.7881.com/aboutus.html" target="_self" rel="nofollow">关于7881</a><em>|</em>
-            <a href="http://www.7881.com/contactus.html" target="_self" rel="nofollow">联系我们</a><em>|</em>
-            <a href="http://www.7881.com/copyright.html" target="_self" rel="nofollow">免责声明</a><em>|</em>
-            <a href="http://www.7881.com/hr.html" target="_self" rel="nofollow">诚聘英才</a><em>|</em>
-            <a href="http://www.7881.com/ParentalControls.jsp" target="_self" rel="nofollow">家长监护</a><em>|</em>
-            <a href="http://www.7881.com/cooperation.html" target="_self" rel="nofollow">商户合作</a><em>|</em>
-            <a href="http://www.7881.com/sitemap.html" target="_self">网站地图</a>
+            <a href="http://www.7881.com/aboutus.html" target="_blank" rel="nofollow">关于7881</a><em>|</em>
+            <a href="http://www.7881.com/contactus.html" target="_blank" rel="nofollow">联系我们</a><em>|</em>
+            <a href="http://www.7881.com/copyright.html" target="_blank" rel="nofollow">免责声明</a><em>|</em>
+            <a href="http://www.7881.com/hr.html" target="_blank" rel="nofollow">诚聘英才</a><em>|</em>
+            <a href="http://www.7881.com/ParentalControls.jsp" target="_blank" rel="nofollow">家长监护</a><em>|</em>
+            <a href="http://www.7881.com/cooperation.html" target="_blank" rel="nofollow">商户合作</a><em>|</em>
+            <a href="http://www.7881.com/sitemap.html" target="_blank">网站地图</a>
         </div>
-        <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_self">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文[2018]9230-174号</p>
+        <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文[2018]9230-174号</p>
     </div>
 </div>
 <!-- 通用底部 End -->
