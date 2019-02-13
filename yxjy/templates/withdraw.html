@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提现</title>
+</head>
+<body>
+<div class="ddgl">
+			<form id="inputForm" action="/financecharge/confirmExtractcash.action" method="post">
+				<input type="hidden" id="isApprovePic" value="1">
+				<input type="hidden" id="tixianSum" value="39678">
+				<input type="hidden" name="financeChargeBean.amount" id="amount">
+				<input type="hidden" name="financeChargeBean.bankname" id="bankname">
+				<input type="hidden" name="financeChargeBean.accountnum" id="accountnum">
+				<input type="hidden" name="financeChargeBean.username" value="王强强">
+				<input type="hidden" id="xskyye" value="0.00">
+				<input type="hidden" id="sale_account_balance" value="0.00">
+				<h1 class="h1">提现</h1>
+				<div class="txlc">
+					<span class="jt">提现流程：</span>
+					<span class="lc1">1</span><span class="wzs">选择银行，填写金额 </span>
+					<span class="jt">→</span>
+					<span class="lc2">2</span><span>确认提现信息</span>
+					<span class="jt">→</span>
+					<span class="lc2">3</span><span>提现申请成功，请耐心等候到账</span>
+				</div>
+				<div class="tx_new">
+					<div class="qqservice"><a href="javascript:openWinLive800()">联系客服</a></div>
+					<h2><img src="http://ofpics.7881.com/7881/market/images/Personal/aqzs.jpg"> 友情提示：通常提现到账时间为2小时内，如遇到银行系统维护可能会有延时。支付宝提现账户名必须与收款人姓名一致，否则提现失败。</h2>
+					<ul>
+						<li>
+							<span>可用余额为：</span><b id="strong_balance" class="f14 left">0.00</b>
+							<a href="/financerecord/incomeExpensesList.action" target="_blank" class="box_1">资金明细查询</a>
+						</li>
+						<li>
+							<span>可提现余额：</span><em id="xskyye_" class="f14 b">0.00</em>
+
+							<p id="tixianMsg" style="display: none;color: #f90;padding-left: 113px">&nbsp;&nbsp;订单撤销后退到账户余额的金额，48小时后才可提现</p>
+						</li>
+						<li class="gray"><span>友情提示：</span>最少提现金额为3元</li>
+						<li>
+							<span>收款人：</span><b class="left f14"></b>
+
+								<a href="/financecharge/toAddExtractBankAccount.action" class="box_2">添加提现账户</a>
+
+
+						</li>
+						<li>
+							<div class="bluebox" id="div_bluebox" style="display: block; overflow: hidden; height: 45px;"><a id="hlk_otheraccount" class="b click" onclick="javascript:return openMore();">选择其他账户</a>
+								<ul id="ul_accountList">
+
+										<li id="li_20180804858053857568706923" isuse="1">
+											<div class="name left">
+												<input type="radio" name="financeChargeBean.payway" class="radio" value="-2020839477617781176" bankid="8105" bankname="中国建设银行" accountnum="6217002540004532534" isuse="1" onclick="javascript:return toPrevious('li_20180804858053857568706923');">
+												<dfn class="">
+												</dfn>
+											</div>
+											<div class="edit cent left"><a href="/financecharge/toEditExtractBankAccount.action?fbaid=20180804858053857568706923">编辑</a></div>
+											<div class="time cent left">
+
+
+
+														12小时内到账
+
+
+											</div>
+											<div class="set cent left">
+												<a id="hlk_default_20180804858053857568706923" type="hlk_default" fbaid="20180804858053857568706923" class="box_4_current" style="display: block">默认账户</a>
+												<a id="hlk_nodefault_20180804858053857568706923" type="hlk_nodefault" fbaid="20180804858053857568706923" class="box_4" style="display: none" onclick="javascript:return setDefaultAccount('20180804858053857568706923');">设为默认</a>
+											</div>
+											<div class="edit cent left"></div>
+										</li>
+
+										<li id="li_201610288294069402734308850" isuse="1">
+											<div class="name left">
+												<input type="radio" name="financeChargeBean.payway" class="radio" value="-3491226889236771657" bankid="7648" bankname="支付宝" accountnum="18037459317" isuse="1" onclick="javascript:return toPrevious('li_201610288294069402734308850');">
+												<dfn class="">
+												</dfn>
+											</div>
+											<div class="edit cent left"><a href="/financecharge/toEditExtractBankAccount.action?fbaid=201610288294069402734308850">编辑</a></div>
+											<div class="time cent left">
+
+											</div>
+											<div class="set cent left">
+												<a id="hlk_default_201610288294069402734308850" type="hlk_default" fbaid="201610288294069402734308850" class="box_4_current" style="display: none">默认账户</a>
+												<a id="hlk_nodefault_201610288294069402734308850" type="hlk_nodefault" fbaid="201610288294069402734308850" class="box_4" style="display: block" onclick="javascript:return setDefaultAccount('201610288294069402734308850');">设为默认</a>
+											</div>
+											<div class="edit cent left"><a onclick="javascript:return deleteBankAccount('201610288294069402734308850');" class="box_5" title="删除"></a></div>
+										</li>
+
+										<li id="li_20170817932917631620762446" isuse="1">
+											<div class="name left">
+												<input type="radio" name="financeChargeBean.payway" class="radio" value="-628197098076729954" bankid="7648" bankname="支付宝" accountnum="13123240069" isuse="1" onclick="javascript:return toPrevious('li_20170817932917631620762446');">
+												<dfn class="">
+
+												</dfn>
+											</div>
+											<div class="edit cent left"><a href="/financecharge/toEditExtractBankAccount.action?fbaid=20170817932917631620762446">编辑</a></div>
+											<div class="time cent left">
+
+
+
+														立即到账
+
+
+											</div>
+											<div class="set cent left">
+												<a id="hlk_default_20170817932917631620762446" type="hlk_default" fbaid="20170817932917631620762446" class="box_4_current" style="display: none">默认账户</a>
+												<a id="hlk_nodefault_20170817932917631620762446" type="hlk_nodefault" fbaid="20170817932917631620762446" class="box_4" style="display: block" onclick="javascript:return setDefaultAccount('20170817932917631620762446');">设为默认</a>
+											</div>
+											<div class="edit cent left"><a onclick="javascript:return deleteBankAccount('20170817932917631620762446');" class="box_5" title="删除"></a></div>
+										</li>
+
+								</ul>
+							</div>
+						</li>
+						<li style="padding-bottom:0"><span>提现金额：</span>
+							<input type="text" class="input" id="amountyuan" name="financeChargeBean.amountyuan" onblur="setAmount()" maxlength="9" autocomplete="off"><b class="left"> 元</b><a href="/financerecord/extractList.action" target="_blank" class="box_3">提现记录查询</a>
+						</li>
+						<li id="li_tips" style="padding-top:0;display: none;"><div class="ico_6"></div></li>
+						<li><span>手续费：</span> <label style="float: left;"><input type="text" id="txt_transactionfees" name="financeChargeBean.factorage" style="color:#F90; font-size:14px; font-weight:bold; text-align:center; border:0px;width:65px;" readonly="readonly" value="0.00" autocomplete="off"> 元</label><a class="charge cent">收费标准&nbsp;&nbsp;&nbsp;</a><em>&nbsp;&nbsp;提现的手续费由银行或支付宝收取，7881平台不收取任何费用</em></li>
+						<li>
+							<div class="gray_box" style="display: none;">
+								<table width="690" border="0" cellpadding="0" cellspacing="1" bgcolor="ddddddd">
+									<tbody><tr>
+										<th height="26">银行</th>
+
+											<th statusindex="0" bankid="7649">工商银行</th>
+
+											<th statusindex="1" bankid="8105">建设银行</th>
+
+											<th statusindex="2" bankid="7651">农业银行</th>
+
+											<th statusindex="3" bankid="7653">招商银行</th>
+
+											<th statusindex="4" bankid="7655">交通银行</th>
+
+											<th statusindex="5" bankid="7654">中国银行</th>
+
+											<th statusindex="6" bankid="0000">其他银行</th>
+
+											<th statusindex="7" bankid="7648">支付宝</th>
+
+									</tr>
+									<tr>
+										<td height="26">手续费比例</td>
+
+											<td id="rate_0" rate="90">0.9%</td>
+
+											<td id="rate_1" rate="25">0.25%</td>
+
+											<td id="rate_2" rate="40">0.4%</td>
+
+											<td id="rate_3" rate="20">0.2%</td>
+
+											<td id="rate_4" rate="15">0.15%</td>
+
+											<td id="rate_5" rate="60">0.6%</td>
+
+											<td id="rate_6" rate="90">0.9%</td>
+
+											<td id="rate_7" rate="90">0.9%</td>
+
+									</tr>
+									<tr>
+										<td height="26">最低手续费</td>
+
+											<td id="minnum_0" minnum="90">0.9元/笔</td>
+
+											<td id="minnum_1" minnum="200">2.0元/笔</td>
+
+											<td id="minnum_2" minnum="100">1.0元/笔</td>
+
+											<td id="minnum_3" minnum="200">2.0元/笔</td>
+
+											<td id="minnum_4" minnum="100">1.0元/笔</td>
+
+											<td id="minnum_5" minnum="100">1.0元/笔</td>
+
+											<td id="minnum_6" minnum="100">1.0元/笔</td>
+
+											<td id="minnum_7" minnum="200">2.0元/笔</td>
+
+									</tr>
+									<tr>
+										<td height="26">手续费上限</td>
+
+											<td id="maxnum_0" maxnum="4500">45.0元/笔</td>
+
+											<td id="maxnum_1" maxnum="2500">25.0元/笔</td>
+
+											<td id="maxnum_2" maxnum="2000">20.0元/笔</td>
+
+											<td id="maxnum_3" maxnum="2000">20.0元/笔</td>
+
+											<td id="maxnum_4" maxnum="5000">50.0元/笔</td>
+
+											<td id="maxnum_5" maxnum="2500">25.0元/笔</td>
+
+											<td id="maxnum_6" maxnum="5000">50.0元/笔</td>
+
+											<td id="maxnum_7" maxnum="5000">50.0元/笔</td>
+
+									</tr>
+								</tbody></table>
+							</div>
+						</li>
+						<li><span>&nbsp;</span><a onclick="return extractcashCheck();" class="an_orange cent white b f14">提交</a></li>
+						</ul>
+				</div>
+			</form>
+		</div>
+</body>
+</html>

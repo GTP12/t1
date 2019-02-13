@@ -1,0 +1,385 @@
+ #dxk {
+            background: #fff;
+            margin-left: 90px;
+            border: none;
+        }
+
+        .cutpicli {
+            overflow: hidden;
+        }
+
+        .cutpic {
+            width: 558px;
+            height: 188px;
+            border: 1px solid #ccc;
+            float: left;
+            padding: 20px;
+        }
+
+        .cutpic_paimai {
+            width: 558px;
+            border: 1px solid #ccc;
+            float: left;
+            padding: 20px;
+        }
+
+        .cutpic p {
+            background: #fffcf0;
+            border: 1px solid #ffcc33;
+            line-height: 20px;
+            padding: 10px 15px;
+        }
+
+        .cutpic_paimai p {
+            background: #fffcf0;
+            border: 1px solid #ffcc33;
+            line-height: 20px;
+            padding: 10px 15px;
+        }
+
+        .webuploader-container {
+            position: relative;
+        }
+
+        .webuploader-element-invisible {
+            position: absolute !important;
+            clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+            clip: rect(1px, 1px, 1px, 1px);
+        }
+
+        .webuploader-pick {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background: #00b7ee;
+            padding: 10px 15px;
+            color: #fff;
+            text-align: center;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .webuploader-pick-hover {
+            background: #00a2d4;
+        }
+
+        .webuploader-pick-disable {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .bl-uploader-box {
+            padding-top: 20px;
+            margin-left: 15px;
+            width: 110px;
+            height: 110px;
+            overflow: hidden;
+            float: left;
+        }
+
+        .bl-uploader-box .uploader-list .file-item {
+            width: 110px;
+            height: 110px;
+            float: left;
+            margin-right: 12px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .bl-uploader-box .uploader-list .file-item img {
+            width: 110px;
+            height: 110px;
+        }
+
+        .bl-uploader-box .uploader-list .file-item .info {
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            width: 110px;
+            text-align: center;
+            height: 26px;
+            line-height: 26px;
+            background: #000;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            -khtml-opacity: 0.8;
+            color: #fff;
+        }
+
+        .bl-uploader-box .uploader-list .file-item .error {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 110px;
+            text-align: center;
+            height: 26px;
+            line-height: 26px;
+            background: red;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            -khtml-opacity: 0.8;
+            color: #fff;
+        }
+
+        .bl-uploader-box .uploader-list .file-item .del-img {
+            position: absolute;
+            z-index: 99;
+            cursor: pointer;
+            right: 0px;
+            top: -0;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            background: url(http://pic.7881.com/7881/market/images/sell/picclose-icon.png) top right no-repeat;
+            line-height: 26px;
+            color: #333;
+        }
+
+        .bl-uploader-box .btns {
+            float: left;
+            margin-bottom: 30px;
+        }
+
+        .bl-uploader-box .btns #picker {
+            width: 110px;
+            height: 110px;
+            text-align: center;
+        }
+
+        .bl-uploader-box .btns #picker .webuploader-pick {
+            background: transparent;
+            color: #999;
+            width: 110px;
+            height: 110px;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .bl-uploader-box .btns #picker_paimai {
+            width: 110px;
+            height: 110px;
+            text-align: center;
+        }
+
+        .bl-uploader-box .btns #picker_paimai .webuploader-pick {
+            background: transparent;
+            color: #999;
+            width: 110px;
+            height: 110px;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .cutsl {
+            width: 110px;
+            height: 110px;
+            float: left;
+            margin: 20px 0 0 20px;
+            position: relative;
+        }
+
+        .cutsl img {
+            width: 110px;
+            height: 110px;
+        }
+
+        .cutsl p {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            bottom: 0;
+            left: 0;
+            height: 18px;
+            line-height: 18px;
+            font-size: 12px;
+            color: #fff;
+            background: #3399ff;
+            padding: 0;
+            border: 0;
+        }
+
+        .cutsl .del-img {
+            position: absolute;
+            z-index: 99;
+            cursor: pointer;
+            right: 0px;
+            top: -0;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            background: url(http://pic.7881.com/7881/market/images/sell/picclose-icon.png) top right no-repeat;
+            line-height: 26px;
+            color: #333;
+        }
+
+        .txcpdd ul li span {
+            width: 120px;
+        }
+
+        .shareServerTip {
+            color: #F00;
+            margin-left: 20px;
+        }
+
+        /*20180306 yhp*/
+        .dealaddr {
+            padding-left: 125px;
+        }
+
+        .dealaddr p {
+            line-height: 20px;
+        }
+
+        .dealaddr p em {
+            color: #ff0000;
+            padding-left: 5px;
+        }
+
+        .dealaddr p.dtips {
+            background: #fffde9;
+            padding: 5px;
+            border: 1px solid #ffcc99;
+            color: #ff6600;
+            width: 430px;
+            margin-top: 8px;
+        }
+
+        .layui-layer.poppaimai {
+            border-radius: 8px;
+        }
+
+        .pop-paimai {
+            width: 620px;
+            margin: 0 auto;
+            height: 464px;
+        }
+
+        .pop-paimai h2 {
+            height: 76px;
+            line-height: 76px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 22px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .pop-paimai h2 span {
+            color: #ff6700;
+        }
+
+        .pop-paimai dl {
+            overflow: hidden;
+            padding: 20px 0 0 50px;
+        }
+
+        .pop-paimai dl dt {
+            float: left;
+            width: 66px;
+            margin-top: 6px;
+        }
+
+        .pop-paimai dl dd {
+            float: left;
+            width: 430px;
+            margin-left: 20px;
+        }
+
+        .pop-paimai dl dd h3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #39f;
+            line-height: 26px;
+        }
+
+        .pop-paimai dl dd p {
+            font-size: 16px;
+            line-height: 26px;
+            font-family: "microsoft yahei";
+            color: #333;
+        }
+
+        .pop-paimai dl dd p span {
+            font-family: simsun;
+            color: #ff6700;
+            font-weight: bold;
+        }
+
+        .pop-paimai h4 {
+            text-align: center;
+            padding-top: 28px;
+        }
+
+        .pop-paimai h5 {
+            text-align: center;
+            padding: 35px 0 25px 0;
+            font-family: "microsoft yahei";
+            color: #339900;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .pop-paimai h5 span {
+            color: #ff6700;
+        }
+
+        .pop-paimai a {
+            text-align: center;
+            width: 150px;
+            height: 42px;
+            display: block;
+            margin: 0 auto;
+            line-height: 42px;
+            background: #ff6700;
+            color: #fff;
+            font-size: 14px;
+            font-family: "microsoft yahei";
+            border-radius: 3px;
+            text-decoration: none;
+        }
+
+        .pop-paimai .closex {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .pop-paimai .notips {
+            position: absolute;
+            right: 35px;
+            bottom: 47px;
+            font-size: 14px;
+            font-family: "microsoft yahei";
+            color: #999;
+        }
+
+        .pop-paimai .notips input {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .form li label.lbaqbz {
+            margin-right: 15px;
+            text-align: left;
+            float: none;
+        }
+
+        .aqbztip {
+            margin-left: 125px;
+        }
+
+        .aqbztip p {
+            font-size: 12px;
+            line-height: 20px;
+            width: 430px;
+            background: #fafafa;
+            border: 1px solid #e4e4e4;
+            padding: 3px 8px;
+        }
+
+        .aqbztip p a {
+            color: #3366cc;
+        }

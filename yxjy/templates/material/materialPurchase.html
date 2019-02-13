@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <title>-游戏材料交易购买详情页面</title>
+    <link rel="stylesheet" href="{% static 'gold/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'gold/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'gold/css/gold-deal.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/purchase.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/Public.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/buy.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/popLayer.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="http://www.7881.com/market/css/sell.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/goldPurchase.css' %}">
+    {#    <style type="text/css">#}
+    {#    </style>#}
+    <script type="text/javascript" src="{% static 'goldPurchase/js/kefu.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/jquery-1.8.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/restrict_input.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/webuploader.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/lightbox-plus-jquery.min.js' %}"></script>
+    {#    <script type="text/javascript" src="/js/GoodsGuaranteeMoney.js?v=20180410.2"></script>#}
+    <script type="text/javascript">
+        function roleSelected(prid) {
+            $('#dxk div').hide();
+            $('#div_' + prid).show();
+            if (prid == "-1" || prid == "0") {
+                var gameId = 'G10';
+                var gtid = '100111';
+                if (gameId == 'G10' && (gtid == '100001' || gtid == '100002' || gtid == '100111')) {
+                    if (gtid == '100001') {
+                        $("#fuzhi_0").show();
+                        $("#fuzhi_-1").show();
+                    }
+                    if (gtid == '100111' || gtid == '100002')
+                        $("#fuzhi_0").show();
+                    $("#fuzhi_-1").show();
+                } else {
+                    $('#div_' + prid + '  #fuzhi_' + prid).show();
+                }
+            } else {
+                $('#div_' + prid + '  #fuzhi_' + prid).hide();
+            }
+        }
+
+        function checkPurchase() {
+            if ('G10' == 'G479' && '100111' == '100074') {
+                // 取得买家收货属性
+                var info = [];
+                var rolename = $('#pt_rolename').val();
+                if (typeof(rolename) == "undefined") {
+                    rolename = "null";
+                }
+                var rolegrade = $('#pt_rolegrade').val();
+                if (typeof(rolegrade) == "undefined") {
+                    rolegrade = "null";
+                }
+                info.push({
+                    'rolename': rolename,
+                    'rolelevel': rolegrade,
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            } else if ('100111' == '100149') {
+                // 取得买家收货属性
+                var info = [];
+                info.push({
+                    'rolename': "null",
+                    'rolelevel': "null",
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            } else if ('100111' == '100150') {
+                // 取得买家收货属性
+                var info = [];
+                info.push({
+                    'rolename': "null",
+                    'rolelevel': "null",
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            } else if ('G10' == 'G3415' && ('100111' == '100144' || '100111' == '100161')) {
+                var info = [];
+                info.push({
+                    'rolename': $("#txtRole").val(),
+                    'rolelevel': $("#txtRoleLevel").val(),
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            } else if ('G10' == 'G4804' && '100111' == '100163') {
+                var info = [];
+                info.push({
+                    'rolename': '-',
+                    'rolelevel': '0',
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+                $('#gameaccount').val($('#stramAccount').val());
+                $('#buyerpassword').val($('#stramPassword').val());
+            } else {
+                if ('G10' == 'G10' && ('100111' == '100148' || '100111' == '100151' || '100111' == '100188')) {
+//                	$('#buyerRolename').val($('#dxk div:visible textarea:eq(0)').val());
+//                    $('#buyerRolename').val($('#txtRole').val());
+                    $('#prid').val(0);
+                } else {
+                    $('#prid').val($('#dxk div:visible').attr('id').split('_')[1]);
+                    $('#buyerRolename').val($('#dxk div:visible dl input:text:eq(0)').val());
+                    $('#grade').val($('#dxk div:visible dl input:text:eq(2)').val());
+                }
+
+                // 问道，QQ仙灵游戏需要填写数字ID
+                if ('G10' == 'G39' || 'G10' == 'G670' || 'G10' == 'G986' || '100111' == '100045') {
+                    $('#numberid').val($('#dxk div:visible dl input:text:eq(3)').val());
+                }
+
+                // 取得买家收货属性
+                var info = [];
+                var roleLevel = !$('#txtRoleLevel').val() ? 0 : $('#txtRoleLevel').val();
+
+                var rolelevel2 = $('#grade').val() == "" ? "0" : $('#grade').val();
+                if ('G10' == 'G10' && '100111' == '100001' && 'db' == 'js') {
+                    rolelevel2 = "";
+                }
+                info.push({
+                    'rolename': $('#buyerRolename').val(),
+                    'rolelevel': rolelevel2,
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            }
+
+
+            var uploadAuctionImg = "";
+            var uploadSuccess = true;
+            $.each($('#thelist').children(), function (i, item) {
+
+                if (typeof($(item).attr("url")) == "undefined" || $(item).attr("url") == "" || $(item).children(".progress").length > 0) {
+                    uploadSuccess = false;
+                    return false;
+                }
+                if (i != 0) {
+                    uploadAuctionImg += ',';
+                }
+                uploadAuctionImg += $(item).attr("url");
+            });
+            if (uploadSuccess == false) {
+                uploadAuctionImg = '';
+                alert('图片上传还未完成，请稍后');
+                return;
+            }
+            if (uploadAuctionImg != "") {
+                $("#uploadAuctionImg").val(uploadAuctionImg);
+            }
+            if ("G3415" == "G10" && "100161" == "100111") {
+                if (uploadAuctionImg == "") {
+                    alert("请先上传装备图片!");
+                    return false;
+                }
+            }
+
+            var goodsprice = eval($('#price').val() + '*' + $('#stock').val()).toFixed(3);
+            goodsprice = goodsprice + '';
+            if (goodsprice.indexOf(".") != -1) {
+                goodsprice = goodsprice.substring(0, goodsprice.indexOf(".") + 3);
+            }
+            if (parseFloat(goodsprice) < 0.01) {
+                goodsprice = 0.01;
+            }
+
+            $('#goodsprice').val(goodsprice);
+//            $('#text_goodsprice').val(goodsprice);
+
+            $.ajax({
+                type: 'post',
+                data: {goodsid: '201612418196875'},
+                {#url: '/procurement/queryGoodsStock.action',#}
+                dataType: 'text',
+                success: function (data) {
+                    if (data < 1) {
+                        alert('很抱歉，该商品已售完，请选择其他同类商品');
+                        window.location.href = '/buy-G10-100111-G10P001-G10P001002-0-0-0-0-0-0.html';
+                    } else {
+                        $('#hlkOK').attr('disabled', true);
+                        $('#goodsForm').submit();
+                    }
+                }
+            });
+            return false;
+        }
+
+        function checkNum(count) {
+
+            $('#checkNum').html(count);
+
+        }
+
+        function changedelivertype(id) {
+            var str = "";
+            if (id == "post") {
+                str = "邮寄后<label style='color:red'>30分钟</label>才可收到邮件";
+            } else {
+                str = "为加快交易速度，订单支付成功后，请您在扬州交易区<信使>处等待交易员与您交易，交易员不会以任何理由索要回交易出去的商品";
+            }
+            $("#dxk_aq").html(str);
+
+            if (id == "auction") {
+                $(".mapdiandaoUploadPic_li").show();
+            } else {
+                $(".mapdiandaoUploadPic_li").hide();
+            }
+        }
+
+        function getByteLen(val) {
+            var len = 0;
+            for (var i = 0; i < val.length; i++) {
+                var length = val.charCodeAt(i);
+                if (length >= 0 && length <= 128) {
+                    len += 1;
+                }
+                else {
+                    len += 2;
+                }
+            }
+            return len;
+        }
+    </script>
+</head>
+<body>
+<!--头部开始-->
+<body>
+	<div class="header">
+		<div class="wrapper clearfix">
+			<ul class="nav">
+				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li class="active"><a target="_parent" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
+                <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+
+			</ul>
+
+			<div class="user-info">
+
+				<!-- 我的订单 -->
+				<div class="register">
+					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
+				</div>
+				<div class="login">
+					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+				</div>
+				<div class="order">
+					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+    {#	// 判断是否登录#}
+    {#	jQuery.ajax({#}
+    {#		type : 'get',#}
+    {#		url : '/loginCheckReturn.action?ip=' + Math.round(Math.random()*10000),#}
+    {#		success : function(resultData) {#}
+    {#			var result = resultData.split('#');#}
+    {#			if(result[0] == '500')#}
+    {#			{#}
+    {#				location.href="/7881_touristlogin.jsp";#}
+    {#			}#}
+    {#			else if (result[0] == '200' && result.length > 2) {#}
+    {#				 jQuery('#span_user').empty();#}
+    {#				 if(result[2]!='0'){#}
+    {#				 	htmlText = '<a class="dlzc" rel="nofollow" href="/personal.html">'+result[1]+'</a>&nbsp;&nbsp;<a class="dlzc" href="/msg/notReadMsg.action" rel="nofollow"><img align="absmiddle" src="http://pic.7881.com/7881/market/images/Personal/znx_wd.png"/>[' + result[2] + ']</a>&nbsp;&nbsp; <a href="/logout.action" rel="nofollow">退出</a>';#}
+    {#				 }else{#}
+    {#				 	htmlText = '<a class="dlzc" rel="nofollow" href="/personal.html">'+result[1]+'</a>&nbsp;&nbsp;<a class="dlzc" href="/msg/notReadMsg.action" rel="nofollow"><img align="absmiddle" src="http://pic.7881.com/7881/market/images/Personal/message.png"/>[' + result[2] + ']</a>&nbsp;&nbsp; <a href="/logout.action" rel="nofollow">退出</a>';#}
+    {#				 }#}
+    {#				 jQuery('#span_user').html(htmlText);#}
+    {#			}#}
+    {#		}#}
+    {#	});#}
+
+    $('#div_seller,#div_buyer,#div_blog,#div_Service').hover(
+        function () {
+            $(this).addClass('hover');
+        },
+        function () {
+            $(this).removeClass('hover');
+        }
+    );
+
+    document.domain = "7881.com";
+</script>
+<div id="div_popup_layer">
+    <div class="box">
+        <div id="div_light" class="pops" style="display: none;">
+            <h2><span>友情提示</span><a href="/goods-201612418196875.html"></a></h2>
+            <dl>
+                <dt>亲爱的用户，您未支付的订单太多了！</dt>
+                <dd>您需要先处理未支付订单后，方可继续购买</dd>
+                <dd><a href="/procurement/queryMyProcureOrder.action" class="s1">我购买的订单</a><a
+                        href="/goods-201612418196875.html" class="s2">返回商品详情</a></dd>
+            </dl>
+        </div>
+    </div>
+    <div id="div_fade" class="mask" style="display: none;"></div>
+</div>
+<script type="text/javascript" src="/market/transaction/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/market/7881_logo_modify.js"></script>
+<script type="text/javascript">
+    var gametype = "";
+</script>
+<div class="center logo">
+    <div class="left">
+        <a id="logoid"><img src="http://ofpics.7881.com/7881/market/images/7881_logo.jpg" title="7881-游戏交易站"/></a>
+    </div>
+</div>
+
+<!--头部结束-->
+<div class="clear"></div>
+<div class="center">
+    <div class="qrgmxx">
+        <h1>确认购买信息</h1>
+        <div class="kuang">
+            <ul>
+                <li class="cpbt"><span>商品标题</span></li>
+                <li class="jg">价格</li>
+
+            </ul>
+            <ul>
+                <li class="cpbt">
+                    <img src="http://ofpics.7881.com/7881/market/images/buy/buy_dan.png"/>
+                    <em>【其他】22704个=5.0元 地下城与勇士 广东区广东2区
+                    </em><br/>
+                    物品类型： 材料<br/>
+                    游戏区服： 地下城与勇士 /广东区
+                    /广东2区
+                    <label style="color: #ff6700;">(跨一)</label>
+                </li>
+                <li class="jg"><strong style=" color:#F90">5.00</strong>元
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<form id="goodsForm" action="" method="post">
+    <div class="center">
+        <div class="txcpdd">
+            <h1>填写商品订单</h1>
+            <style>
+                .tips-of3b {
+                background: #ffdfbe;
+                padding: 10px 20px;
+                color: red;
+                font-size: 14px;
+                margin: 5px 20px 0 20px
+            }
+            .tips-of3b p {
+                text-indent: 1em;
+                margin: 5px 0 0
+            }
+            </style>
+            <input type="hidden" name="goodsPurchaseBean.goodsid" value="201612418196875"/>
+            <input type="hidden" name="goodsPurchaseBean.tradetype" value="db"/>
+            <input type="hidden" name="goodsPurchaseBean.gameid" value="G10"/>
+            <input type="hidden" name="goodsPurchaseBean.gamename" value="地下城与勇士"/>
+            <input type="hidden" name="goodsPurchaseBean.carrierid" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.carriername" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.groupid" value="G10P001"/>
+            <input type="hidden" name="goodsPurchaseBean.groupname" value="广东区"/>
+            <input type="hidden" name="goodsPurchaseBean.serverid" value="G10P001002"/>
+            <input type="hidden" name="goodsPurchaseBean.servername" value="广东2区"/>
+            <input type="hidden" name="goodsPurchaseBean.camp" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.rid" value=""/>
+            <input type="hidden" id="gameaccount" name="goodsPurchaseBean.gameaccount" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.gtid" value="100111"/>
+            <input type="hidden" name="goodsPurchaseBean.ver" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.payoutdelay" value="0"/>
+            <input type="hidden" id="rolename" name="goodsPurchaseBean.rolename" value=""/>
+            <input type="hidden" id="price" name="goodsPurchaseBean.price" value="5"/>
+            <input type="hidden" id="pernum" name="goodsPurchaseBean.pernum" value="22704"/>
+            <input type="hidden" id="prid" name="goodsPurchaseBean.prid"/>
+            <input type="hidden" id="grade" name="goodsPurchaseBean.grade"/>
+            <input type="hidden" id="goodsinfo" name="goodsPurchaseBean.goodsinfo"/>
+            <input type="hidden" id="goodsprice" name="goodsPurchaseBean.goodsprice"/>
+            <input type="hidden" id="numberid" name="goodsPurchaseBean.numberid"/>
+            <input type="hidden" id="buyerRolename" name="buyerRolename"/>
+            <input type="hidden" id="uploadAuctionImg" name="goodsPurchaseBean.uploadAuctionImg"/>
+            <input type="hidden" id="buyerGroupId" name="goodsPurchaseBean.buyerGroupId"/>
+            <input type="hidden" id="buyerGroupName" name="goodsPurchaseBean.buyerGroupName"/>
+            <input type="hidden" id="buyerServerId" name="goodsPurchaseBean.buyerServerId"/>
+            <input type="hidden" id="buyerServerName" name="goodsPurchaseBean.buyerServerName"/>
+            <input type="hidden" id="buyNum" value="1"/>
+            <input type="hidden" id="buyerpassword" name="goodsPurchaseBean.buyerpassword"/>
+            <ul>
+                <li class="buyNum"><span>购买数量：<strong style="color:#F00">* </strong></span><input type="text" id="stock"
+                                                                                                  name="goodsPurchaseBean.stock"
+                                                                                                  maxval="1"
+                                                                                                  size="5" desc="购买数量"
+                                                                                                  regexp="^[1-9]\d*$"
+                                                                                                  regexp_desc="购买数量必须大于0"
+                                                                                                  value="1"/>
+
+                    <p class="txcpdd_default"> (可购 1 件)</p>
+                    <p style="display: inline-table;color: red;"></p>
+                </li>
+                <li><span>收货角色所在区服：<strong style="color:#F00">* </strong></span></li>
+                <li style="margin-left: 92px">
+                    <input type="hidden" name="goodsPurchaseBean.crossserver" value="0"/>
+                    <select id="shareServerId">
+                        <option value="-1">请选择服</option>
+                        <option value="G10P019003" name="江西区" id="G10P019">江西区</option>
+                        <option value="G10P019003" name="广东区" id="G10P018">广东区</option>
+                        <option value="G10P019003" name="北京区" id="G10P017">北京区</option>
+                        <option value="G10P019003" name="四川区" id="G10P016">四川区</option>
+                        <option value="G10P019003" name="江苏区" id="G10P015">江苏区</option>
+                        <option value="G10P019003" name="湖北区" id="G10P014">湖北区</option>
+                        <option value="G10P019003" name="广西区" id="G10P013">广西区</option>
+                        <option value="G10P019003" name="东北区" id="G10P012">东北区</option>
+                        <option value="G10P019003" name="浙江区" id="G10P011">浙江区</option>
+                        <option value="G10P019003" name="山东区" id="G10P009">山东区</option>
+                        <option value="G10P019003" name="上海区" id="G10P008">上海区</option>
+                        <option value="G10P019003" name="西南区" id="G10P007">西南区</option>
+                        <option value="G10P019003" name="安徽区" id="G10P006">安徽区</option>
+                    </select>
+                </li>
+
+
+                <li>
+
+                    <span>收货角色：<strong style="color:#F00">* </strong></span>
+
+
+                    &nbsp;&nbsp;<a href="" target="_self"
+                                   style="color: blue">管理收货角色</a>
+
+                    <div id="dxk">
+                        <div id="div_0">
+                            <dl>
+                                <dd><span>角色名：<strong style="color:#F00">*</strong></span> <input type="text"
+                                                                                                  id="txtRole"
+                                                                                                  desc="角色名"
+                                                                                                  autocomplete="off"
+                                                                                                  value=""
+                                                                                                  maxlength="40"/>
+                                    <p class="txcpdd_default">
+                                    </p>
+                                    <a id="fuzhi_0" href="http://www.7881.com/helpcenter/15886363374533255.html"
+                                       target="_self" style="color: blue;display:none;">如何复制角色名>></a>
+                                </dd>
+                                <dd><span>确认角色名：<strong style="color:#F00">*</strong></span> <input type="text"
+                                                                                                    compare="true"
+                                                                                                    compareid="txtRole"
+                                                                                                    desc="确认角色名"
+                                                                                                    autocomplete="off"
+                                                                                                    value=""
+                                                                                                    maxlength="40"/>
+
+                                    <p class="txcpdd_default"></p></dd>
+
+
+                            </dl>
+                        </div>
+
+
+                    </div>
+                </li>
+
+
+                <li><span>电话号码：<strong style="color:#F00">* </strong></span><input type="text"
+                                                                                   name="goodsPurchaseBean.phone"
+                                                                                   maxlength="11" desc="电话号码"
+                                                                                   regexp="^1[0-9]{10}$"
+                                                                                   regexp_desc="无效的手机号码"
+                                                                                   value="13239175253"/>
+                </li>
+                <li><span>联系QQ：<strong style="color:#F00">* </strong></span><input type="text"
+                                                                                   name="goodsPurchaseBean.qq"
+                                                                                   maxlength="12" desc="联系QQ"
+                                                                                   regexp="^[0-9]{5,12}$"
+                                                                                   regexp_desc="无效的QQ号"
+                                                                                   value="1532080699"/>
+                </li>
+
+
+                <li style=""><span>推广码：<strong style="color:#F00">&nbsp;&nbsp;</strong></span><input type="text"
+                                                                                                     id="tgm"
+                                                                                                     name="goodsPurchaseBean.promocode"
+                                                                                                     maxlength="12"
+                                                                                                     required="true"
+                                                                                                     onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+</form>
+<div class="clear"></div>
+<div class="center">
+    <div class="qdtjdd">
+        <h1><a href="{% url 'transaction:payment' %}">确认提交订单</a></h1>
+        <ul>
+            <li>7881官方任何工作人员，都<b>不会</b>通过
+                QQ、电话或游戏内等方式，您索要您的登陆密码、手机号码或手机验证码！（手游代充、账号订单除外）如有人冒充7881工作人员向您索要，请千万不要提供！并第一时间联系7881官方客服，电话：400-187-7881（此号码无外拨功能）。
+            </li>
+            <li>需支付总价<input type="text" id="text_goodsprice"
+                            style="color:#F90; font-size:16px; font-weiht:bold; text-align:center; border:0px;width:65px;"
+                            readonly="readonly"/>元
+
+            </li>
+            <li>
+
+
+                <span style="padding-left: 20px;border: red">
+                    <a  style="padding: 0 2px; color: #ff6700" href="{% url 'transaction:payment' %}">确认购买</a>
+                </span>
+
+            </li>
+
+
+            <li><input type="checkbox" id="agreement" checked="checked" style=" height:12px;"/>&nbsp;我已阅读并同意<a
+                    href="/gmxy.html" target="_self" class="ls">《7881网游交易协议》</a></li>
+        </ul>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="center">
+    <div class="ddwt">
+        <h1>订单遇到问题：</h1>
+        <ul>
+            <li>
+                1.订单号无效，怎么回事啊？<br/>
+                回答：请确保您的订单成功支付了，否则无法成功取货哦。
+            </li>
+            <li><a href="/helpcenter.html" target="_self" class="ls">更多帮助</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--  -->
+
+
+<!--底部开始-->
+<div class="clear"></div>
+<div class="center" style="border-bottom:1px solid #CAC9C9; width:100%; height:1px; margin-top:10px;"></div>
+<div class="clear"></div>
+<div class="foot">
+    <div class="center foot_wenzi">
+        <a href="http://www.7881.com/aboutus.html" target="_self" class="hs" rel="nofollow">&nbsp;关于我们&nbsp;</a> |
+        <a href="http://www.7881.com/contactus.html" target="_self" class="hs" rel="nofollow">&nbsp;联系我们&nbsp;</a> |
+        <a href="http://www.7881.com/copyright.html" target="_self" class="hs" rel="nofollow">&nbsp;免责声明&nbsp;</a> |
+        <a href="http://www.7881.com/hr.html" target="_self" class="hs" rel="nofollow">&nbsp;诚聘英才&nbsp;</a> |
+        <a href="http://pic.7881.com/shenhe/allshen/jzjh-7881.html" target="_self" class="hs" rel="nofollow">&nbsp;家长监护&nbsp;</a>
+        |
+        <a href="http://www.7881.com/cooperation.html" target="_self" class="hs" rel="nofollow">&nbsp;商务合作&nbsp;</a> |
+        <a href="http://www.7881.com/sitemap.html" target="_self" class="hs">&nbsp;网站地图&nbsp;</a> |
+        <a href="http://www.7881.com/articlelist9-0-0.html" target="_self" class="hs">&nbsp;媒体声音&nbsp;</a> <br/>
+        Copyright Reserved 2008-2016 &copy; 7881游戏交易 网络文化经营许可证：
+        苏网文 〔2018〕9230-174号
+        网站备案-<a href="http://www.miitbeian.gov.cn" target="_self" class="hs">苏B1-20110004-4 </a>
+    </div>
+    <div class="mb10 center cent">
+        <a target="_self" rel="nofollow" href="http://www.miibeian.gov.cn"><img
+                src="http://ofpics.7881.com/7881/market/images/foot_1.png"/> 网站备案信息</a>
+        <a target="_self" rel="nofollow" href="http://www.cyberpolice.cn/wfjb/"><img
+                src="http://ofpics.7881.com/7881/market/images/foot_2.png"/> 网络警察</a>
+        <a target="_self" rel="nofollow" href="https://www.alipay.com"><img
+                src="http://ofpics.7881.com/7881/market/images/foot_3.png"/> 支付宝特约商户</a>
+        <a target="_self" rel="nofollow"
+           href="http://www.anquan.org/authenticate/cert/?site=www.7881.com&sn=2013071816040123804"><img
+                src="http://ofpics.7881.com/7881/market/images/foot_6.png"/> 安全联盟</a>
+        <a target="_self" rel="nofollow"
+           href="http://sq.ccm.gov.cn/ccnt/sczr/service/business/emark/toDetail/6C975C7695A34AD89E8416C44BEE105B"><img
+                src="http://pic.7881.com/7881/market/images/foot_8.png"/> 中国文化部</a>
+
+    </div>
+    <div class="tleft"></div>
+</div>
+<!--底部结束-->
+<script type="text/javascript">
+    function goTopEx() {
+        var obj = document.getElementById("goTopBtn");
+
+        function getScrollTop() {
+            return document.documentElement.scrollTop;
+        }
+
+        function setScrollTop(value) {
+            document.documentElement.scrollTop = value;
+        }
+
+        window.onscroll = function () {
+            getScrollTop() > 0 ? obj.style.display = "" : obj.style.display = "none";
+        }
+        obj.onclick = function () {
+            var goTop = setInterval(scrollMove, 10);
+
+            function scrollMove() {
+                setScrollTop(getScrollTop() / 1.1);
+                if (getScrollTop() < 1) clearInterval(goTop);
+            }
+        }
+    }
+</script>
+<DIV style="DISPLAY: none" id="goTopBtn"><IMG border=0 src="http://ofpics.7881.com/7881/market/images/index_top.jpg"
+                                              alt="返回头部"></DIV>
+<SCRIPT type=text/javascript>goTopEx();</SCRIPT>
+<div style="display: none;">
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6fb35abaf76325a4316e33e23c984e73' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44365965-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</div>
+
+
+<div class="sehpaimai hide">
+    <div class="pop-paimai">
+        <img src="http://pic.7881.com/7881-2016/images/auction/closex.png" class="closex" onclick="layer.closeAll()"/>
+        <h2>欢迎使用7881<span>人工拍卖交易</span></h2>
+        <dl>
+            <dt><img src="http://pic.7881.com/7881-2016/images/auction/julie.png"/></dt>
+            <dd>
+                <h3>什么是拍卖交易？</h3>
+                <p>例如：您购买8000万金币，需要在DNF拍卖行<span>挂装备</span>，<br>并<span>标价8000万金币</span>，卖家拍下指定装备后，完成发货</p>
+            </dd>
+        </dl>
+        <h4><img src="http://pic.7881.com/7881-2016/images/auction/acustep.png"/></h4>
+        <h5>为保障订单发货速度，请您<span>务必上传</span>拍卖截图</h5>
+        <a href="javascript:void(0);">我知道了，开始吧</a>
+        <label class="notips"><input type="checkbox">不再提示</label>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript" src="http://pic.7881.com/7881-2016/common/popup-new/popup.js"></script>
+
+<script type="text/javascript">
+
+    function calcMallIntegral(goodsprice) {
+        var gameId = "G10";
+        var gtId = "100111";
+        var groupId = "G10P001";
+        var serverId = "G10P001002";
+        $.ajax({
+            url: "/procurement/getMallIntegral.action",
+            data: {
+                "gameId": gameId,
+                "gtId": gtId,
+                "groupId": groupId,
+                "serverId": serverId,
+                "price": goodsprice
+            },
+            type: "POST",
+            dataType: "JSON",
+            success: function (result) {
+                if (!result) {
+                    return;
+                }
+                var mallJf = result.creditPoint;//商城积分比率
+                var oldMallJf = result.preCreditPoint;//商城历史积分比率
+                if (mallJf && mallJf > 0) {
+                    if (oldMallJf && oldMallJf > 0) {
+                        var _oldJf = parseInt(price / oldMallJf);
+                        if (_oldJf > 0) {
+                            $("#oldJf").parent().removeClass("hide");
+                            $("#oldJf").html(oldMallJf);
+                        } else {
+                            $("#oldJf").parent().addClass("hide");
+                            $("#oldJf").html("0");
+                        }
+                    }
+                    $("#nowJf").html(mallJf);
+                    $("#nowJf").parent().removeClass("hide");
+                }
+            }
+        })
+    }
+
+    /*计算实际的数量*/
+    function calcActualNum(num) {
+        if ("G10" == "G10" && ("100001" == "100111" || "100170" == "100111") && "【拍卖交易】" == "") {
+            var pernum = $("#pernum").val();
+            var price = parseFloat(pernum) * parseInt(num);
+            if (!isNaN(price)) {
+                var hasTicket = price * 0.97;
+                var noTicket = price * 0.95;
+                hasTicket = Math.floor(hasTicket * 100) / 100;
+                noTicket = Math.floor(noTicket * 100) / 100;
+                if ("true" == "false") {
+                    hasTicket = parseInt(hasTicket);
+                    noTicket = parseInt(noTicket);
+                }
+                $(".hasTicket").html(hasTicket);
+                $(".noTicket").html(noTicket);
+            }
+        }
+        if ("G10" == "G10" && ("100001" == "100111" || "100170" == "100111") && "1" == "") {
+            var pernum = $("#pernum").val();
+            var actualNum = parseFloat(pernum) * parseInt(num);
+            var dnfActualRatio = "";
+            if (!isNaN(actualNum) && !isNaN(dnfActualRatio)) {
+                dnfActualRatio = parseFloat(dnfActualRatio);
+                var dnfActualnum = Math.floor(actualNum * dnfActualRatio * 100) / 100;
+                if ("true" == "false") {
+                    dnfActualnum = parseInt(dnfActualnum);
+                }
+                $("#dnfActualnum").html(dnfActualnum);
+            }
+        }
+        if ("G10" == "G10" && "100001" == "100111" && "3" == "") {
+            var pernum = $("#pernum").val();
+            var actualNum = parseFloat(pernum) * parseInt(num);
+            var dnfFaceRatio = "";
+            if (!isNaN(actualNum) && !isNaN(dnfFaceRatio)) {
+                dnfFaceRatio = parseFloat(dnfFaceRatio);
+                var dnfFaceActualnum = Math.floor(actualNum * dnfFaceRatio * 100) / 100;
+                if ("true" == "false") {
+                    dnfFaceActualnum = parseInt(dnfFaceActualnum);
+                }
+                $("#dnfFaceActualnum").html(dnfFaceActualnum);
+            }
+        }
+    }
+
+    // 基础工具类
+    BaseJs = {};
+    // 判断数组
+    BaseJs.isArray = function (v) {
+        return v.constructor == Array;
+    };
+    // json工具
+    BaseJs.Json = new (function () {
+
+        var useHasOwn = !!{}.hasOwnProperty,
+
+            pad = function (n) {
+                return n < 10 ? "0" + n : n;
+            },
+            // 编码
+            doDecode = function (json) {
+                return eval("(" + json + ')');
+            },
+            // 解码
+            doEncode = function (o) {
+
+                if (typeof o == "undefined" || o === null) {
+                    return "null";
+                } else if (BaseJs.isArray(o)) {
+                    return encodeArray(o);
+                } else if (Object.prototype.toString.apply(o) === '[object Date]') {
+                    return BaseJs.Json.encodeDate(o);
+                } else if (typeof o == "string") {
+                    return encodeString(o);
+                } else if (typeof o == "number") {
+                    return isFinite(o) ? String(o) : "null";
+                } else if (typeof o == "boolean") {
+                    return String(o);
+                } else {
+                    var a = ["{"], b, i, v;
+                    for (i in o) {
+                        if (!useHasOwn || o.hasOwnProperty(i)) {
+                            v = o[i];
+                            switch (typeof v) {
+                                case "undefined" :
+                                case "function" :
+                                case "unknown" :
+                                    break;
+                                default :
+                                    if (b) {
+                                        a.push(',');
+                                    }
+                                    a.push(doEncode(i), ":", v === null
+                                        ? "null"
+                                        : doEncode(v));
+                                    b = true;
+                            }
+                        }
+                    }
+                    a.push("}");
+                    return a.join("");
+                }
+            }, m = {
+                "\b": '\\b',
+                "\t": '\\t',
+                "\n": '\\n',
+                "\f": '\\f',
+                "\r": '\\r',
+                '"': '\\"',
+                "\\": '\\\\'
+            }, encodeString = function (s) {
+                if (/["\\\x00-\x1f]/.test(s)) {
+                    return '"' + s.replace(/([\x00-\x1f\\"])/g, function (a, b) {
+                        var c = m[b];
+                        if (c) {
+                            return c;
+                        }
+                        c = b.charCodeAt();
+                        return "\\u00" + Math.floor(c / 16).toString(16)
+                            + (c % 16).toString(16);
+                    }) + '"';
+                }
+                return '"' + s + '"';
+            }, encodeArray = function (o) {
+                var a = ["["], b, i, l = o.length, v;
+                for (i = 0; i < l; i += 1) {
+                    v = o[i];
+                    switch (typeof v) {
+                        case "undefined" :
+                        case "function" :
+                        case "unknown" :
+                            break;
+                        default :
+                            if (b) {
+                                a.push(',');
+                            }
+                            a.push(v === null ? "null" : BaseJs.Json.encode(v));
+                            b = true;
+                    }
+                }
+                a.push("]");
+                return a.join("");
+            };
+
+        this.encodeDate = function (o) {
+            return '"' + o.getFullYear() + "-" + pad(o.getMonth() + 1) + "-"
+                + pad(o.getDate()) + "T" + pad(o.getHours()) + ":"
+                + pad(o.getMinutes()) + ":" + pad(o.getSeconds()) + '"';
+        };
+        this.encode = function () {
+            return function (o) {
+                return doEncode(o);
+            };
+        }();
+        this.decode = function () {
+            var dc;
+            return function (json) {
+                return doDecode(json);
+            };
+        }();
+
+    })();
+
+    if ('true' == 'false') {
+        alert('');
+        if ('' == 'yes') {
+            window.location.href = '/goods-201612418196875.html';
+        }
+        if ("false" == "true") {
+            window.location.href = "";
+        }
+
+    }
+    if ('120680522' == '120724299') {
+        // 购买自己发布的商品，跳转到商品详情页面
+        window.location.href = '/goods-201612418196875.html';
+    }
+    if ('false' == 'true') {
+        window.location.href = '/buy-G10-0-100111-G10P001-G10P001002-0-0-0-0-0-0.html';
+    }
+    if ($.trim($('#stock').val()) != '' && !isNaN($('#stock').val())) {
+        var goodsprice = eval($('#price').val() + '*' + $('#stock').val()).toFixed(3);
+        goodsprice = goodsprice + '';
+        if (goodsprice.indexOf(".") != -1) {
+            goodsprice = goodsprice.substring(0, goodsprice.indexOf(".") + 3);
+        }
+        if (parseFloat(goodsprice) < 0.01) {
+            goodsprice = 0.01;
+        }
+
+        var goodspriceSum = getGoodsGuaranteeMoney('G10', '100111', goodsprice, 'false', $(".lbaqbz input:radio[name='goodsPurchaseBean.guaranteeFlag']:checked").val());
+
+        $('#text_goodsprice').val(goodspriceSum);
+        calcMallIntegral(goodsprice);
+    }
+
+    function zzpm() {
+        var html = $(".sehpaimai").html();
+        layer.open({
+            type: 1,
+            skin: 'poppaimai',
+            closeBtn: 0,
+            title: '',
+            anim: 2,
+            area: ['680px', '464px'],
+            content: html
+        });
+    }
+
+    $(document).ready(function () {
+        if (false) {
+            if ("120724299" != "") {
+                if (getCookie("buyDnf_120724299") != "1") {
+                    zzpm();
+                }
+            }
+        }
+        $(".pop-paimai a").click(function () {
+            if ($(".pop-paimai input").is(':checked')) {
+                if ("120724299" != "") {
+                    setCookie("buyDnf_120724299", "1");
+                }
+            }
+            layer.closeAll();
+        });
+
+        calcActualNum($('#stock').val());
+        if ($('#stock').attr('nodetype') != 'select') {
+            restrict_digit_input($('#stock'));
+        } else {
+            $('#stock').change(function () {
+                var goodsprice = eval($('#price').val() + '*' + $('#stock').val()).toFixed(3);
+                goodsprice = goodsprice + '';
+                if (goodsprice.indexOf(".") != -1) {
+                    goodsprice = goodsprice.substring(0, goodsprice.indexOf(".") + 3);
+                }
+                if (parseFloat(goodsprice) < 0.01) {
+                    goodsprice = 0.01;
+                }
+                var goodspriceSum = getGoodsGuaranteeMoney('G10', '100111', goodsprice, 'false', $(".lbaqbz input:radio[name='goodsPurchaseBean.guaranteeFlag']:checked").val());
+
+                $('#text_goodsprice').val(goodspriceSum);
+                calcMallIntegral(goodsprice);
+                calcActualNum($(this).val());
+            });
+        }
+        restrict_digit_input($('input[rolegrade="rolegrade"]'));
+
+        if ('' != '') {
+            $('input:radio[prid=""]').attr('checked', true);
+            $('input:radio[prid=""]').trigger('change');
+        } else {
+            $('#dxk').parent().find(':radio:first').attr('checked', true);
+        }
+
+        $(".txcpdd").on('blur', ':text,textarea', function () {
+            if ($.trim($(this).val()) != '' && $(this).attr('regexp') && $(this).attr('regexp_desc')) {
+                var pattern = new RegExp($(this).attr('regexp'));
+                if (!pattern.test($(this).val())) {
+                    $(this).parent().find('p').remove();
+                    $(this).parent().append('<p class="cw"> ' + $(this).attr('regexp_desc') + '</p>');
+                    return false;
+                }
+            }
+            if ($(this).attr("id") == "tgm") {
+                check();
+                if (isok == "1") {
+                    $(this).parent().find('p').remove();
+                    $(this).parent().append('<p class="cw">推广码无效，如无可不填写</p>');
+                    return false;
+                } else {
+                    $(this).parent().find('p').remove();
+                }
+            }
+            if ($(this).attr("id") == "jyam") {
+                var jval = $("#jyam").val();
+                if (jval == "" || jval == null || jval.length != 4) {
+                    $(this).parent().find('p').remove();
+                    if ("G10" == "G3415" && "100111" == "100160") {
+                        $(this).parent().append('<p class="cw">请您随机填写4位数的数字交易暗号</p>');
+                    } else {
+                        $(this).parent().append('<p class="cw">请您随机填写4位数的数字交易暗号，并在发货员向您索要时提供</p>');
+                    }
+                    return false;
+                } else {
+                    $(this).parent().find('p').remove();
+                }
+            }
+            if ($(this).attr('required')) {
+                return false;
+            }
+            if ($(this).attr('readonly')) {
+                return false;
+            }
+            if ($(this).is(':hidden')) {
+                return false;
+            }
+            if ($(this).attr('id') == 'stock' && $.trim($('#stock').val()) != '' && !isNaN($('#stock').val())) {
+                var goodsprice = eval($('#price').val() + '*' + $('#stock').val()).toFixed(3);
+                goodsprice = goodsprice + '';
+                if (goodsprice.indexOf(".") != -1) {
+                    goodsprice = goodsprice.substring(0, goodsprice.indexOf(".") + 3);
+                }
+                if (parseFloat(goodsprice) < 0.01) {
+                    goodsprice = 0.01;
+                }
+                var goodspriceSum = getGoodsGuaranteeMoney('G10', '100111', goodsprice, 'false', $(".lbaqbz input:radio[name='goodsPurchaseBean.guaranteeFlag']:checked").val());
+
+                $('#text_goodsprice').val(goodspriceSum);
+                calcMallIntegral(goodsprice);
+
+                if ('100111' == '100149' && $('#stock').val() > 1) {
+                    $("#qq_account").parent().find('p').remove();
+                    $("#qq_account").after('<p class="cw"> 购买多个,QQ号请以逗号连接</p>');
+                }
+            }
+            var djflag = 0;
+            var gameid = "G10";
+            var gtid = "100111";
+            if (gameid == "A2492") {
+                if (gtid == '100001' || gtid == '100002') {
+                    djflag = 1;
+                }
+            }
+            $(this).parent().find('p').remove();
+
+
+            if (gameid == "G10" && gtid != "100148") {
+                var rolename = $("#txtRole").val();
+                if (rolename != "" && (rolename.indexOf(" ") == 0 || rolename.indexOf(" ") == rolename.length - 1)) {
+                    if (!confirm("您的角色名前后带空格，提交时会自动去掉")) {
+                        return false;
+                    } else {
+                        rolename = $.trim(rolename);
+                        $('#txtRole').val(rolename);
+                    }
+                }
+            }
+
+            if ($.trim($(this).val()) == '') {
+                $(this).after('<p class="cw"> 请填写' + $(this).attr('desc') + '</p>');
+            } else if ($(this).attr('maxval') && parseInt($(this).val(), 10) > parseInt($(this).attr('maxval'), 10)) {
+                $(this).after('<p class="cw"> 超过最大' + $(this).attr('desc') + '</p>');
+            } else if ($(this).attr('compare') && $(this).attr('compare') == 'true' && $(this).val() != $('#' + $(this).attr('compareid')).val()) {
+                $(this).after('<p class="cw"> ' + $(this).attr('desc') + '与' + $('#' + $(this).attr('compareid')).attr('desc') + '不一致</p>');
+            } else if ($(this).attr('desc') == "角色等级" && $.trim($(this).val())) {
+                var dengji = $.trim($(this).val());
+                if (isNaN(dengji)) {
+                    $(this).after('<p class="cw">请填写角色等级</p>');
+                } else {
+                    if (djflag == 1 && dengji < 40) {
+                        $(this).after('<p class="cw">达到40级才能交易哦</p>');
+                    } else {
+                        $(this).after('<p class="zq">&nbsp;</p>');
+                    }
+                }
+            } else if ($(this).attr('desc') == "角色名") {
+                checkRoleNameLength($(this).val());
+            } else {
+                $(this).after('<p class="zq">&nbsp;</p>');
+            }
+            return false;
+        });
+        $('#hlkOK').click(function () {
+            var gid = "201612418196875";
+            buyGoodsFlag(gid);
+            if (buygoodsflag == 1) {
+                return false;
+            }
+            if ("G10" == "G3415" && "100111" == "100160"
+                && "0" == "0" && "" == "true") {
+                alert("该商品仅支持平台代强");
+                return false;
+            }
+
+            $('p.cw,p.zq,p.txcpdd_default').remove();
+            var flag = true;
+            var roleNameFlag = true;
+            $.each($(".txcpdd").find(':text,textarea'), function (i, item) {
+                if ($.trim($(item).val()) != '' && $(item).attr('regexp') && $(item).attr('regexp_desc')) {
+                    var pattern = new RegExp($(item).attr('regexp'));
+                    if (!pattern.test($(item).val())) {
+                        $(item).parent().append('<p class="cw"> ' + $(this).attr('regexp_desc') + '</p>');
+                        if (flag) {
+                            flag = false;
+                        }
+                        return true;
+                    }
+                }
+
+                if ($(item).attr('required')) {
+                    return true;
+                }
+                if ($(item).attr('readonly')) {
+                    return true;
+                }
+                if ($(item).is(':hidden')) {
+                    return true;
+                }
+                var djflag = 0;
+                var gameid = "G10";
+                var gtid = "100111";
+                if (gameid == "A2492") {
+                    if (gtid == '100001' || gtid == '100002') {
+                        djflag = 1;
+                    }
+                }
+                if ($.trim($(this).val()) == '') {
+                    $(this).after('<p class="cw"> 请填写' + $(this).attr('desc') + '</p>');
+                    flag = false;
+                } else if ($(this).attr('maxval') && parseInt($(this).val(), 10) > parseInt($(this).attr('maxval'), 10)) {
+                    $(this).after('<p class="cw"> 超过最大' + $(this).attr('desc') + '</p>');
+                    flag = false;
+                } else if ($(this).attr('compare') && $(this).attr('compare') == 'true' && $(this).val() != $('#' + $(this).attr('compareid')).val()) {
+                    $(this).after('<p class="cw"> ' + $(this).attr('desc') + '与' + $('#' + $(this).attr('compareid')).attr('desc') + '不一致</p>');
+                    flag = false;
+                } else if ($(this).attr('desc') == "角色等级" && $.trim($(this).val())) {
+                    var dengji = $.trim($(this).val());
+                    var verifyFlag = true;
+                    if (isNaN(dengji)) {
+                        $(this).after('<p class="cw">请填写角色等级</p>');
+                        flag = false;
+                        verifyFlag = false;
+                    } else {
+                        if (verifyFlag) {
+                            if (djflag == 1 && dengji < 40) {
+                                $(this).after('<p class="cw">达到40级才能交易哦</p>');
+                                flag = false;
+                            } else {
+                                $(this).after('<p class="zq">&nbsp;</p>');
+                            }
+                        }
+                    }
+                } else if ($(this).attr('desc') == "角色名" || $(this).attr('desc') == "确认角色名") {
+                    if (roleNameFlag && !checkRoleNameLength($(this).val())) {
+                        flag = false;
+                        roleNameFlag = false;
+                    }
+                } else {
+                    $(this).after('<p class="zq">&nbsp;</p>');
+                }
+
+            });
+            if (!flag) {
+                return false;
+            }
+            var gameidn = "G10";
+            var gtid = "100111";
+            var tradetypen = "db";
+            var tradeplacen = "";
+            if (gameidn == "G10" && tradetypen == "js" && tradeplacen == "【附魔交易】") {
+                var jyam = $("#jyam").val();
+                if (jyam == null || jyam == "" || jyam.length != 4) {
+                    $("#jyam").after('<p class="cw">请您随机填写4位数的数字交易暗号，并在发货员向您索要时提供</p>');
+                    return false;
+                }
+            } else if (gameidn == "G10" && tradeplacen == "【当面交易】") {
+                var jyam = $("#jyam").val();
+                if (jyam == null || jyam == "" || jyam.length != 4) {
+                    $("#jyam").after('<p class="cw">请填写4位数交易暗码，在商品交易时需要进行校验</p>');
+                    return false;
+                }
+            } else if (gameidn == "G3415" && gtid == "100160") {
+                var jyam = $("#jyam").val();
+                if (jyam == null || jyam == "" || jyam.length != 4) {
+                    $("#jyam").after('<p class="cw">请您随机填写4位数的数字交易暗号</p>');
+                    return false;
+                }
+            }
+
+            check();
+            if (isok == "1") {
+                alert("推广码无效，如无可不填写");
+                $("#tgm").after('<p class="cw">推广码无效，如无可不填写</p>');
+                return false;
+            }
+            /*   if($("input[name='goodsPurchaseBean.serverid']").val()==""){
+                   alert("请选择号具体的区服信息！");
+                   return false;
+               }*/
+
+            if ($('#groupNameSel').val() == '-1') {
+                $('#serverNameSel').after('<p class="cw">请选择区</p>');
+                return false;
+            } else {
+                $('#groupNameSel').parent().find('.check_no,.no').remove();
+            }
+            if ($('#serverNameSel').val() == '-1') {
+                $('#serverNameSel').after('<p class="cw">请选择服</p>');
+                return false;
+            } else {
+                $('#serverNameSel').parent().find('.check_no,.no').remove();
+            }
+
+            if ($("#shareServerId").val() == "-1") {
+                $('#shareServerId').after('<p class="cw">请选择收货角色所在区服</p>');
+                return false;
+            }
+
+            if (gameidn == "G10" && (gtid == "100148" || gtid == "100151" || gtid == "100188")) {//DNF金团
+                var roleCount = 0;
+                var roleName = "";
+                $(".roleIpt").each(function () {
+                    if ($(this).val() != "") {
+                        roleName += ";" + $(this).val();
+                        roleCount++;
+                    }
+                });
+
+                if ($('#stock').val() != roleCount) {
+                    alert("购买数量与角色名称数量不一致");
+                    return false;
+                }
+                $('#buyerRolename').val(roleName.substr(1));
+            }
+
+            if ('' != '【拍卖交易】') {
+                var p = $('input:radio[name="radRole"]:checked').attr("prid");
+                var rolname = "";
+                if (typeof(p) == "undefined" || p == 0 || p == -1) {
+                    rolname = $("#txtRole").val();
+                } else if (p > 0) {
+                    rolname = $('input:radio[name="radRole"]:checked').attr("rname");
+                }
+//            if(rolname !="" && (rolname.indexOf(" ") == 0 || rolname.indexOf(" ") == rolname.length -1)){
+//            	if(!confirm("您的角色名前后带空格，提交时会自动去掉")){
+//            		return false;
+//            	}
+//            }
+
+                if (roleNameFlag && !checkRoleNameLength(rolname)) {
+                    return false;
+                }
+            }
+
+            if (!$('#agreement').is(':checked')) {
+                alert('同意《7881网游交易协议》方可购买');
+                return false;
+            }
+
+            var buyer = '120680522';
+            var seller = '120724299';
+            if (buyer && buyer == seller) {
+                alert('不能购买自己发布的商品');
+                return false;
+            }
+
+
+            // 抱歉,1分钟内请勿提交相同的订单请求!
+            $.ajax({
+                type: 'post',
+                url: '/procurement/queryGoodsMemPurchaseState.action',
+                data: {goodsid: '201612418196875'},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success == 'T') {
+                        checkPurchase();
+                    } else {
+                        alert('抱歉,1分钟内请勿提交相同的订单请求!');
+                    }
+                }
+            });
+            return false;
+        });
+    });
+
+    //全区区服的商品，增加区服选择信息
+    var _gameId = 'G10';
+    var _carrierid = '';
+    var _carrierName = '';
+    var _userChooseGroupId = '';
+    var _userChooseServerId = '';
+    var servers = {};
+    $(function () {
+        if ('广东区' == "全区" && '广东2区' == "全服") {
+            $("input[name='goodsPurchaseBean.groupid']").val("");
+            $("input[name='goodsPurchaseBean.serverid']").val("");
+            getGameServerInfo();
+            $("#groupNameSel").change(function () {
+                var selectGroupId = $("#groupNameSel").find("option:selected").val();
+                var selectGroupName = $("#groupNameSel").find("option:selected").text();
+                $("input[name='goodsPurchaseBean.groupid']").val(selectGroupId);
+                $("input[name='goodsPurchaseBean.groupname']").val(selectGroupName);
+                var serverObjs = servers["group_" + selectGroupId];
+                $("#serverNameSel").find("option").remove();
+                $("#serverNameSel").append("<option value='-1'>请选择服</option>");
+                if (serverObjs.length > 0) {
+                    for (var s in serverObjs) {
+                        var serverobj = serverObjs[s];
+                        var serverName = serverobj.servername;
+                        var serverId = serverobj.serverid;
+                        $("#serverNameSel").append("<option value=" + serverId + ">" + serverName + "</option>");
+                    }
+                }
+            });
+            $("#serverNameSel").change(function () {
+                var selectServerId = $("#serverNameSel").find("option:selected").val();
+                var selectServerName = $("#serverNameSel").find("option:selected").text();
+                $("input[name='goodsPurchaseBean.serverid']").val(selectServerId);
+                $("input[name='goodsPurchaseBean.servername']").val(selectServerName);
+            });
+
+            if (_userChooseGroupId) {
+                $("#groupNameSel option[value='" + _userChooseGroupId + "']").attr("selected", true);
+                $("#groupNameSel").change();
+            }
+
+            if (_userChooseServerId) {
+                $("#serverNameSel option[value='" + _userChooseServerId + "']").attr("selected", true);
+                $("#serverNameSel").change();
+            }
+        }
+    });
+
+    function getGameServerInfo() {
+        $.ajax({
+            url: "../getGameQuFuInfo.action",
+            async: false,
+            datatype: "json",
+            data: {"gameid": _gameId},
+            success: function (data) {
+                iniServerIndfo(data);
+            }
+        });
+    }
+
+    function iniServerIndfo(data) {
+        var carriers = data.carriers;
+        for (var i in carriers) {
+            var carrier = carriers[i];
+            var carrierid = carrier.carrierid;
+            var carrierName = carrier.carriername;
+            if (carrierName == _carrierName) {
+                var groups = carrier.groups;
+                if (groups.length > 0) {
+                    for (var g in groups) {
+                        var groupObj = groups[g];
+                        var groupId = groupObj.groupid;
+                        var groupName = groupObj.groupname;
+                        $("#groupNameSel").append("<option value=" + groupId + ">" + groupName + "</option>");
+                        servers["group_" + groupId] = groupObj.servers;
+                    }
+                }
+            }
+        }
+    }
+
+    function selectPurchaseQQStock() {
+        var stockValue = $("#qqCoinSel").val();
+        if (stockValue) {
+            $("#stock").val(stockValue);
+        }
+        var goodsprice = eval($('#price').val() + '*' + $('#stock').val()).toFixed(3);
+        goodsprice = goodsprice + '';
+        if (goodsprice.indexOf(".") != -1) {
+            goodsprice = goodsprice.substring(0, goodsprice.indexOf(".") + 3);
+        }
+        if (parseFloat(goodsprice) < 0.01) {
+            goodsprice = 0.01;
+        }
+
+        var goodspriceSum = getGoodsGuaranteeMoney('G10', '100111', goodsprice, 'false', $(".lbaqbz input:radio[name='goodsPurchaseBean.guaranteeFlag']:checked").val());
+
+        $('#goodsprice').val(goodsprice);
+        $('#text_goodsprice').val(goodspriceSum);
+    }
+
+    $(function () {
+
+        restrict_digit_input($('#djtxt'));
+        selectPurchaseQQStock();
+        shareServer();//dnf共享区服
+    });
+
+    var buygoodsflag = 1;
+    var activityid = 4;
+
+    function buyGoodsFlag(goodsid) {
+        $.ajax({
+            type: 'post',
+            data: {activityid: activityid, goodsid: goodsid},
+            url: '/activity/buyGoodsFlag.action',
+            dataType: 'json',
+            async: false,
+            success: function (json) {
+                if (json != 2) {
+                    $("#stock").val(1);
+                    $("#stock").attr("disabled", true);
+                    $(".txcpdd_default").html("(可购1件)");
+                }
+                if (json == 1) {
+                    alert("您购买的商品不在活动时间内");
+                    buygoodsflag = 1;
+                    return false;
+                } else if (json == 3 || json == 4) {
+                    alert("已抢光");
+                    buygoodsflag = 1;
+                    return false;
+                } else {
+                    buygoodsflag = 0;
+                }
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        var gid = "201612418196875";
+        buyGoodsFlag(gid);
+        if (buygoodsflag == 1) {
+            return false;
+        }
+        var roleCount = '0';
+        if (roleCount == '0') {
+            $("#fuzhi_0").show();
+        }
+
+        $(".buyNum").find("select").val($("#buyNum").val()).change();
+        $(".buyNum").find("input").val($("#buyNum").val()).click().blur().keyup();
+    });
+
+    var isok = "0";
+
+    function getCodeFlag() {
+        var code = $("#tgm").val();
+        $.ajax({
+            type: 'post',
+            url: "/procurement/getCodeFlag.action",
+            data: {code: code},
+            async: false,
+            cache: false,
+            success: function (json) {
+                if (json == "yes") {
+                    isok = "0";
+                } else {
+                    isok = "1";
+                }
+
+            }
+        });
+    }
+
+    function check() {
+        var code = $("#tgm").val();
+        if (code != null && code != "") {
+            getCodeFlag();
+        } else {
+            isok = "0";
+        }
+    }
+
+    function checkRoleNameLength(rolname) {
+        if ('G10' == 'G10' && ('100111' == '100001'
+            || '100111' == '100072' || '100111' == '100002'
+            || '100111' == '100111' || '100111' == '100113')) {
+            var str_length = getByteLen(rolname);
+            if (str_length > 12) {
+                alert("角色名称长度不可超过12个字符,一个汉字等于2个字符");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*dnf共享区服事件*/
+    function shareServer() {
+        var oldServerid = "G10P001002";
+        var _gameId = "G10";
+        var _gtId = "100111";
+        $("#shareServerId").change(function () {
+            $("input[name='goodsPurchaseBean.crossserver']").val("0");
+            $(".shareServerTip").remove();
+            $("#shareServerId").next().remove();
+            var serverId = $(this).val();
+            var tradeplace = $("input[name='goodsPurchaseBean.delivertype']:checked").val();
+            if (_gtId != '100001') {
+                tradeplace = "post";
+            }
+            $("input[name='goodsPurchaseBean.buyerGroupId']").val($(this).find("option:selected").attr("groupId"));
+            $("input[name='goodsPurchaseBean.buyerGroupName']").val($(this).find("option:selected").attr("groupName"));
+            $("input[name='goodsPurchaseBean.buyerServerId']").val($(this).val());
+            $("input[name='goodsPurchaseBean.buyerServerName']").val($(this).find("option:selected").text());
+            if (serverId == "-1") {
+                $("input[name='goodsPurchaseBean.crossserver']").val("0");
+            } else if ((tradeplace == "post" || tradeplace == "auction") && oldServerid != serverId) {
+                $("input[name='goodsPurchaseBean.crossserver']").val("1");
+            } else if (tradeplace == "face") {
+                $('#shareServerId').after('<em class="shareServerTip">请您到' + $(this).find("option:selected").attr("tradePlace") + '处进行交易</em>');
+                if (oldServerid != serverId) {
+                    $("input[name='goodsPurchaseBean.crossserver']").val("1");
+                } else {
+                    $("input[name='goodsPurchaseBean.crossserver']").val("0");
+                }
+
+            }
+
+        })
+    }
+</script>
+<script type="text/javascript">
+    imgUrlList = [];
+    var picsrc = "";
+    var $ = jQuery,
+        $list = $('#thelist'),
+        state = 'pending',
+        // 优化retina, 在retina下这个值是2
+        ratio = window.devicePixelRatio || 1,
+
+        // 缩略图大小
+        thumbnailWidth = 148 * ratio,
+        thumbnailHeight = 148 * ratio,
+
+        // Web Uploader实例
+        uploaderAuth;
+    // 初始化Web Uploader
+    uploaderAuth = WebUploader.create({
+        // 自动上传。
+        auto: true,
+        // 限制大小
+        fileSingleSizeLimit: 2097152,
+        fileNumLimit: 1,
+        // 去重
+        duplicate: true,
+
+        // swf文件路径
+        swf: 'http://pic.7881.com/7881-2016/common/uploader/Uploader.swf',
+
+        // 文件接收服务端。
+        server: 'http://upload.7881.com/file/uploadFlash.action',
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#picker',
+        formData: {"userid": '111675301', "isGoods": 'true'},
+        fileVal: 'fileImage',
+        // 只允许选择文件，可选。
+        accept: {
+            title: 'Images',
+            extensions: 'jpg,jpeg,png',
+            mimeTypes: 'image/jpg,image/jpeg,image/png'
+        }
+    });
+
+    // 文件上传过程中
+    uploaderAuth.on('uploadProgress', function (file) {
+        //$("#rt_"+file.source.ruid).parent().find(".webuploader-pick").html("<em class='uploading'></em>上传中...");
+    });
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploaderAuth.on('uploadSuccess', function (file, response) {
+        $(".webuploader-pick").hide();
+        var fileName = file.name;
+        var $li = $(
+            '<div id="' + file.id + '" class="file-item thumbnail">' +
+            '<a href="' + picsrc + '" class="example-image-link" data-lightbox="example-set" data-title="7881上传截图"><img></a>' +
+            '<div class="info">' + fileName + '</div>' +
+            '<div class="del-img"></div>' +
+            '</div>'
+            ),
+            $img = $li.find('img');
+        $list.html($li);
+        $href = $li.find('a');
+        $href.attr('href', response.url);
+
+        $('#' + file.id).addClass('upload-state-done');
+        $('#' + file.id).attr("url", response.url);
+
+        $li.on('click', '.del-img', function () {
+            $(this).parents(".file-item").remove();
+            uploaderAuth.removeFile(file, true);
+            $(".webuploader-pick").show();
+        })
+
+        // 创建缩略图
+        uploaderAuth.makeThumb(file, function (error, src) {
+            if (error) {
+                $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
+            $img.attr('src', src);
+        }, thumbnailWidth, thumbnailHeight);
+        $('#' + file.id).addClass('upload-state-done');
+        $("#rt_" + file.source.ruid).parents(".upload-con").find(".webuploader-pick").html("更换图片");
+        $("#rt_" + file.source.ruid).parents(".upload-con").find(".upload-tips").show().text("上传成功，点击图片可查看大图").removeClass("error");
+
+        $("#rt_" + file.source.ruid).parents(".upload-con").find(".uploader-url").val(response.url);
+        $("#big-img").find("img").attr("src", response.url);
+
+        $("#" + file.id).find("img").click(function () {
+            layer_open($(this).parents(".upload-con").find(".uploader-url").val());
+        });
+
+    });
+
+
+    uploaderAuth.on('error', function (type, c, file) {
+
+        if (type == "Q_TYPE_DENIED") {
+            alert("仅支持JPG、JPEG、PNG格式");
+        }
+        if (type == "F_EXCEED_SIZE") {
+            alert("请上传图片大小控制在512K");
+        }
+        if (type == "Q_EXCEED_NUM_LIMIT") {
+            alert("只能上传1张图片");
+        }
+
+    });
+
+
+    // 文件上传失败，显示上传出错。
+    uploaderAuth.on('uploadError', function (file) {
+        alert("上传失败,请重新上传");
+        $(".webuploader-pick").show();
+    });
+
+</script>
+
+<!-- 拍卖交易，上传拍卖图片 -->
+<script type="text/javascript">
+    imgUrlList = [];
+    var picsrc = "";
+    var $ = jQuery, state = 'pending', uploaderAuth;
+
+    // 初始化Web Uploader
+    uploaderAuth = WebUploader.create({
+        // 自动上传。
+        auto: true,
+        // 限制大小
+        fileSingleSizeLimit: 2097152,
+        fileNumLimit: 3,
+        // 去重
+        duplicate: true,
+        // swf文件路径
+        swf: 'http://pic.7881.com/7881-2016/common/uploader/Uploader.swf',
+        // 文件接收服务端。
+        server: 'http://upload.7881.com/file/uploadFlash.action',
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#picker_paimai',
+        formData: {"userid": '111675301', "isGoods": 'true'},
+        fileVal: 'fileImage',
+        // 只允许选择文件，可选。
+        accept: {
+            title: 'Images',
+            extensions: 'jpg,jpeg,png',
+            mimeTypes: 'image/jpg,image/jpeg,image/png'
+        }
+    });
+
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploaderAuth.on('uploadSuccess', function (file, response) {
+        var fileName = file.name;
+        var $fileDiv = $(
+            '<div class="cutsl" style="float:left;">' +
+            '<a href="' + response.url + '" target= "_self" class="example-image-link" data-lightbox="example-set" data-title="' + fileName + '"><img src="' + response.url + '" /></a>' +
+            '<p>' + fileName + '</p>' +
+            '<div class="del-img"></div>' +
+            '</div>'
+        );
+
+        $("#paimaiFileList").append($fileDiv);
+        $("#uploadAuctionImg").val(getPaimaiFileUrls());
+
+        //绑定删除图片事件
+        $fileDiv.on('click', '.del-img', function () {
+            $(this).parents(".cutsl").remove();
+            uploaderAuth.removeFile(file, true);
+            $("#uploadAuctionImg").val(getPaimaiFileUrls());
+        })
+    });
+
+    //获取拍卖上传图片地址
+    function getPaimaiFileUrls() {
+        var urls = "";
+        $($("#paimaiFileList").find("a")).each(function (i, v) {
+            var url = $(v).attr("href");
+            if (urls != "") {
+                //зъ,分隔符，火星文
+                urls += "зъ" + url;
+            } else {
+                urls += url;
+            }
+        });
+        return urls;
+    }
+
+
+    uploaderAuth.on('error', function (type, c, file) {
+
+        if (type == "Q_TYPE_DENIED") {
+            alert("仅支持JPG、JPEG、PNG格式");
+        }
+        if (type == "F_EXCEED_SIZE") {
+            alert("请上传图片大小控制在512K");
+        }
+        if (type == "Q_EXCEED_NUM_LIMIT") {
+            alert("只能上传3张图片");
+        }
+
+    });
+
+
+    // 文件上传失败，显示上传出错。
+    uploaderAuth.on('uploadError', function (file) {
+        alert("上传失败,请重新上传");
+        $(".webuploader-pick").show();
+    });
+
+    function setCookie(name, value)//两个参数，一个是cookie的名子，一个是值
+    {
+        var Days = 300; //此 cookie 将被保存 30 天
+        var exp = new Date();    //new Date("December 31, 9998");
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+    }
+
+    function getCookie(name)//取cookies函数
+    {
+        var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+        if (arr != null) return (arr[2]);
+        return null;
+    }
+
+    $(".lbaqbz input:radio[name='goodsPurchaseBean.guaranteeFlag']").change(function () {
+        var goodsprice = eval($('#price').val() + '*' + $('#stock').val()).toFixed(3);
+        goodsprice = goodsprice + '';
+        if (goodsprice.indexOf(".") != -1) {
+            goodsprice = goodsprice.substring(0, goodsprice.indexOf(".") + 3);
+        }
+        if (parseFloat(goodsprice) < 0.01) {
+            goodsprice = 0.01;
+        }
+
+        var checkValue = $(".lbaqbz input:radio[name='goodsPurchaseBean.guaranteeFlag']:checked").val();
+        if (checkValue == "0") {
+            $('#text_goodsprice').val(goodsprice);
+            $("#guaranteeMoney_span").hide();
+        } else if (checkValue == "1") {
+            var goodspriceSum = getGoodsGuaranteeMoney('G10', '100111', goodsprice, 'false', checkValue);
+            $('#text_goodsprice').val(goodspriceSum);
+            $("#guaranteeMoney_span").show();
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+	<meta name="keywords" content=" " />
+	<meta name="description" content=" " />
+	<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'css/common.css' %}">
+	<link rel="stylesheet" href="{% static 'css/login_.css' %}">
+	<script src="{% static 'js/jquery-1.8.1.min.js' %}"></script>
+	<script src="{% static 'js/slide.js' %}"></script>
+	<title>游戏首页</title>
+</head>
+<body>
+	<div class="header">
+		<div class="wrapper clearfix">
+			<ul class="nav">
+				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li><a target="_self" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
+                <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+
+			</ul>
+
+			<div class="user-info">
+
+				<!-- 我的订单 -->
+				<div class="register">
+					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
+				</div>
+				<div class="login">
+					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+				</div>
+				<div class="order active">
+{#                    <a target="_parent" href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>#}
+					<a target="_self" href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="container">
+		<!-- 主体内容 （登陆界面）-->
+		<div class="main">
+			<!-- 左侧信息栏 -->
+			<!-- 右侧登陆界面 -->
+			<div class="sideright">
+				<div class="index">
+					<form action="#" method="get">
+						<p class="headline">用户登陆</p>
+						<p class="astyle">用户名：</p>
+						<input type="text" value="请输入您的手机号">
+						<p class="astyle">密码：</p>
+						<input type="text" value="请输入密码">
+						<input type="submit" value="登陆" name="login" >
+
+						</br>
+						<p class="bstyle"><input type="checkbox" name="rempas" />  记住密码</p>
+						<p class="cstyle"><a href=""></a>忘记密码</p>
+						</br></br>
+						<p class="cstyle">没有账号？<a href="{% url 'transaction:register' %}">立即注册</a></p>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script>
+
+	</script>
+</body>
+</html>

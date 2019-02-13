@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <title>-游戏交易站-购买</title>
+    <link rel="stylesheet" href="{% static 'gold/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'gold/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'gold/css/gold-deal.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/purchase.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/Public.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/buy.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/popLayer.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="http://www.7881.com/market/css/sell.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'goldPurchase/css/goldPurchase.css' %}">
+{#    <style type="text/css">#}
+{#    </style>#}
+    <script type="text/javascript" src="{% static 'goldPurchase/js/kefu.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/jquery-1.8.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/restrict_input.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/webuploader.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'goldPurchase/js/lightbox-plus-jquery.min.js' %}"></script>
+    {#    <script type="text/javascript" src="/js/GoodsGuaranteeMoney.js?v=20180410.2"></script>#}
+    <script type="text/javascript">
+        function roleSelected(prid) {
+            $('#dxk div').hide();
+            $('#div_' + prid).show();
+            if (prid == "-1" || prid == "0") {
+                var gameId = 'G10';
+                var gtid = '100001';
+                if (gameId == 'G10' && (gtid == '100001' || gtid == '100002' || gtid == '100111')) {
+                    if (gtid == '100001') {
+                        $("#fuzhi_0").show();
+                        $("#fuzhi_-1").show();
+                    }
+                    if (gtid == '100111' || gtid == '100002')
+                        $("#fuzhi_0").show();
+                    $("#fuzhi_-1").show();
+                } else {
+                    $('#div_' + prid + '  #fuzhi_' + prid).show();
+                }
+            } else {
+                $('#div_' + prid + '  #fuzhi_' + prid).hide();
+            }
+        }
+
+        function checkPurchase() {
+            if ('G10' == 'G479' && '100001' == '100074') {
+                // 取得买家收货属性
+                var info = [];
+                var rolename = $('#pt_rolename').val();
+                if (typeof(rolename) == "undefined") {
+                    rolename = "null";
+                }
+                var rolegrade = $('#pt_rolegrade').val();
+                if (typeof(rolegrade) == "undefined") {
+                    rolegrade = "null";
+                }
+                info.push({
+                    'rolename': rolename,
+                    'rolelevel': rolegrade,
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            } else if ('100001' == '100149') {
+                // 取得买家收货属性
+                var info = [];
+                info.push({
+                    'rolename': "null",
+                    'rolelevel': "null",
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            } else if ('100001' == '100150') {
+                // 取得买家收货属性
+                var info = [];
+                info.push({
+                    'rolename': "null",
+                    'rolelevel': "null",
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            } else if ('G10' == 'G3415' && ('100001' == '100144' || '100001' == '100161')) {
+                var info = [];
+                info.push({
+                    'rolename': $("#txtRole").val(),
+                    'rolelevel': $("#txtRoleLevel").val(),
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            } else if ('G10' == 'G4804' && '100001' == '100163') {
+                var info = [];
+                info.push({
+                    'rolename': '-',
+                    'rolelevel': '0',
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+                $('#gameaccount').val($('#stramAccount').val());
+                $('#buyerpassword').val($('#stramPassword').val());
+            } else {
+                if ('G10' == 'G10' && ('100001' == '100148' || '100001' == '100151' || '100001' == '100188')) {
+//                	$('#buyerRolename').val($('#dxk div:visible textarea:eq(0)').val());
+//                    $('#buyerRolename').val($('#txtRole').val());
+                    $('#prid').val(0);
+                } else {
+                    $('#prid').val($('#dxk div:visible').attr('id').split('_')[1]);
+                    $('#buyerRolename').val($('#dxk div:visible dl input:text:eq(0)').val());
+                    $('#grade').val($('#dxk div:visible dl input:text:eq(2)').val());
+                }
+
+                // 问道，QQ仙灵游戏需要填写数字ID
+                if ('G10' == 'G39' || 'G10' == 'G670' || 'G10' == 'G986' || '100001' == '100045') {
+                    $('#numberid').val($('#dxk div:visible dl input:text:eq(3)').val());
+                }
+
+                // 取得买家收货属性
+                var info = [];
+                var roleLevel = !$('#txtRoleLevel').val() ? 0 : $('#txtRoleLevel').val();
+
+                var rolelevel2 = $('#grade').val() == "" ? "0" : $('#grade').val();
+                if ('G10' == 'G10' && '100001' == '100001' && 'db' == 'js') {
+                    rolelevel2 = "";
+                }
+                info.push({
+                    'rolename': $('#buyerRolename').val(),
+                    'rolelevel': rolelevel2,
+                    'stock': eval($('#pernum').val() + '*' + $('#stock').val())
+                });
+                goodinfo = BaseJs.Json.encode(info);
+                $('#goodsinfo').val(goodinfo);
+            }
+
+
+            var uploadAuctionImg = "";
+            var uploadSuccess = true;
+            $.each($('#thelist').children(), function (i, item) {
+
+                if (typeof($(item).attr("url")) == "undefined" || $(item).attr("url") == "" || $(item).children(".progress").length > 0) {
+                    uploadSuccess = false;
+                    return false;
+                }
+                if (i != 0) {
+                    uploadAuctionImg += ',';
+                }
+                uploadAuctionImg += $(item).attr("url");
+            });
+            if (uploadSuccess == false) {
+                uploadAuctionImg = '';
+                alert('图片上传还未完成，请稍后');
+                return;
+            }
+            if (uploadAuctionImg != "") {
+                $("#uploadAuctionImg").val(uploadAuctionImg);
+            }
+            if ("G3415" == "G10" && "100161" == "100001") {
+                if (uploadAuctionImg == "") {
+                    alert("请先上传装备图片!");
+                    return false;
+                }
+            }
+
+            var goodsprice = eval($('#price').val() + '*' + $('#stock').val()).toFixed(3);
+            goodsprice = goodsprice + '';
+            if (goodsprice.indexOf(".") != -1) {
+                goodsprice = goodsprice.substring(0, goodsprice.indexOf(".") + 3);
+            }
+            if (parseFloat(goodsprice) < 0.01) {
+                goodsprice = 0.01;
+            }
+
+            $('#goodsprice').val(goodsprice);
+//            $('#text_goodsprice').val(goodsprice);
+
+            $.ajax({
+                type: 'post',
+                data: {goodsid: '201612418473965'},
+                url: '/procurement/queryGoodsStock.action',
+                dataType: 'text',
+                success: function (data) {
+                    if (data < 1) {
+                        alert('很抱歉，该商品已售完，请选择其他同类商品');
+                        window.location.href = '/buy-G10-100001-G10P004-G10P004005-0-0-0-0-0-0.html';
+                    } else {
+                        $('#hlkOK').attr('disabled', true);
+                        $('#goodsForm').submit();
+                    }
+                }
+            });
+            return false;
+        }
+
+        function checkNum(count) {
+
+            $('#checkNum').html(count);
+
+        }
+
+        function changedelivertype(id) {
+            var str = "";
+            if (id == "post") {
+                str = "邮寄后<label style='color:red'>30分钟</label>才可收到邮件";
+            } else {
+                str = "为加快交易速度，订单支付成功后，请您在扬州交易区<信使>处等待交易员与您交易，交易员不会以任何理由索要回交易出去的商品";
+            }
+            $("#dxk_aq").html(str);
+
+            if (id == "auction") {
+                $(".mapdiandaoUploadPic_li").show();
+            } else {
+                $(".mapdiandaoUploadPic_li").hide();
+            }
+        }
+
+        function getByteLen(val) {
+            var len = 0;
+            for (var i = 0; i < val.length; i++) {
+                var length = val.charCodeAt(i);
+                if (length >= 0 && length <= 128) {
+                    len += 1;
+                }
+                else {
+                    len += 2;
+                }
+            }
+            return len;
+        }
+    </script>
+</head>
+<body>
+<!--头部开始-->
+<div class="header">
+		<div class="wrapper clearfix">
+			<ul class="nav">
+				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li><a target="_self" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
+				<li class="active"><a target="_parent" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
+                <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+
+			</ul>
+
+			<div class="user-info">
+
+				<!-- 我的订单 -->
+				<div class="register">
+					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
+				</div>
+				<div class="login">
+					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+				</div>
+				<div class="order">
+					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+    // 判断是否登录
+    {#jQuery.ajax({#}
+    {#    type: 'get',#}
+    {#    url: '/loginCheckReturn.action?ip=' + Math.round(Math.random() * 10000),#}
+    {#    success: function (resultData) {#}
+    {#        var result = resultData.split('#');#}
+    {#        if (result[0] == '500') {#}
+    {#            location.href = "/7881_touristlogin.jsp";#}
+    {#        }#}
+    {#        else if (result[0] == '200' && result.length > 2) {#}
+    {#            jQuery('#span_user').empty();#}
+    {#            if (result[2] != '0') {#}
+    {#                htmlText = '<a class="dlzc" rel="nofollow" href="/personal.html">' + result[1] + '</a>&nbsp;&nbsp;<a class="dlzc" href="/msg/notReadMsg.action" rel="nofollow"><img align="absmiddle" src="http://pic.7881.com/7881/market/images/Personal/znx_wd.png"/>[' + result[2] + ']</a>&nbsp;&nbsp; <a href="/logout.action" rel="nofollow">退出</a>';#}
+    {#            } else {#}
+    {#                htmlText = '<a class="dlzc" rel="nofollow" href="/personal.html">' + result[1] + '</a>&nbsp;&nbsp;<a class="dlzc" href="/msg/notReadMsg.action" rel="nofollow"><img align="absmiddle" src="http://pic.7881.com/7881/market/images/Personal/message.png"/>[' + result[2] + ']</a>&nbsp;&nbsp; <a href="/logout.action" rel="nofollow">退出</a>';#}
+    {#            }#}
+    {#            jQuery('#span_user').html(htmlText);#}
+    {#        }#}
+    {#    }#}
+    {# });#}
+    $('#div_seller,#div_buyer,#div_blog,#div_Service').hover(
+        function () {
+            $(this).addClass('hover');
+        },
+        function () {
+            $(this).removeClass('hover');
+        }
+    );
+    document.domain = "7881.com";
+</script>
+<!--  -->
+<script type="text/javascript" src="{% static 'goldPurchase/js/jquery-1.11.1.min.js' %}"></script>
+<!--<script type="text/javascript" src="/common/js/jquery1.5.js"></script>-->
+<script type="text/javascript" src="{% static 'goldPurchase/js/7881_logo_modify.js' %}"></script>
+<!--头部结束-->
+<div class="clear"></div>
+<div class="center">
+    <div class="qrgmxx">
+        <h1>确认购买信息</h1>
+        <div class="kuang">
+            <ul>
+                <li class="cpbt"><span>商品标题</span></li>
+                <li class="jg">价格</li>
+                <li class="dj">单价</li>
+            </ul>
+            <ul>
+                <li class="cpbt">
+                    <img src="http://ofpics.7881.com/7881/market/images/buy/buy_dan.png"/>
+                    <em>【拍卖交易】5000.00万金=105.4元 地下城与勇士 江苏区江苏5/7区</em>
+                    <br/>物品类型： 游戏币<br/>游戏区服： 地下城与勇士 /江苏区 /江苏5/7区
+                    <label style="color: #ff6700;">(跨四)</label>
+                </li>
+                <li class="jg"><strong style=" color:#F90">105.40</strong>元
+                </li>
+                <li class="dj">
+                    1元=47.44万金<br/>
+                    0.02108元/万金
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<form id="goodsForm" action="{% url 'transaction:payment' %}" method="post">
+    <div class="center">
+        <div class="txcpdd">
+            <h1>填写商品订单</h1>
+{#            <style>#}
+{#                .tips-of3b {#}
+{#                background: #ffdfbe;#}
+{#                padding: 10px 20px;#}
+{#                color: red;#}
+{#                font-size: 14px;#}
+{#                margin: 5px 20px 0 20px#}
+{#            }#}
+{#            .tips-of3b p {#}
+{#                text-indent: 1em;#}
+{#                margin: 5px 0 0#}
+{#            }</style>#}
+            <input type="hidden" name="goodsPurchaseBean.goodsid" value="201612418473965"/>
+            <input type="hidden" name="goodsPurchaseBean.tradetype" value="db"/>
+            <input type="hidden" name="goodsPurchaseBean.gameid" value="G10"/>
+            <input type="hidden" name="goodsPurchaseBean.gamename" value="地下城与勇士"/>
+            <input type="hidden" name="goodsPurchaseBean.carrierid" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.carriername" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.groupid" value="G10P004"/>
+            <input type="hidden" name="goodsPurchaseBean.groupname" value="江苏区"/>
+            <input type="hidden" name="goodsPurchaseBean.serverid" value="G10P004005"/>
+            <input type="hidden" name="goodsPurchaseBean.servername" value="江苏5/7区"/>
+            <input type="hidden" name="goodsPurchaseBean.camp" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.rid" value=""/>
+            <input type="hidden" id="gameaccount" name="goodsPurchaseBean.gameaccount" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.gtid" value="100001"/>
+            <input type="hidden" name="goodsPurchaseBean.ver" value=""/>
+            <input type="hidden" name="goodsPurchaseBean.payoutdelay" value="0"/>
+            <input type="hidden" id="rolename" name="goodsPurchaseBean.rolename" value=""/>
+            <input type="hidden" id="price" name="goodsPurchaseBean.price" value="105.4"/>
+            <input type="hidden" id="pernum" name="goodsPurchaseBean.pernum" value="5000"/>
+            <input type="hidden" id="prid" name="goodsPurchaseBean.prid"/>
+            <input type="hidden" id="grade" name="goodsPurchaseBean.grade"/>
+            <input type="hidden" id="goodsinfo" name="goodsPurchaseBean.goodsinfo"/>
+            <input type="hidden" id="goodsprice" name="goodsPurchaseBean.goodsprice"/>
+            <input type="hidden" id="numberid" name="goodsPurchaseBean.numberid"/>
+            <input type="hidden" id="buyerRolename" name="buyerRolename"/>
+            <input type="hidden" id="uploadAuctionImg" name="goodsPurchaseBean.uploadAuctionImg"/>
+            <input type="hidden" id="buyerGroupId" name="goodsPurchaseBean.buyerGroupId"/>
+            <input type="hidden" id="buyerGroupName" name="goodsPurchaseBean.buyerGroupName"/>
+            <input type="hidden" id="buyerServerId" name="goodsPurchaseBean.buyerServerId"/>
+            <input type="hidden" id="buyerServerName" name="goodsPurchaseBean.buyerServerName"/>
+            <input type="hidden" id="buyNum" value="1"/>
+            <input type="hidden" id="buyerpassword" name="goodsPurchaseBean.buyerpassword"/>
+            <ul>
+                <li class="buyNum">
+                    <span>购买数量：<strong style="color:#F00">* </strong></span>
+                    <select id="stock" name="goodsPurchaseBean.stock" nodetype="select" onchange="checkNum(value);">
+                        <option value="1">5,000万金</option>
+                        <option value="2">10,000万金</option>
+                        <option value="3">15,000万金</option>
+                        <option value="4">20,000万金</option>
+                        <option value="5">25,000万金</option>
+                        <option value="6">30,000万金</option>
+                    </select>
+                    <p style="display:inline; text-indent:5px; text-align:left;"> (已选 <strong id="checkNum" class="red">1</strong>件，可购
+                        6 件)</p>
+                </li>
+                <li>
+                    <span>交易方式：<strong style="color:#F00">* </strong></span>
+                    <input type="radio" name="goodsPurchaseBean.delivertype" value="auction" checked="checked"/>&nbsp;拍卖交易
+                    <em style="color: red">(买家承担游戏内的交易税)</em>
+                </li>
+                <li><span>收货角色所在区服：<strong style="color:#F00">* </strong></span></li>
+                <li style="margin-left: 92px">
+                    <input type="hidden" name="goodsPurchaseBean.crossserver" value="0"/>
+                    <select id="shareServerId">
+                        <option value="-1">请选择服</option>
+                        <option value="G10P019003" name="江西区" id="G10P019">江西区</option>
+                        <option value="G10P019003" name="广东区" id="G10P018">广东区</option>
+                        <option value="G10P019003" name="北京区" id="G10P017">北京区</option>
+                        <option value="G10P019003" name="四川区" id="G10P016">四川区</option>
+                        <option value="G10P019003" name="江苏区" id="G10P015">江苏区</option>
+                        <option value="G10P019003" name="湖北区" id="G10P014">湖北区</option>
+                        <option value="G10P019003" name="广西区" id="G10P013">广西区</option>
+                        <option value="G10P019003" name="东北区" id="G10P012">东北区</option>
+                        <option value="G10P019003" name="浙江区" id="G10P011">浙江区</option>
+                        <option value="G10P019003" name="山东区" id="G10P009">山东区</option>
+                        <option value="G10P019003" name="上海区" id="G10P008">上海区</option>
+                        <option value="G10P019003" name="西南区" id="G10P007">西南区</option>
+                        <option value="G10P019003" name="安徽区" id="G10P006">安徽区</option>
+                    </select>
+                </li>
+                <li class="cutpicli"><span>上传拍卖图片：</span>
+                    <div class="cutpic_paimai">
+                        <p style="color: red;font-size: 14px;font-weight: bold;">
+                            请上传最新的物品拍卖截图(建议上架蓝白装)，注意“24小时时限”的请不要上传25小时的截图，任何情况下未经过客服允许请不要私自下架物品，若因此造成的损失需由您自行承担！
+                            <a href="http://www.7881.com/article/view.action?lid=265006827612974498" target="_self"
+                               style="color: #0c5995">（拍卖交易教程）</a>
+                        </p>
+                        <div id="paimaiFileList">
+                        </div>
+                        <div id="uploader" class="bl-uploader-box clearfix">
+                            <div class="btns">
+                                <div id="picker_paimai" class="webuploader-container">
+                                    <div class="webuploader-pick"><img
+                                            src="http://pic.7881.com/7881/market/images/sell/pic-upload-btn.png"
+                                            width="110" height="110"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cutsl">
+                            <a href="http://pic.7881.com/7881-2016/images/help_center/dnfslt.jpg"
+                               class="example-image-link" data-lightbox="example-set" data-title="4396示例截图"
+                               target="_self"><img src="http://pic.7881.com/7881-2016/images/help_center/dnfslt.jpg"/></a>
+                            <p>示例截图</p>
+                        </div>
+                    </div>
+                </li>
+                <li><span>电话号码：<strong style="color:#F00">* </strong></span>
+                    <input type="text" name="goodsPurchaseBean.phone" maxlength="11"
+                            desc="电话号码"  regexp="^1[0-9]{10}$"  regexp_desc="无效的手机号码"  value="13239175253"/>
+                </li>
+                <li><span>联系QQ：<strong style="color:#F00">* </strong></span>
+                    <input type="text" name="goodsPurchaseBean.qq" maxlength="12" desc="联系QQ" regexp="^[0-9]{5,12}$" regexp_desc="无效的QQ号" value=""/>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+<div class="clear"></div>
+<div class="center">
+    <div class="qdtjdd">
+        <h1>确认提交订单</h1>
+        <ul>
+            <li>4396官方任何工作人员，都<b>不会</b>通过
+                QQ、电话或游戏内等方式，您索要您的登陆密码、手机号码或手机验证码！（手游代充、账号订单除外）如有人冒充7881工作人员向您索要，请千万不要提供！并第一时间联系4396官方客服，电话：400-187-7881（此号码无外拨功能）。
+            </li>
+            <li>需支付总价<input type="text" id="text_goodsprice"
+                            style="color:#F90; font-size:16px; font-weight:bold; text-align:center; border:0px;width:65px;"
+                            readonly="readonly"/>100元
+            </li>
+            <li>
+                <a style="padding: 0 2px; color: #ff6700;"  href="{% url 'transaction:payment' %}">确认购买</a>
+            </li>
+
+
+            <li><input type="checkbox" id="agreement" checked="checked" style=" height:12px;"/>&nbsp;我已阅读并同意<a
+                    href="/gmxy.html" target="_self" class="ls">《4396网游交易协议》</a></li>
+        </ul>
+    </div>
+</div>
+</form>
+<div class="clear"></div>
+<div class="center">
+    <div class="ddwt">
+        <h1>订单遇到问题：</h1>
+        <ul>
+            <li>
+                1.订单号无效，怎么回事啊？<br/>
+                回答：请确保您的订单成功支付了，否则无法成功取货哦。
+            </li>
+            <li><a href="" target="_self" class="ls">更多帮助</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--  -->
+
+
+<!--底部开始-->
+<div class="clear"></div>
+<div class="center" style="border-bottom:1px solid #CAC9C9; width:100%; height:1px; margin-top:10px;"></div>
+<div class="clear"></div>
+<div class="foot">
+    <div class="center foot_wenzi">
+        <a href="http://www.7881.com/aboutus.html" target="_self" class="hs" rel="nofollow">&nbsp;关于我们&nbsp;</a> |
+        <a href="http://www.7881.com/contactus.html" target="_self" class="hs" rel="nofollow">&nbsp;联系我们&nbsp;</a> |
+        <a href="http://www.7881.com/copyright.html" target="_self" class="hs" rel="nofollow">&nbsp;免责声明&nbsp;</a> |
+        <a href="http://www.7881.com/hr.html" target="_self" class="hs" rel="nofollow">&nbsp;诚聘英才&nbsp;</a> |
+        <a href="http://pic.7881.com/shenhe/allshen/jzjh-7881.html" target="_self" class="hs" rel="nofollow">&nbsp;家长监护&nbsp;</a>
+        |
+        <a href="http://www.7881.com/cooperation.html" target="_self" class="hs" rel="nofollow">&nbsp;商务合作&nbsp;</a> |
+        <a href="http://www.7881.com/sitemap.html" target="_self" class="hs">&nbsp;网站地图&nbsp;</a> |
+        <a href="http://www.7881.com/articlelist9-0-0.html" target="_self" class="hs">&nbsp;媒体声音&nbsp;</a> <br/>
+        Copyright Reserved 2008-2016 &copy; 7881游戏交易 网络文化经营许可证：
+        苏网文 〔2018〕9230-174号
+        网站备案-<a href="http://www.miitbeian.gov.cn" target="_self" class="hs">苏B1-20110004-4 </a>
+    </div>
+    <div class="mb10 center cent">
+        <a target="_self" rel="nofollow" href="http://www.miibeian.gov.cn"><img
+                src="http://ofpics.7881.com/7881/market/images/foot_1.png"/> 网站备案信息</a>
+        <a target="_self" rel="nofollow" href="http://www.cyberpolice.cn/wfjb/"><img
+                src="http://ofpics.7881.com/7881/market/images/foot_2.png"/> 网络警察</a>
+        <a target="_self" rel="nofollow" href="https://www.alipay.com"><img
+                src="http://ofpics.7881.com/7881/market/images/foot_3.png"/> 支付宝特约商户</a>
+        <a target="_self" rel="nofollow"
+           href="http://www.anquan.org/authenticate/cert/?site=www.7881.com&sn=2013071816040123804"><img
+                src="http://ofpics.7881.com/7881/market/images/foot_6.png"/> 安全联盟</a>
+        <a target="_self" rel="nofollow"
+           href="http://sq.ccm.gov.cn/ccnt/sczr/service/business/emark/toDetail/6C975C7695A34AD89E8416C44BEE105B"><img
+                src="http://pic.7881.com/7881/market/images/foot_8.png"/> 中国文化部</a>
+
+    </div>
+    <div class="tleft"></div>
+</div>
+<!--底部结束-->
+<script type="text/javascript">
+    function goTopEx() {
+        var obj = document.getElementById("goTopBtn");
+        function getScrollTop() {
+            return document.documentElement.scrollTop;
+        }
+        function setScrollTop(value) {
+            document.documentElement.scrollTop = value;
+        }
+
+        window.onscroll = function () {
+            getScrollTop() > 0 ? obj.style.display = "" : obj.style.display = "none";
+        }
+        obj.onclick = function () {
+            var goTop = setInterval(scrollMove, 10);
+
+            function scrollMove() {
+                setScrollTop(getScrollTop() / 1.1);
+                if (getScrollTop() < 1) clearInterval(goTop);
+            }
+        }
+    }
+</script>
+<DIV style="DISPLAY: none" id="goTopBtn"><IMG border=0 src="http://ofpics.7881.com/7881/market/images/index_top.jpg"
+                                              alt="返回头部"></DIV>
+<SCRIPT type=text/javascript>goTopEx();</SCRIPT>
+<div style="display: none;">
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        {#document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6fb35abaf76325a4316e33e23c984e73' type='text/javascript'%3E%3C/script%3E"));#}
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44365965-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</div>
+
+
+<div class="sehpaimai hide">
+    <div class="pop-paimai">
+        <img src="http://pic.7881.com/7881-2016/images/auction/closex.png" class="closex" onclick="layer.closeAll()"/>
+        <h2>欢迎使用7881<span>人工拍卖交易</span></h2>
+        <dl>
+            <dt><img src="http://pic.7881.com/7881-2016/images/auction/julie.png"/></dt>
+            <dd>
+                <h3>什么是拍卖交易？</h3>
+                <p>例如：您购买8000万金币，需要在DNF拍卖行<span>挂装备</span>，<br>并<span>标价8000万金币</span>，卖家拍下指定装备后，完成发货</p>
+            </dd>
+        </dl>
+        <h4><img src="http://pic.7881.com/7881-2016/images/auction/acustep.png"/></h4>
+        <h5>为保障订单发货速度，请您<span>务必上传</span>拍卖截图</h5>
+        <a href="{% url 'transaction:payment' %}">付款交易</a>
+        <label class="notips"><input type="checkbox">不再提示</label>
+    </div>
+</div>
+</body>
+
