@@ -28,6 +28,9 @@ urlpatterns = [
 
     path('login_/',login_,name='login_'),
     path('register/',register,name='register'),
+    path('check/', check_username, name='check_username'),
+    path('wechat_log/', wechat_log, name='wechat_log'),
+    path('logout/',logout,name='logout'),
 
     path('details2/',details2,name='details2'),
     path('material_deal/',material_deal,name='material_deal'),

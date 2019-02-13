@@ -46,16 +46,21 @@
     <div class="container">
 		<!-- 主体内容 （登陆界面）-->
 		<div class="main">
-			<!-- 左侧信息栏 -->
-			<!-- 右侧登陆界面 -->
+			<!-- 登陆界面 -->
 			<div class="sideright">
 				<div class="index">
-					<form action="#" method="get">
-						<p class="headline">用户登陆</p>
+                    <div>
+                        <p class="denglu" style="float: left; font-size:20px; padding: 10px 15px; ">账号登录</p>
+                        <p class="denglu" style="float: left;font-size:20px; padding: 10px 15px;"><a href="{% url 'transaction:wechat_log' %}">微信登录</a></p>
+                    </div>
+                    <br/>
+                    <div style="float: left">
+					    <form action="{% url 'transaction:login_' %}" method="post" class="acount_login">
+						{% csrf_token %}
 						<p class="astyle">用户名：</p>
-						<input type="text" value="请输入您的手机号">
+						<input type="text" placeholder="请输入您的用户名" name="username">
 						<p class="astyle">密码：</p>
-						<input type="text" value="请输入密码">
+						<input type="password" placeholder="请输入密码" name="password" style="width: 100%;height: 32px">
 						<input type="submit" value="登陆" name="login" >
 
 						</br>
@@ -63,15 +68,33 @@
 						<p class="cstyle"><a href=""></a>忘记密码</p>
 						</br></br>
 						<p class="cstyle">没有账号？<a href="{% url 'transaction:register' %}">立即注册</a></p>
-					</form>
-
-				</div>
-			</div>
-		</div>
+					    </form>
+                    </div>
+                    <div style="float: left">
+                        <form action="#" method="get" class="wechat_login" style="display: none;">
+                            <div><img src="{% static 'uploads/QR.png'%}" width="250" height="250" alt=""></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	</div>
 	<script>
-
+        $('.denglu').click(function (e) {
+            console.log($(this).text())
+            if ($(this).text() == '账号登录'){
+                $('.wechat_login').hide(300);
+                $('.acount_login').show(300);
+            }else if($(this).text() == '微信登录'){
+                $('.acount_login').hide(300);
+                $('.wechat_login').show(300);
+            }else{
+                $('.wechat_login').hide(300);
+                $('.acount_login').show(300);
+            }
+        })
 	</script>
 </body>
 </html>

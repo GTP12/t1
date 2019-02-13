@@ -46,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middlewares.yxjy_middleware.LoginMiddleware'
 ]
 
 ROOT_URLCONF = 'yxjy.urls'
@@ -73,6 +74,7 @@ WSGI_APPLICATION = 'yxjy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -80,7 +82,7 @@ DATABASES = {
         'USER':'xpy1805',
         'PASSWORD':'xpy1805',
         'HOST':'47.94.239.114',
-        'POST':3306
+        'PORT':3306,
     }
 }
 
@@ -125,3 +127,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/uploads')  #指定图片的上传目录
