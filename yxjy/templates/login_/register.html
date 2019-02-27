@@ -11,48 +11,7 @@
 	<link rel="stylesheet" href="{% static 'css/register.css' %}">
 	<script src="{% static 'js/jquery-1.8.1.min.js' %}"></script>
 	<script src="{% static 'js/slide.js' %}"></script>
-    <script>
-        function check_username(obj) {
-            var username = obj.value;
-            var $span = $('#msg');
-            $.ajax("{% url 'transaction:check_username' %}",{
-                "method":'GET',
-                'data':{'username':username},
-                'dataType':'json',
-                'success':function (data) {
-                    var status = data.status;
-                    if(status=='900'){
-                        $span.css('color','green').html(data.msg);
-                    }else if(status=='901'){
-                        $span.css('color','red').html(data.msg);
-                    }
-                }
-            });
-        }
 
-
-        function checkMobile(str) {
-
-            var  re = /^1\d{10}$/;
-            if (re.test(str)) {
-                  $("#sj").html("手机号码格式正确");
-                  $("#sj").css("color","green");
-            }
-            else {
-                  $("#sj").html("手机号码格式错误");
-                  $("#sj").css("color","red");
-            }
-        }
-        $("#tel").blur(function(){
-                var str = $(this).val();
-                checkMobile(str);
-        })
-
-
-
-
-
-    </script>
 	<title>游戏首页</title>
 </head>
 <body>
@@ -60,10 +19,10 @@
 		<div class="wrapper clearfix">
 			<ul class="nav">
 				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li><a target="_parent" href="{% url 'transaction:account_deal' 10000 '1' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' 10000 '1' %}">账号求购</a></li>
 				<li><a target="_self" href="{% url 'transaction:material_deal' 10000 20000 1%}">材料交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:gold_deal' 10000 1%}">金币交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' 10000 '1' %}">金币交易</a></li>
                 <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 
 			</ul>
@@ -85,64 +44,164 @@
 		</div>
 	</div>
     <div class="reg_content">
-        <form class="form form-horizontal" action="{% url 'transaction:register' %}" method="post" name="regist_form" enctype="multipart/form-data">
-            {%csrf_token%}
-            <div class="form-group">
-                <label class="col-xs-3 text-right" for="username">用户名</label>
-                <div class="col-xs-5">
-                    <input class="form-control" type="text" name="username"
-                           placeholder="输入您的用户名" onblur="check_username(this)">
-                    <span id="msg"></span>
+        <div class="reg_cont">
+            <form class="form form-horizontal" action="{% url 'transaction:register' %}" method="post" name="regist_form" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="form-group" style="margin-bottom: 12px">
+                    <label class="col-xs-3 text-right" for="username">用户名</label>
+                    <div class="col-xs-5">
+                        <input class="form-control" type="text" name="username"
+                               placeholder="输入您的用户名" onblur="check_username(this)" id="username">
+                        <span id="msg"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-xs-3 text-right" for="password">密码</label>
-                <div class="col-xs-5">
-                    <input class="form-control" type="password" name="password" id="password"
-                           placeholder="输入您的密码">
+                <div class="form-group" style="margin-bottom: 12px">
+                    <label class="col-xs-3 text-right" for="password">密码</label>
+                    <div class="col-xs-5">
+                        <input class="form-control" type="password" name="password" id="password"
+                               placeholder="输入您的密码">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-xs-3 text-right" for="username">QQ</label>
-                <div class="col-xs-5">
-                    <input class="form-control" type="text" name="qq" id="qq"
-                           placeholder="输入您的QQ号(必填)">
+                <div class="form-group" style="margin-bottom: 12px">
+                    <label class="col-xs-3 text-right" for="username">QQ</label>
+                    <div class="col-xs-5">
+                        <input class="form-control" type="text" name="qq" id="qq"
+                               placeholder="输入5-11位QQ号(必填)" onblur="checkqq()">
+                        <span id="q"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-xs-3 text-right" for="username">邮箱</label>
-                <div class="col-xs-5">
-                    <input class="form-control" type="text" name="email" id="email"
-                           placeholder="输入您的邮箱(必填)" >
+                <div class="form-group" style="margin-bottom: 12px">
+                    <label class="col-xs-3 text-right" for="username">邮箱</label>
+                    <div class="col-xs-5">
+                        <input class="form-control" type="text" name="email" id="email"
+                               placeholder="输入您的邮箱(必填)" onblur="checkemail()" >
+                        <span id="yx"></span>
+                    </div>
+                </div>
 
+                <div class="form-group" style="margin-bottom: 12px">
+                    <label class="col-xs-3 text-right" for="username">电话号码</label>
+                    <div class="col-xs-5">
+                        <input class="form-control" type="text" name="tel" id="tel"
+                            placeholder="输入您的电话号码(必填)" onblur="checkPhone()">
+                        <span id="sj"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-xs-3 text-right" for="username">电话号码</label>
-                <div class="col-xs-5">
-                    <input class="form-control" type="text" name="tel" id="tel"
-                        placeholder="输入您的电话号码(必填)">
-                    <span id="sj"></span>
-                </div>
-            </div>
+                <div class="form-group" style="margin-bottom: 12px">
 
-            <div class="form-group">
-            <label class="col-xs-3 text-right" for="username">上传头像</label>
-                <div class="col-xs-5">
-                    <input class="form-control" type="file" name="photo" id="photo">
+                    <div class="col-xs-5">
+                        <input class="form-control" type="text" name="yzm" id="yzm"
+                            placeholder=""  style="width:60px;" onblur="checkyzm()">
+                        <input type="button"  id='get_yzm' value="获取验证码" >
+                        <span id="match_yzm"></span>
+
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="text-center">
-                    <input class="btn btn-success" type="submit" value="注册" id="btn"/>
-                    <a href="{% url 'transaction:login_' %}" class="btn btn-link">已有用户，直接登录</a>
+
+                <div class="form-group" style="margin-bottom: 12px">
+                <label class="col-xs-3 text-right" for="username">上传头像</label>
+                    <div class="col-xs-5">
+                        <input class="form-control" type="file" name="photo" id="photo">
+                    </div>
                 </div>
-            </div>
-        </form>
+                <div class="form-group" style="margin-bottom: 12px">
+                    <div class="text-center">
+                        <input class="btn btn-success" type="submit" value="注册" id="btn"/>
+                        <a href="{% url 'transaction:login_' %}" class="btn btn-link">已有用户，直接登录</a>
+                        <span id="sjs" name=""></span>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
+ <script>
+        function check_username(obj) {
+            var username = obj.value;
+            var $span = $('#msg');
+            $.ajax("{% url 'transaction:check_username' %}",{
+                "method":'GET',
+                'data':{'username':username},
+                'dataType':'json',
+                'success':function (data) {
+                    var status = data.status;
+                    if(status=='900'){
+                        $span.css('color','green').html(data.msg);
+                    }else if(status=='901'){
+                        $span.css('color','red').html(data.msg);
+                    }
+                }
+            });
+        }
+
+        function checkqq(){
+           var qq = document.getElementById('qq').value;
+           var reg = /^\s*[.0-9]{5,11}\s*$/;
+           if(!(reg.test(qq))){
+             return document.getElementById('q').innerHTML = '请输入正确的QQ号';
+             return false;
+           }    else{return document.getElementById('q').innerHTML = '';}
+         }
+
+
+        function checkemail(){
+           var email = document.getElementById('email').value;
+           var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+           if(!(reg.test(email))){
+             return document.getElementById('yx').innerHTML = '请输入正确的邮箱';
+             return false;
+           }    else{return document.getElementById('yx').innerHTML = '';}
+         }
+
+
+        function checkPhone(){
+           var phone = document.getElementById('tel').value;
+           if(!(/^1[34578]\d{9}$/.test(phone))){
+             return document.getElementById('sj').innerHTML = '请输入正确的手机号';
+             return false;
+           }    else{return document.getElementById('sj').innerHTML = '';}
+         }
+
+
+        $('#get_yzm').click(function () {
+            var tel= document.getElementById('tel').value;
+            var $span = $('#sjs');
+            $.ajax("{% url 'transaction:yzm' %}",{
+                "method":'GET',
+                'data':{'tel':tel},
+                'dataType':'json',
+                'success':function (data) {
+                    $span.attr('name',data.num)
+                    $span.html(data.num)
+                    }
+            });
+        })
+
+
+        function checkyzm(){
+            var yzm = document.getElementById("yzm").value;
+			var sjs = $('#sjs').attr('name')
+			if(yzm!=sjs){
+				return document.getElementById('match_yzm').innerHTML = '请输入正确的验证码';
+             return false;
+           }    else{return document.getElementById('match_yzm').innerHTML = '';}
+         }
+
+
+        $('#btn').mouseover(function () {
+            if($('#username').val() != '' && $('#password').val() != '' && $('#qq').val() != ''
+            && $('#email').val() != '' && $('#tel').val() != '' && $('#yzm').val() != '' ){
+                $('#btn').attr('disabled',false)
+            }else {
+                $('#btn').attr('disabled',true)
+            }
+
+
+        })
+
+ </script>

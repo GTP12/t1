@@ -16,24 +16,24 @@
 	<div class="header">
 		<div class="wrapper clearfix">
 			<ul class="nav">
-				<li><a target="_blank" href="{% url 'transaction:index' %}">首页</a></li>
-				<li class="active"><a target="_parent" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-				<li><a target="_blank" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
-				<li><a target="_blank" href="{% url 'transaction:material_deal' %}">材料交易</a></li>
-				<li><a target="_blank" href="{% url 'transaction:gold_deal' %}">金币交易</a></li>
-                <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+				<li class="active"><a target="_parent" href="{% url 'transaction:account_deal' 10000 '1' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' 10000 '1'%}">账号求购</a></li>
+				<li><a target="_self" href="{% url 'transaction:material_deal' 10000 20000 1 %}">材料交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' 10000 1 %}">金币交易</a></li>
+                <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 
 			</ul>
 
 			<div class="user-info">
 
 				<!-- 我的订单 -->
-				<div class="register">
-					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
-				</div>
-				<div class="login">
-					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
-				</div>
+{#				<div class="register">#}
+{#					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>#}
+{#				</div>#}
+{#				<div class="login">#}
+{#					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>#}
+{#				</div>#}
 				<div class="order">
 					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
 				</div>
@@ -57,7 +57,7 @@
 						为保障交易安全，请您不要在游戏内泄露手机号，QQ号等个人信息，谨防诈骗
 					</div>
 					<div class="btn">
-                        <a href="{% url 'transaction:account_purchase' %}">继续出售</a>
+                        <a href="{% url 'transaction:account_purchase' 10000 '1' %}">继续出售</a>
 					</div>
                     <div class="btn">
                         <a href="{% url 'transaction:person_center' %}">返回个人中心</a>

@@ -15,10 +15,10 @@
 		<div class="wrapper clearfix">
 			<ul class="nav">
 				<li><a target="__self" href="{% url 'transaction:index' %}">首页</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_deal' 10000 '1' %}">账号交易</a></li>
+                <li><a target="_self" href="{% url 'transaction:account_purchase' 10000 '1' %}">账号求购</a></li>
 				<li class="active"><a target="_parent" href="{% url 'transaction:material_deal' 10000 20000 1%}">材料交易</a></li>
-				<li><a target="_self" href="{% url 'transaction:gold_deal' '10000' '1' %}">金币交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' 10000 1%}">金币交易</a></li>
                 <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 
 			</ul>
@@ -55,6 +55,7 @@
                                 <li>
                                     {% if game.gameareaid == area %}
                                         <span class="border-s .selected"></span>
+                                         <span style="display: none" id='gameareaid'>{{ game.gameareaid }}</span>
                                         <span>😀</span>
                                     {% endif %}
                                     <a href= "{% url 'transaction:material_deal' game.gameareaid 20000 1%}"><span class="border-s ">{{ game.areaname }}</span></a>
@@ -69,14 +70,14 @@
 						</div>
 						<div class="area-con fl">
 							<ul>
-								{% for games in game_materials %}
+								{% for childname,childid in child_dict.items %}
                                     <li>
-                                        {% if games.gameareaid == area %}
+                                        {% if childid == materialid %}
                                              <span class="border-s .selected"></span>
+                                             <span style="display: none" id='materialid'>{{ childid }}</span>
                                              <span>😀</span>
-                                            <span style="display: none" id='gameareaid'>{{ games.gameareaid }}</span>
                                         {% endif %}
-                                        <a href= "{% url 'transaction:material_deal'  10000 games.materialsid 1%}"><span class="border-s ">{{ games.materialsname }}</span></a>
+                                        <a href= "{% url 'transaction:material_deal'  area childid 1%}"><span class="border-s ">{{ childname }}</span></a>
                                     </li>
 								{% endfor %}
 							</ul>
@@ -89,36 +90,39 @@
 							默认排序
 						</div>
 						<div class="price sort-list sort-tri" id="price">
-                        <span class="text" id="tri">价格</span>
-                        <span class="tri-top" id="top"></span>
-                    </div>
-                    <div class="price sort-list sort-tri" id="price1">
-                        <span id="tri">价格</span>
-                        <span class="tri-bottom" id="bottom"></span>
-                    </div>
-                    <div class="time sort-list sort-tri" id="time">
-                        <span id="datetime">发布时间</span>
-                        <span class="tri-top"></span>
-                    </div>
-                    <div class="time sort-list sort-tri" id="time1">
-                        <span id="datetime">发布时间</span>
-                        <span class="tri-bottom"></span>
-                    </div>
+                            <span class="text" id="tri">价格</span>
+                            <span class="tri-top" id="top"></span>
+                        </div>
+                        <div class="price sort-list sort-tri" id="price1">
+                            <span id="tri">价格</span>
+                            <span class="tri-bottom" id="bottom"></span>
+                        </div>
+                        <div class="time sort-list sort-tri" id="time">
+                            <span id="datetime">发布时间</span>
+                            <span class="tri-top"></span>
+                        </div>
+                        <div class="time sort-list sort-tri" id="time1">
+                            <span id="datetime">发布时间</span>
+                            <span class="tri-bottom"></span>
+                        </div>
 					</div>
 				</div>
 				<div class="search">
-					<div class="left-search s-f fl">
-						<p>关键字：</p>
-						<input type="text" name="" id="keywords" placeholder="请输入您要搜索的关键字">
-						<div class="s-btn">确定</div>
-					</div>
-					<div class="right-search s-f fr">
-						<p>价格筛选：</p>
-						<input type="text" id="minPrice" class="p-input" placeholder="￥">
-						<span>&nbsp;-&nbsp;</span>
-						<input type="text" name="" id="maxPrice"  class="p-input" placeholder="￥">
-						<div class="s-btn">确定</div>
-					</div>
+					<form action="{% url 'transaction:material_keys' 10000 20000 1 %}" method="get">
+                            <div class="left-search s-f fl">
+                                <p>关键字：</p>
+                                <input type="text" name="keywords" id="keywords" placeholder="请输入您要搜索的关键字">
+                                <input type="submit" class="s-btn" value="确定">
+
+                            </div>
+                            <div class="right-search s-f fr">
+                                    <p>价格筛选：</p>
+                                    <input type="text" id="minPrice" class="p-input" placeholder="￥" name="minPrice">
+                                    <span>&nbsp;-&nbsp;</span>
+                                    <input type="text" name="maxPrice" id="maxPrice" class="p-input" placeholder="￥">
+                                    <input type="submit" class="s-btn" value="确定">
+                            </div>
+                </form>
 				</div>
 			</div>
 			<div class="item fl" id="f1">
@@ -187,8 +191,10 @@
         var f1 = document.getElementById("f1");
         price.addEventListener("click", function () {
             var gameareaid = document.getElementById('gameareaid');
-            var id = gameareaid.textContent;
-            $.get("/games_deal/checkmaxprice/", {"top": id}, function (html) {
+            var materialid = document.getElementById('materialid');
+            var gameid = gameareaid.textContent;
+            var matid = materialid.textContent;
+            $.get("/games_deal/check_material_maxprice/", {"gameid": gameid, "matid":matid}, function (html) {
                 f1.innerHTML = html;
         })
     });
@@ -197,10 +203,47 @@
             var f2 = document.getElementById("f1");
             top1.addEventListener("click", function () {
                 var gameareaid = document.getElementById('gameareaid');
-                var id = gameareaid.textContent;
-                $.get("/games_deal/checkminprice/", {"top": id}, function (html) {
+                var materialid = document.getElementById('materialid');
+                var gameid = gameareaid.textContent;
+                var matid = materialid.textContent;
+                $.get("/games_deal/check_material_minprice/", {"gameid": gameid, "matid":matid}, function (html) {
                     f2.innerHTML = html;
                 })
+            })
+        });
+         // 日期排序
+        var datetime = document.getElementById('time');
+        var f3 = document.getElementById("f1");
+        datetime.addEventListener("click", function () {
+            var gameareaid = document.getElementById('gameareaid');
+                var materialid = document.getElementById('materialid');
+                var gameid = gameareaid.textContent;
+                var matid = materialid.textContent;
+                $.get("/games_deal/check_material_maxtime/", {"gameid": gameid, "matid":matid}, function (html) {
+                    f3.innerHTML = html;
+            })
+        });
+        var time1 = document.getElementById('time1');
+        var f4 = document.getElementById("f1");
+        time1.addEventListener("click", function () {
+                var gameareaid = document.getElementById('gameareaid');
+                var materialid = document.getElementById('materialid');
+                var gameid = gameareaid.textContent;
+                var matid = materialid.textContent;
+                $.get("/games_deal/check_material_mintime/", {"gameid": gameid, "matid":matid}, function (html) {
+                    f4.innerHTML = html;
+            })
+        });
+        //默认排序
+        var defsort = document.getElementById('default');
+        var f5 = document.getElementById("f1");
+        defsort.addEventListener("click", function () {
+                var gameareaid = document.getElementById('gameareaid');
+                var materialid = document.getElementById('materialid');
+                var gameid = gameareaid.textContent;
+                var matid = materialid.textContent;
+                $.get("/games_deal/check_material_default/", {"gameid": gameid, "matid":matid}, function (html) {
+                    f5.innerHTML = html;
             })
         });
 	</script>

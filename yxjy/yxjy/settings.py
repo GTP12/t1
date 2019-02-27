@@ -42,11 +42,11 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'middlewares.yxjy_middleware.LoginMiddleware',
+    'middlewares.yxjy_middleware.LoginMiddleware'
 ]
 
 ROOT_URLCONF = 'yxjy.urls'
@@ -74,14 +74,15 @@ WSGI_APPLICATION = 'yxjy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': '4396',
-        'USER': 'xpy1805',
-        'PASSWORD': 'xpy1805',
-        'PORT': 3306,
-        'HOST': '47.94.239.114',
+        'USER':'xpy1805',
+        'PASSWORD':'xpy1805',
+        'HOST':'47.94.239.114',
+        'PORT':3306,
     }
 }
 
@@ -126,3 +127,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/uploads')  #指定图片的上传目录

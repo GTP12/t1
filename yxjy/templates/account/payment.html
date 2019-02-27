@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+{% load static %}
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
@@ -8,100 +8,51 @@
     <title>收银台 - 7881代练交易平台</title>
     <meta name="keywords" content="充值页面-7881代练交易平台" />
     <meta name="description" content="充值页面-7881代练交易平台" />
-    <link type="text/css" rel="stylesheet" href="http://pic.7881.com/7881-2016/common/common-2016.css" />
-    <link type="text/css" rel="stylesheet" href="http://pic.7881.com/7881-2016/css/cashier/cashier.css" />
+    <script src="{% static 'material/js/jquery-1.8.1.min.js' %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'payment/css/common-2016.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'payment/css/cashier.css' %}" />
+    <link rel="stylesheet" href="{% static 'gold/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'gold/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'gold/css/gold-deal.css' %}">
 </head>
 <body>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <meta name="renderer" content="webkit" />
 <!--通用顶部 Start-->
-<div class="top-common-box">
-	<div class="top-common clearfix">
-		<div class="top-common-left">
-			<div class="not-log" id="noLog">
-                <span>您好，欢迎访问7881游戏交易平台！</span>
-                <a href="https://graph.qq.com/oauth/show?which=Login&display=pc&response_type=code&client_id=101142043&redirect_uri=http%3A%2F%2Fwww.7881.com%2Fuser%2Fqqlogin.action"
-				   class="qq-log" rel="nofollow"><em class="icon-com"></em>QQ登录</a>
-                <a href="/7881_touristlogin.jsp" class="blue" rel="nofollow">登录</a>
-                <a href="/register.html" rel="nofollow">免费注册</a>
-            </div>
-			<div class="already-log" id="alreadyLog" style="display: none;">
-				<span>13814021438,欢迎回来！</span><em>|</em>
-				<a href="#" class="on" rel="nofollow"><i class="icon-com message"></i>消息（<b>10</b>）</a><em>|</em>
-				<a href="#" rel="nofollow">退出</a>
+<!--通用顶部 End--><!-- 通用头部02 Start -->
+	<div class="header">
+		<div class="wrapper clearfix">
+			<ul class="nav">
+				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_deal' 10000 '1' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' 10000 '1' %}">账号求购</a></li>
+			    <li><a target="_self" href="{% url 'transaction:material_deal' 10000 20000 1 %}">材料交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' 10000 1 %}">金币交易</a></li>
+                <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+
+			</ul>
+
+			<div class="user-info">
+
+				<!-- 我的订单 -->
+{#				<div class="register">#}
+{#					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>#}
+{#				</div>#}
+{#				<div class="login">#}
+{#					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>#}
+{#				</div>#}
+				<div class="order">
+					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
+				</div>
 			</div>
 		</div>
-		<div class="top-common-right">
-			<ul>
-				<li><a href="https://im.7881.com" class="org" target="_blank" rel="nofollow">订单处理中心</a></li>
-				<li><a href="/personal.html?ver=20140717" rel="nofollow">我的7881</a></li>
-				<li><a href="/financecharge/toAdd.action" class="gre" rel="nofollow">充值</a></li>
-				<li class="tixianCls" style="display: none;" ><a href="/financecharge/toAddExtractcash.action" class="org" rel="nofollow">提现</a></li>
-				<li class="top-menu-item">
-					<div class="top-menu middle-menu">
-						<a href="/personal.html?ver=20140717" class="menu-hd" rel="nofollow">买家中心<i class="icon-com"></i></a>
-						<div class="top-menu-list">
-							<a href="/procurement/queryMyProcureOrder.action" rel="nofollow">我购买的商品</a>
-							<a href="http://shou.7881.com/goods/receiptGoods.htm" rel="nofollow">我的收货订单</a>
-							<a href="/gamelistshow.html" rel="nofollow">我要买</a>
-						</div>
-					</div>
-				</li>
-				<li class="top-menu-item">
-					<div class="top-menu middle-menu">
-						<a href="/personal.html" class="menu-hd" rel="nofollow">卖家中心<i class="icon-com"></i></a>
-						<div class="top-menu-list">
-							<a href="http://www.7881.com/sellertool/queryMySaleOrder.action" rel="nofollow">我卖出的订单</a>
-							<a href="http://www.7881.com/procurement/showMyGoods.action" rel="nofollow">出售中的商品</a>
-							<a href="http://www.7881.com/shouhuo/getOrderByList.action" rel="nofollow">我的出货订单</a>
-							<a href="http://sellertools.7881.com/" rel="nofollow">卖家工具</a>
-							<a href="http://www.7881.com/release.html" rel="nofollow">我要卖</a>
-						</div>
-					</div>
-				</li>
-				<li class="top-menu-item">
-					<div class="top-menu middle-menu">
-						<a href="#" class="menu-hd" rel="nofollow">商家准入<i class="icon-com"></i></a>
-						<div class="top-menu-list">
-							<a href="http://i.7881.com/sellerEnter/applyserver/9" rel="nofollow">VIP商城入驻</a>
-							<a href="http://i.7881.com/sellerEnter/applyserver/12" rel="nofollow">收货网入驻</a>
-							<a href="http://i.7881.com/sellerEnter/applyserver/11" rel="nofollow">商品批量发布</a>
-							<a href="http://i.7881.com/sellerEnter/enterindex" rel="nofollow">更多服务准入</a>
-						</div>
-					</div>
-				</li>
-				<li class="top-menu-item">
-					<div class="top-menu middle-menu">
-						<a href="#" class="menu-hd">代练中心<i class="icon-com"></i></a>
-						<div class="top-menu-list">
-							<a href="http://dl.7881.com/" rel="nofollow">王者荣耀代练</a>
-							<a href="http://dl.7881.com/" rel="nofollow">英雄联盟代练</a>
-							<a href="http://dnf.dl.7881.com/" rel="nofollow">DNF代练</a>
-						</div>
-					</div>
-				</li>
-				<li class="top-menu-item last-menu-item">
-					<div class="top-menu">
-						<a href="#" class="menu-hd" rel="nofollow">服务中心<i class="icon-com"></i></a>
-						<div class="top-menu-list">
-							<a href="/sc/sc_index.html" rel="nofollow">客服中心</a>
-							<a href="/helpCenter.html" rel="nofollow">帮助中心</a>
-							<a href="/articlelist4-0-0.html" rel="nofollow">资讯中心</a>
-							<a href="/tradesafe.html" rel="nofollow">安全中心</a>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
 	</div>
-</div>
-<!--通用顶部 End--><!-- 通用头部02 Start -->
-<div class="header-02-box boxshadow">
-    <div class="header-02 clearfix">
-        <h1 class="logo"><a href="http://www.7881.com/" title="游戏金币交易平台"><img src="http://pic.7881.com/7881-2016/images/logo-small.png" alt="7881logo" /></a><em></em><span>收银台</span></h1>
-        <h3><a href="http://www.7881.com/personal.html" target="_blank">个人中心</a><em>|</em><a href="http://www.7881.com/procurement/queryMyProcureOrder.action" target="_blank">我的订单</a></h3>
-    </div>
-</div>
+{#<div class="header-02-box boxshadow">#}
+{#    <div class="header-02 clearfix">#}
+{#        <h1 class="logo"><a href="http://www.7881.com/" title="游戏金币交易平台"><img src="http://pic.7881.com/7881-2016/images/logo-small.png" alt="7881logo" /></a><em></em><span>收银台</span></h1>#}
+{#        <h3><a href="http://www.7881.com/personal.html" target="_self">个人中心</a><em>|</em><a href="http://www.7881.com/procurement/queryMyProcureOrder.action" target="_self">我的订单</a></h3>#}
+{#    </div>#}
+{#</div>#}
 <!-- 通用头部02 End -->
 <!-- 主体区域 Start -->
 <div class="panel-body">
@@ -114,18 +65,18 @@
                 </div>
                 <div class="waitright">
                     <h3>应付金额：<span class="allprice">
-                        285.00</span><em>元</em></h3>
-                    <p><a href="javascript:void(0)" class="ordetail">订单详情</a></p>
+                        {{ account.price }}</span><em>元</em></h3>
+                    <p><a href="javascript:void(0)" class="ordetail"></a></p>
                 </div>
             </div>
             <div class="waitpay-bot">
-                <p><span>订单编号：</span><em class="ordid">129020815496058294014452</em></p>
+                <p><span>订单编号：</span><em class="ordid">129012215481609562765122</em></p>
                 <p><span>订单金额：</span> <em class="price orderPrice">
-                    285.00</em></p>
+                    100.00</em></p>
                 <p><span>商品名称：</span>
-                    【邮寄交易】10000万金=285.0元地下城与勇士</p>
+                    【拍卖交易】4700万金=100.0元地下城与勇士</p>
                 <p><span>游戏区服：</span>
-                    陕西区陕西2/3区</p>
+                    云贵区云南1区</p>
             </div>
         </div>
         <div class="type-pay">
@@ -232,7 +183,7 @@
                     </div>
                 </div>
                 <div class="paysubmit">
-                    <a href="javascript:void(0)" class="submita">立即支付</a>
+                    <a href="{% url 'transaction:deal_success' account.id %}" class="submita">立即支付</a>
                 </div>
             </div>
         </div>
@@ -274,15 +225,15 @@
     <div class="footer-link-box">
         <div class="footer-link">
             <div class="footer-link-a">
-                <a href="http://www.7881.com/aboutus.html" target="_blank" rel="nofollow">关于7881</a><em>|</em>
-                <a href="http://www.7881.com/contactus.html" target="_blank" rel="nofollow">联系我们</a><em>|</em>
-                <a href="http://www.7881.com/copyright.html" target="_blank" rel="nofollow">免责声明</a><em>|</em>
-                <a href="http://www.7881.com/hr.html" target="_blank" rel="nofollow">诚聘英才</a><em>|</em>
-                <a href="http://www.7881.com/ParentalControls.jsp" target="_blank" rel="nofollow">家长监护</a><em>|</em>
-                <a href="http://www.7881.com/cooperation.html" target="_blank" rel="nofollow">商户合作</a><em>|</em>
-                <a href="http://www.7881.com/sitemap.html" target="_blank">网站地图</a>
+                <a href="http://www.7881.com/aboutus.html" target="_self" rel="nofollow">关于7881</a><em>|</em>
+                <a href="http://www.7881.com/contactus.html" target="_self" rel="nofollow">联系我们</a><em>|</em>
+                <a href="http://www.7881.com/copyright.html" target="_self" rel="nofollow">免责声明</a><em>|</em>
+                <a href="http://www.7881.com/hr.html" target="_self" rel="nofollow">诚聘英才</a><em>|</em>
+                <a href="http://www.7881.com/ParentalControls.jsp" target="_self" rel="nofollow">家长监护</a><em>|</em>
+                <a href="http://www.7881.com/cooperation.html" target="_self" rel="nofollow">商户合作</a><em>|</em>
+                <a href="http://www.7881.com/sitemap.html" target="_self">网站地图</a>
             </div>
-            <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文 〔2018〕9230-174号</p>
+            <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_self">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文 〔2018〕9230-174号</p>
         </div>
     </div>
 </div>
@@ -362,58 +313,59 @@
 			</div>
 		</div>
 	</div>
-</div><form id="payForm" method="post">
-    <input type="hidden" id="fptname" name="financeChargeBean.fptname" />
-    <input type="hidden" name="financeChargeBean.orderid" value="129020815496058294014452" />
-    <input type="hidden" name="financeChargeBean.backurl" value="/payment/endPayout.action?orderid=129020815496058294014452&from=" />
-    <input type="hidden" id="amount" name="financeChargeBean.amount" value="28500" />
-    <input type="hidden" id="amountyuan" name="financeChargeBean.amountyuan" value="285.00" />
-    <input type="hidden" id="hdn_useBalance" name="financeChargeBean.useBalance" value="-1" />
-    <input type="hidden" id="hdn_redEnvelopid" name="financeChargeBean.vouchersid" />
-    <input type="hidden" id="hdn_redEnvelopdeduct" name="financeChargeBean.vouchersmoney" value="0" />
-    <input type="hidden" id="validway" name="userRegisterBean.validway" />
-    <input type="hidden" id="yefalg" name="yefalg" value="0" />
-    <input type="hidden" name="financeChargeBean.deliverroleid" value="" />
-    <input type="hidden" name="financeChargeBean.payway" id="payway" />
-    <input type="hidden"  value="" id="marketflag" />
-    <input type="hidden"  value="" id="marketflag_" />
-    <input type="hidden"  value="1" id="mobilechecked" />
-    <input type="hidden" id="transactionpass" name="userRegisterBean.transactionpass" />
-    <input type="hidden" id="verificationcode" name="userRegisterBean.verificationcode" />
-
-
-</form>
-<!--微信支付弹窗 End-->
-<!-- 通用Js库 Start -->
-<script type="text/javascript" src="http://pic.7881.com/7881-2016/common/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="http://pic.7881.com/7881-2016/js/7881-2016.js"></script>
-<script type="text/javascript" src="/common/js/validateLogin.js"></script>
-<!-- 通用Js库 End -->
-<!-- 可选Js库 Start -->
-<script type="text/javascript" src="http://pic.7881.com/7881-2016/common/layer/layer.js"></script>
-<script type="text/javascript" src="http://pic.7881.com/7881-2016/js/7881-2016.js"></script>
-<script type="text/javascript" src="http://pic.7881.com/7881-2016/js/cashier/jquery.inputbox.js"></script>
-<script type="text/javascript" src="/market/js/purchase_pay_cashier.js?v=20181114"></script>
-<!-- 可选Js库 Start -->
-<script type="text/javascript">
-    var orderPrice = parseFloat($(".orderPrice").text());
-    var allprice = parseFloat($(".allprice").text()); //总金额
-    var balance = parseFloat("0.00"); //账户余额
-    var feemoney = 0; //手续费
-    var haspay = 0; //余额支付金额
-    var needpay = 0; //在线支付金额
-    var payTypeName = "";
-    var from='';
-    var oid;
-    var payoutResultData;
-    var payUrl = "http://newpay.7881.com";
-    var payoutBackUrl = "";
-    var payoutUseBalanceUrl = '/payment/payoutUseBalance.action?from='+from;
-    var payoutAjaxUrl = "/payment/payoutAjax.action";
-    var payoutUrl = '/payment/payout.action?from='+from;
-    var phone = "132***75253";
-    var qrCodeRefreshTime = 5000;
-
-</script>
+</div>
+{#</div><form id="payForm" method="post">#}
+{#    <input type="hidden" id="fptname" name="financeChargeBean.fptname" />#}
+{#    <input type="hidden" name="financeChargeBean.orderid" value="129012215481609562765122" />#}
+{#    <input type="hidden" name="financeChargeBean.backurl" value="/payment/endPayout.action?orderid=129012215481609562765122&from=" />#}
+{#    <input type="hidden" id="amount" name="financeChargeBean.amount" value="10000" />#}
+{#    <input type="hidden" id="amountyuan" name="financeChargeBean.amountyuan" value="100.00" />#}
+{#    <input type="hidden" id="hdn_useBalance" name="financeChargeBean.useBalance" value="-1" />#}
+{#    <input type="hidden" id="hdn_redEnvelopid" name="financeChargeBean.vouchersid" />#}
+{#    <input type="hidden" id="hdn_redEnvelopdeduct" name="financeChargeBean.vouchersmoney" value="0" />#}
+{#    <input type="hidden" id="validway" name="userRegisterBean.validway" />#}
+{#    <input type="hidden" id="yefalg" name="yefalg" value="0" />#}
+{#    <input type="hidden" name="financeChargeBean.deliverroleid" value="" />#}
+{#    <input type="hidden" name="financeChargeBean.payway" id="payway" />#}
+{#    <input type="hidden"  value="" id="marketflag" />#}
+{#    <input type="hidden"  value="" id="marketflag_" />#}
+{#    <input type="hidden"  value="1" id="mobilechecked" />#}
+{#    <input type="hidden" id="transactionpass" name="userRegisterBean.transactionpass" />#}
+{#    <input type="hidden" id="verificationcode" name="userRegisterBean.verificationcode" />#}
+{##}
+{##}
+{#</form>#}
+{#<!--微信支付弹窗 End-->#}
+{#<!-- 通用Js库 Start -->#}
+{#<script type="text/javascript" src="{% static 'payment/js/jquery-1.8.3.min.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'payment/js/7881-2016.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'payment/js/validateLogin.js' %}"></script>#}
+{#<!-- 通用Js库 End -->#}
+{#<!-- 可选Js库 Start -->#}
+{#<script type="text/javascript" src="{% static 'payment/js/layer.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'payment/js/7881-2016.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'payment/js/jquery-1.8.3.min.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'payment/js/purchase_pay_cashier.js' %}"></script>#}
+{#<!-- 可选Js库 Start -->#}
+{#<script type="text/javascript">#}
+{#    var orderPrice = parseFloat($(".orderPrice").text());#}
+{#    var allprice = parseFloat($(".allprice").text()); //总金额#}
+{#    var balance = parseFloat("0.00"); //账户余额#}
+{#    var feemoney = 0; //手续费#}
+{#    var haspay = 0; //余额支付金额#}
+{#    var needpay = 0; //在线支付金额#}
+{#    var payTypeName = "";#}
+{#    var from='';#}
+{#    var oid;#}
+{#    var payoutResultData;#}
+{#    var payUrl = "http://newpay.7881.com";#}
+{#    var payoutBackUrl = "";#}
+{#    var payoutUseBalanceUrl = '/payment/payoutUseBalance.action?from='+from;#}
+{#    var payoutAjaxUrl = "/payment/payoutAjax.action";#}
+{#    var payoutUrl = '/payment/payout.action?from='+from;#}
+{#    var phone = "132***75253";#}
+{#    var qrCodeRefreshTime = 5000;#}
+{##}
+{#</script>#}
 </body>
 </html>

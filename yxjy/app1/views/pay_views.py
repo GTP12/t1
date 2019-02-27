@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from app1.models import Goldorder2, Materialsorder
+from app1.models import Goldorder2, Materialsorder2
 
 app_name = 'transaction'
 
@@ -10,14 +10,14 @@ def payment(request, payprice, order_time):
 
 
 def paysuccess(request, order_time):
-    goldsorder2 = Goldorder2.objects.get(order_time=order_time)
-    goldsorder2.order_state = 0
-    goldsorder2.save()
+    # userid = request.user
+    goldsorder2 = Goldorder2.objects.filter(order_time=order_time)
+    materialsorder2 = Materialsorder2.objects.filter(order_time=order_time)
+    if goldsorder2:
+        goldsorder2[0].order_state = 0
+        goldsorder2[0].save()
+    elif materialsorder2:
+        materialsorder2[0].order_state = 0
+        materialsorder2[0].save()
     return render(request, 'pay/paysuccess.html')
 
-
-def matrialsuccess(request, oreder_time):
-    materialsorder2 = Materialsorder.objects.get(oreder_time=oreder_time)
-    materialsorder2.order_state = 0
-    materialsorder2.save()
-    return render(request, 'pay/paysuccess.html', locals())

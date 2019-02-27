@@ -9,22 +9,21 @@ from django.db import models
 
 
 class Account1(models.Model):
-    gamearea = models.CharField(max_length=20, blank=True, null=True)
-    sex = models.CharField(max_length=5, blank=True, null=True)
-    profession = models.CharField(max_length=10, blank=True, null=True)
-    punish_record = models.CharField(max_length=20, blank=True, null=True)
-    qq_grade = models.CharField(max_length=20, blank=True, null=True)
-    qq_friends = models.CharField(max_length=20, blank=True, null=True)
-    safety_grade = models.CharField(max_length=10, blank=True, null=True)
-    publish_time = models.DateTimeField(blank=True, null=True)
-    price = models.FloatField(blank=True, null=True)
-    account_describe = models.CharField(max_length=200, blank=True, null=True)
-    account_number = models.BigIntegerField(blank=True, null=True)
-    account_photo = models.CharField(max_length=255, blank=True, null=True)
-    state = models.CharField(max_length=50, blank=True, null=True)
-    user = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
-    expiration_time = models.DateTimeField(blank=True, null=True)
-    gameareaid = models.IntegerField(blank=True, null=True)
+    gamearea = models.CharField(max_length=20)
+    sex = models.CharField(max_length=5)
+    profession = models.CharField(max_length=10)
+    punish_record = models.CharField(max_length=20)
+    qq_grade = models.CharField(max_length=20)
+    qq_friends = models.CharField(max_length=20)
+    safety_grade = models.CharField(max_length=10)
+    publish_time = models.DateTimeField()
+    price = models.FloatField()
+    account_describe = models.CharField(max_length=200)
+    account_number = models.IntegerField()
+    account_photo = models.CharField(max_length=255)
+    state = models.CharField(max_length=50)
+    user = models.ForeignKey('User', models.DO_NOTHING)
+    expiration_time = models.DateTimeField()
 
     class Meta:
         managed = False
@@ -32,89 +31,22 @@ class Account1(models.Model):
 
 
 class Account2(models.Model):
-    gamearea = models.CharField(max_length=20, blank=True, null=True)
-    sex = models.CharField(max_length=5, blank=True, null=True)
-    profession = models.CharField(max_length=20, blank=True, null=True)
-    punish_record = models.CharField(max_length=20, blank=True, null=True)
-    qq_grade = models.CharField(max_length=10, blank=True, null=True)
-    qq_friends = models.CharField(max_length=10, blank=True, null=True)
-    account_message = models.CharField(max_length=100, blank=True, null=True)
-    price = models.FloatField(blank=True, null=True)
-    publish_time = models.DateTimeField(blank=True, null=True)
-    expiration_time = models.DateTimeField(blank=True, null=True)
-    state = models.CharField(max_length=20, blank=True, null=True)
-    user = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
-    gameareaid = models.IntegerField(blank=True, null=True)
+    gamearea = models.CharField(max_length=20)
+    sex = models.CharField(max_length=5)
+    profession = models.CharField(max_length=20)
+    punish_record = models.CharField(max_length=20)
+    qq_grade = models.CharField(max_length=10)
+    qq_friends = models.CharField(max_length=10)
+    account_message = models.CharField(max_length=100)
+    price = models.FloatField()
+    publish_time = models.DateTimeField()
+    expiration_time = models.DateTimeField()
+    state = models.CharField(max_length=20)
+    user = models.ForeignKey('User', models.DO_NOTHING)
 
     class Meta:
         managed = False
         db_table = 'account2'
-
-
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=80)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group'
-
-
-class AuthGroupPermissions(models.Model):
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
-
-
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
-
-
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=150)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user'
-
-
-class AuthUserGroups(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
-
-
-class AuthUserUserPermissions(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
 
 
 class Credit(models.Model):
@@ -127,50 +59,6 @@ class Credit(models.Model):
     class Meta:
         managed = False
         db_table = 'credit'
-
-
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.PositiveSmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
-
-
-class DjangoMigrations(models.Model):
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_session'
 
 
 class Gold(models.Model):
@@ -228,7 +116,7 @@ class Goldorder2(models.Model):
     order_time = models.DateTimeField(blank=True, null=True)
     order_state = models.IntegerField()
     total_price = models.FloatField()
-    order_num = models.BigIntegerField()
+    order_num = models.IntegerField()
     order_tpye = models.IntegerField()
 
     class Meta:
@@ -240,7 +128,6 @@ class Goldtypes(models.Model):
     id = models.IntegerField(primary_key=True)
     gameareaid = models.IntegerField()
     areaname = models.CharField(max_length=50)
-    childtypenames = models.CharField(max_length=255)
 
     class Meta:
         managed = False
@@ -276,6 +163,7 @@ class Materialsorder(models.Model):
     payprice = models.FloatField()
     ordernumber = models.BigIntegerField()
     materials = models.ForeignKey(Materials, models.DO_NOTHING)
+    order = models.ForeignKey('Order', models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -303,7 +191,7 @@ class Materialsorder2(models.Model):
     order_time = models.DateTimeField(blank=True, null=True)
     order_state = models.IntegerField()
     total_price = models.FloatField()
-    order_num = models.BigIntegerField()
+    order_num = models.IntegerField()
     order_tpye = models.IntegerField()
 
     class Meta:
@@ -313,6 +201,8 @@ class Materialsorder2(models.Model):
 
 class Materialtypes(models.Model):
     id = models.IntegerField(primary_key=True)
+    gameareaid = models.IntegerField()
+    areaname = models.CharField(max_length=50)
     materialsid = models.IntegerField()
     materialsname = models.CharField(max_length=20)
 
@@ -406,7 +296,7 @@ class Sellorder1(models.Model):
     order_state = models.IntegerField()
     total_price = models.FloatField()
     order_num = models.IntegerField()
-    order_tpye = models.CharField(max_length=2)
+    order_tpye = models.IntegerField()
 
     class Meta:
         managed = False
@@ -420,7 +310,7 @@ class Sellorder2(models.Model):
     order_state = models.IntegerField()
     total_price = models.FloatField()
     order_num = models.IntegerField()
-    order_tpye = models.CharField(max_length=2)
+    order_tpye = models.IntegerField()
 
     class Meta:
         managed = False
@@ -428,7 +318,7 @@ class Sellorder2(models.Model):
 
 
 class User(models.Model):
-    username = models.CharField(max_length=100)
+    username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
     qq = models.IntegerField()
     email = models.CharField(max_length=50)
@@ -438,6 +328,7 @@ class User(models.Model):
     pay_pwd = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=100, blank=True, null=True)
     sign = models.CharField(max_length=200, blank=True, null=True)
+    money = models.BigIntegerField(blank=True, null=True)
 
     class Meta:
         managed = False

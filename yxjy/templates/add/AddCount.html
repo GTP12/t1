@@ -16,36 +16,36 @@
             <link rel="stylesheet" type="text/css" href="http://pic.7881.com/7881-2016/css/goods-publish/publish-type-02.css?v=0.0.1"/>
         <link rel="icon" type="image/png" href="/static/favicon.ico">
 </head>
-<body>
+<form action="{% url 'transaction:success' %}" method="post">
 	<!-- 顶部导航 -->
 	<div class="header" style="width: 100%">
 		<div class="wrapper clearfix">
 			<ul class="nav">
-				<li><a href="games-deal/index/">首页</a></li>
-				<li><a target="_blank" href="../account/account-deal.html">账号交易</a></li>
-				<li><a target="_blank" href="../account/account-purchase.html">账号求购</a></li>
-				<li><a target="_blank" href="../material/material-deal.html">材料交易</a></li>
-				<li><a target="_blank" href="../not_do/material-purchase.html">材料求购</a></li>
-				<li><a target="_blank" href="">金币交易</a></li>
-                <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+			    <li><a target="_self" href="{% url 'transaction:account_deal' 10000 '1' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' 10000 '1' %}">账号求购</a></li>
+				<li><a target="_self" href="{% url 'transaction:material_deal' 10000 20000 1 %}">材料交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' 10000 1 %}">金币交易</a></li>
+                <li class="active"><a target="_parent" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 
 			</ul>
 
 			<div class="user-info">
 
 				<!-- 我的订单 -->
-				<div class="register">
-					<a href=""><p>免费注册</p></a>
-				</div>
-				<div class="login">
-					<a href=""><p>登录</p></a>
-				</div>
+{#				<div class="register">#}
+{#					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>#}
+{#				</div>#}
+{#				<div class="login">#}
+{#					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>#}
+{#				</div>#}
 				<div class="order">
-					<a href=""><p>个人中心</p></a>
+					<a href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
 				</div>
 			</div>
 		</div>
-    </div>
+	</div>
+
 <div style="width:100%;height: 100px;background-color: white;border: white"></div>
 <div class="publish-header w980">
 
@@ -72,7 +72,7 @@
     <div class="form-item-l"><i>*</i><span>商品标题：</span></div>
     <div class="form-item-r" style="z-index: 1;">
         <p class="goods-title" name="spellTitle"><em>【</em><span></span><em>】</em></p>
-        <p class="goods-title-extra"><em class="iconfont"></em><input placeholder="您可以写填写个性化商品标题，吸引买家眼球" datatype="*" type="text" class="common-input w768 h-36" name="inputTitle" id="" value="" maxlength="50"><span><i>0</i>/50</span><span class="Validform_checktip"></span></p>
+        <p class="goods-title-extra"><em class="iconfont"></em><input placeholder="您可以写填写个性化商品标题，吸引买家眼球" datatype="*" type="text" class="common-input w768 h-36" name="inputTitle" id="h1"  maxlength="50"><span><i>0</i>/50</span><span class="Validform_checktip"></span></p>
     </div>
     <input name="title" type="hidden" />
     <p class="goods-title-extra aftertit">
@@ -81,15 +81,15 @@
 <div class="form-item clearfix" style="z-index: 1;">
     <div class="form-item-l"><i>*</i><span>卖多少钱：</span></div>
     <div class="form-item-r" style="z-index: 1;">
-        <input maxlength="12" datatype="*,howmuch" type="text" class="common-input w100 h-36 wntsell onlynums" name="price" id="" value="">
+        <input maxlength="12" datatype="*,howmuch" type="text" class="common-input w100 h-36 wntsell onlynums" name="price" id="h2" >
         <span class="val-unit">元</span>
-        <em class="serfee">需要收取手续费<i>0.0</i>元<a href="http://www.7881.com/helpcenter/73790970494518017.html" target="_blank">[了解更多]</a></em>
+        <em class="serfee">需要收取手续费<i>0.0</i>元<a href="http://www.7881.com/helpcenter/73790970494518017.html" target="_self">[了解更多]</a></em>
     </div>
 </div>
 <div class="form-item mrg-b-38 clearfix" style="z-index: 1;">
     <div class="form-item-l"><span>账号描述：</span></div>
     <div class="form-item-r" style="z-index: 1;">
-        <textarea placeholder="描述一下您的账号情况，丰富详细的描述将更有利于帮助您尽快找到合适的买家。" maxlength="1000" name="description"></textarea>
+        <textarea placeholder="描述一下您的账号情况，丰富详细的描述将更有利于帮助您尽快找到合适的买家。" maxlength="1000" name="description" id="h3"></textarea>
         <p class="form-tips-b">请您将不出售的商品转移出账号，如未转移，则视为与账号一起出售</p>
     </div>
 </div>
@@ -180,19 +180,9 @@
                 <div class="form-item-l"><i>*</i><span>所在大区：</span></div>
                 <div class="form-item-r" style="z-index: 1;">
                     <div class="game-ipt">
-                        <input type="text" class="common-input h-30 Validform_error" name="parameters[54]" value="" datatype="gameAccount,checkTransVoucher" placeholder="请输入游戏账号" nullmsg="请输入游戏账号">
-                        <span class="Validform_checktip Validform_wrong">请填写正确的信息</span>
-                    </div><em class="form-tips-r">游戏区应真实存在。</em>
-                </div>
-             </div>
-
-            <div class="form-item clearfix" style="z-index: 1;">
-                <div class="form-item-l"><i>*</i><span>交易类型：</span></div>
-                <div class="form-item-r" style="z-index: 1;">
-                    <div class="game-ipt">
-                        <input type="text" class="common-input h-30 Validform_error" name="parameters[55]" value="" datatype="gameAccount,checkTransVoucher" placeholder="请输入游戏账号" nullmsg="请输入游戏账号">
-                        <span class="Validform_checktip Validform_wrong">请填写正确的信息</span>
-                    </div><em class="form-tips-r">请选择账号交易或者金币材料交易。</em>
+                        <input type="text" id='h4' class="common-input h-30 " name="parameters[54]" value="" datatype="gameAccount,checkTransVoucher" placeholder="请输入游戏账号" nullmsg="请输入游戏账号">
+                        <span  id="h5" class="Validform_checktip "></span>
+                    </div><em class="form-tips-r" >游戏区应真实存在</em>
                 </div>
              </div>
 
@@ -200,15 +190,15 @@
                 <div class="form-item-l"><i>*</i><span>游戏账号：</span></div>
                 <div class="form-item-r" style="z-index: 1;">
                     <div class="game-ipt">
-                        <input type="text" class="common-input h-30 Validform_error" name="parameters[56]" value="" datatype="gameAccount,checkTransVoucher" placeholder="请输入游戏账号" nullmsg="请输入游戏账号">
-                        <span class="Validform_checktip Validform_wrong">游戏账号不能包含中文！</span>
+                        <input type="text" class="common-input h-30 " name="parameters[56]" value="" datatype="gameAccount,checkTransVoucher" placeholder="请输入游戏账号" nullmsg="请输入游戏账号">
+                        <span class="Validform_checktip "></span>
                     </div><em class="form-tips-r">游戏账号不要与7881账号一致，以避免资金被盗的风险。</em>
                 </div>
              </div>
             <div class="form-item clearfix" style="z-index: 1;">
                 <div class="form-item-l"><i>*</i><span>游戏密码：</span></div>
                 <div class="form-item-r" style="z-index: 1;"><div class="game-ipt">
-                    <input type="password" class="common-input h-30" name="parameters[57]" value="" datatype="*|hideYs" placeholder="请输入游戏密码" nullmsg="请输入游戏密码"><span class="Validform_checktip Validform_right">通过信息验证！</span>
+                    <input type="password" class="common-input h-30" name="parameters[57]" id="h9" value="" datatype="*|hideYs" placeholder="请输入游戏密码" nullmsg="请输入游戏密码"><span class="Validform_checktip Validform_right" >通过信息验证！</span>
                     </div><em class="form-tips-r">腾讯异地登录会出现冻结保护，请您先到QQ安全中心绑定手机后再发布。</em>
                 </div>
             </div>
@@ -216,27 +206,27 @@
                 <div class="form-item-l"><i>*</i><span>确认输入密码：</span></div>
                 <div class="form-item-r" style="z-index: 1;">
                     <div class="game-ipt">
-                        <input type="password" class="common-input h-30 Validform_error" name="parameters[59]" value="" datatype="*|hideYs" recheck="parameters[57]" errormsg="您两次输入的信息不一致" placeholder="请输入确认输入密码" nullmsg="请输入确认输入密码">
-                        <span class="Validform_checktip Validform_wrong">您两次输入的信息不一致</span>
+                        <input type="password" id='h10'class="common-input h-30" name="parameters[59]" value="" datatype="*|hideYs" recheck="parameters[57]" placeholder="请输入确认输入密码" nullmsg="请输入确认输入密码">
+                        <span class="Validform_checktip " id="h11"></span>
                     </div>
                 </div>
             </div>
 
             <div class="form-item clearfix" style="z-index: 1;">
-                <div class="form-item-l"><i>*</i><span>游戏角色名：</span></div>
+                <div class="form-item-l"><i>*</i><span>游戏角色：</span></div>
                 <div class="form-item-r" style="z-index: 1;">
                     <div class="game-ipt">
-                        <input type="text" class="common-input h-30" name="parameters[58]" value="" datatype="*|hideYs" placeholder="请输入游戏角色名" nullmsg="请输入游戏角色名">
+                        <input type="text" class="common-input h-30" name="parameters[58]" value="" datatype="*|hideYs" placeholder="请输入游戏角色" nullmsg="请输入游戏角色">
                         <span class="Validform_checktip Validform_right">通过信息验证！</span>
                     </div>
                 </div>
             </div>
             <div class="form-item clearfix" style="z-index: 1;">
-                <div class="form-item-l"><span>身份证号码：</span></div>
+                <div class="form-item-l"><span>qq等级：</span></div>
                 <div class="form-item-r" style="z-index: 1;">
                     <div class="game-ipt">
-                        <input type="text" class="common-input h-30 Validform_error" name="parameters[59828]" value="" datatype="idcard|orNull" placeholder="请输入身份证号码" nullmsg="请输入身份证号码">
-                        <span class="Validform_checktip Validform_wrong">请填写正确信息！</span>
+                        <input type="text" class="common-input h-30 " name="parameters[59828]" value="" datatype="idcard|orNull" placeholder="请输入qq等级" nullmsg="请输入qq等级">
+                        <span class="Validform_checktip"></span>
                     </div>
                 </div>
             </div>
@@ -403,25 +393,25 @@
     <div class="form-item-l"><i>*</i><span>联系手机：</span></div>
     <div class="form-item-r w170">
         <div class="game-ipt">
-            <input type="text" class="common-input h-30"  placeholder="请输入手机号码" name="phone" id="" value="13123240069" datatype="m" nullmsg="请留下可以联系到您的手机号码" errormsg="请留下可以联系到您的手机号码"/>
+            <input type="text" class="common-input h-30"  placeholder="请输入手机号码" name="phone" id="" value="" datatype="m" nullmsg="请留下可以联系到您的手机号码" errormsg="请留下可以联系到您的手机号码"/>
         </div>
     </div>
     <div class="form-item-l w110"><i>*</i><span>联系QQ：</span></div>
     <div class="form-item-r game-ipt w170">
         <div class="game-ipt">
-            <input type="text" class="common-input h-30" placeholder="请输入QQ号码" name="qq" id="" value="1359785501" datatype="n4-12" nullmsg="请留下可以联系到您的QQ号" errormsg="请留下可以联系到您的QQ号"/>
+            <input type="text" class="common-input h-30" placeholder="请输入QQ号码" name="qq" id="" value="" datatype="n4-12" nullmsg="请留下可以联系到您的QQ号" errormsg="请留下可以联系到您的QQ号"/>
         </div>
     </div>
 </div>    </div>
 </div>
             </div>
             <div class="publish-btn">
-                <p><input id="agreeMe" type="checkbox" checked="checked" />我同意<a href="http://www.7881.com/account_pro.html" target="_blank">《帐号交易服务协议》</a></p>
-                <a href="{% url 'transaction:success' %}" class="com-btn-01 color01 btn-pub">确认无误，立即发布</a>
+                <p><input id="agreeMe" type="checkbox" checked="checked" />我同意<a href="http://www.7881.com/account_pro.html" target="_self">《帐号交易服务协议》</a></p>
+                <input type="submit" name='ooo' class="com-btn-01 color01 btn-pub" value="确认无误，立即发布">
             </div>
         </div>
 
-    </form>
+
 </div>
 
 
@@ -441,12 +431,8 @@
         </div>
     </div>
 
-
-
-
-
     <input type="hidden" id="newUserFlag" value="0"/>
-
+</form>
     <!-- 通用底部 Start -->
 <div class="footer-content footer-01">
     <div class="footer-server-box">
@@ -485,15 +471,15 @@
     </div>
     <div class="footer-link">
         <div class="footer-link-a">
-            <a href="http://www.7881.com/aboutus.html" target="_blank" rel="nofollow">关于7881</a><em>|</em>
-            <a href="http://www.7881.com/contactus.html" target="_blank" rel="nofollow">联系我们</a><em>|</em>
-            <a href="http://www.7881.com/copyright.html" target="_blank" rel="nofollow">免责声明</a><em>|</em>
-            <a href="http://www.7881.com/hr.html" target="_blank" rel="nofollow">诚聘英才</a><em>|</em>
-            <a href="http://www.7881.com/ParentalControls.jsp" target="_blank" rel="nofollow">家长监护</a><em>|</em>
-            <a href="http://www.7881.com/cooperation.html" target="_blank" rel="nofollow">商户合作</a><em>|</em>
-            <a href="http://www.7881.com/sitemap.html" target="_blank">网站地图</a>
+            <a href="http://www.7881.com/aboutus.html" target="_self" rel="nofollow">关于7881</a><em>|</em>
+            <a href="http://www.7881.com/contactus.html" target="_self" rel="nofollow">联系我们</a><em>|</em>
+            <a href="http://www.7881.com/copyright.html" target="_self" rel="nofollow">免责声明</a><em>|</em>
+            <a href="http://www.7881.com/hr.html" target="_self" rel="nofollow">诚聘英才</a><em>|</em>
+            <a href="http://www.7881.com/ParentalControls.jsp" target="_self" rel="nofollow">家长监护</a><em>|</em>
+            <a href="http://www.7881.com/cooperation.html" target="_self" rel="nofollow">商户合作</a><em>|</em>
+            <a href="http://www.7881.com/sitemap.html" target="_self">网站地图</a>
         </div>
-        <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文[2018]9230-174号</p>
+        <p>Copyright <i>©</i> 2008-2014 7881.com版权所有  ICP证：<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_self">苏B1-20110004-4</a>(江苏猎宝网络科技股份有限公司) 苏网文[2018]9230-174号</p>
     </div>
 </div>
 <!-- 通用底部 End -->
@@ -574,6 +560,62 @@
         }
         alertTips();
 
+    </script>
+    <script>
+        $('#h4').blur(function () {
+
+		var areaname=$('#h4').val();
+		var $span=$('#h5');
+		$.ajax({
+			url:"{% url 'transaction:AddCount' %}",
+            type:'POST',
+			dataType:'json',
+            data:{
+                // 'csxfmiddlewaretoken':$('[name="csxfmiddlewaretoken"]').val(),
+                'areaname':areaname,
+            },
+            success:function (data) {
+                var status=data.status;
+                if (status== '200') {
+                    $span.css('color','green').html(data.msg);
+                    $("[name='ooo']").prop('disabled',false);
+				}else if (status=='900'){
+                	$span.css('color','red').html(data.msg);
+                	$("[name='ooo']").prop('disabled',true);
+
+				}
+                }
+        })
+
+    });
+        $('#h10').blur(function () {
+
+		var pwd1=$('#h9').val();
+		var pwd2=$('#h10').val();
+		var $span=$('#h11');
+		$.ajax({
+			url:"{% url 'transaction:AddCount' %}",
+            type:'POST',
+			dataType:'json',
+            data:{
+                // 'csxfmiddlewaretoken':$('[name="csxfmiddlewaretoken"]').val(),
+                'pwd1':pwd1,
+                'pwd2':pwd2
+            },
+            success:function (data) {
+                var status=data.status;
+                if (status== '200') {
+                    $span.css('color','green').html(data.msg);
+                    $("[name='ooo']").prop('disabled',false);
+
+				}else if (status=='900'){
+                	$span.css('color','red').html(data.msg);
+                	$("[name='ooo']").prop('disabled',true);
+				}
+                }
+        })
+
+    });
     </script>
 </body>
 </html>

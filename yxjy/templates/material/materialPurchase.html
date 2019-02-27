@@ -26,13 +26,13 @@
 <div class="header">
     <div class="wrapper clearfix">
         <ul class="nav">
-            <li><a target="_blank" href="{% url 'transaction:index' %}">首页</a></li>
-            <li><a target="_blank" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-            <li><a target="_blank" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
-            <li class="active"><a target="_blank" href="{% url 'transaction:material_deal' 10000 20000 1 %}">材料交易</a>
+            <li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+            <li><a target="_self" href="{% url 'transaction:account_deal' 10000 '1' %}">账号交易</a></li>
+            <li><a target="_self" href="{% url 'transaction:account_purchase' 10000 '1' %}">账号求购</a></li>
+            <li class="active"><a target="_self" href="{% url 'transaction:material_deal' 10000 20000 1 %}">材料交易</a>
             </li>
-            <li><a target="_parent" href="{% url 'transaction:gold_deal' 10000 1 %}">金币交易</a></li>
-            <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+            <li><a target="_self" href="{% url 'transaction:gold_deal' 10000 1 %}">金币交易</a></li>
+            <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
         </ul>
         <div class="user-info">
             <!-- 我的订单 -->
@@ -128,9 +128,8 @@
                     QQ、电话或游戏内等方式，您索要您的登陆密码、手机号码或手机验证码！（手游代充、账号订单除外）如有人冒充4396工作人员向您索要，请千万不要提供！并第一时间联系4396官方客服，电话：0911-3838438（此号码无外拨功能）。
                 </li>
                 <li>需支付总价
-                    <input type="text"
-                           style="color:#F90; font-size:16px; font-weight:bold; text-align:center; border:1px;width:65px;"
-                           readonly="readonly" value="{{ material.price }}" name="payprice" id="price">元
+                    <input type="text" style="color:#F90; font-size:16px; font-weight:bold; text-align:center; border:1px;width:65px;"
+                            value="{{ material.price }}" name="payprice" id="price">元
                 </li>
                 <li>
                     <input type="submit" value="确认购买"
@@ -195,11 +194,11 @@
         var price = document.getElementById("price");
         num.addEventListener("blur", function () {
             inputstr = this.value;
-            $.get("/games_deal/checknum/", {"num": inputstr}, function (data) {
+            prices = price.value;
+            $.get("/games_deal/checknum/", {"num": inputstr, "prices": prices}, function (data) {
                 tip3.style.color = data["color"];
                 tip3.innerHTML = data["msg"];
-                price.innerText = int(data["num"]) * ({{ material.price }});
-                alert({{ material.price }});
+                price.value = data['price'];
                 if (data.status == "fail") {
                     $("[type='submit']").prop("disabled", true); // 禁用提交按钮
                 } else {
@@ -208,22 +207,7 @@
             })
         })
     });
-    {#$(document).click(function () {#}
-    {#    var QQ = document.getElementById("shareServerId");#}
-    {#    var tip1 = document.getElementById("tip2");#}
-    {#    QQ.addEventListener("blur", function () {#}
-    {#        inputstr = this.value;#}
-    {#        $.get("/games_deal/checkqq/", {"qq": inputstr}, function (data) {#}
-    {#            tip1.style.color = data["color"];#}
-    {#            tip1.innerHTML = data["msg"];#}
-    {#            if (data.status == "fail") {#}
-    {#                $("[type='submit']").prop("disabled", true); // 禁用提交按钮#}
-    {#            } else {#}
-    {#                $("[type='submit']").prop("disabled", false); // 解禁提交按钮#}
-    {#            }#}
-    {#        })#}
-    {#    })#}
-    {#{)#}
+
 </script>
 <!--底部开始-->
 <div class="clear"></div>
@@ -240,7 +224,7 @@
         <a href="http://www.7881.com/cooperation.html" target="_blank" class="hs" rel="nofollow">&nbsp;商务合作&nbsp;</a> |
         <a href="http://www.7881.com/sitemap.html" target="_blank" class="hs">&nbsp;网站地图&nbsp;</a> |
         <a href="http://www.7881.com/articlelist9-0-0.html" target="_blank" class="hs">&nbsp;媒体声音&nbsp;</a> <br/>
-        Copyright Reserved 2008-2016 &copy; 7881游戏交易 网络文化经营许可证：
+        Copyright Reserved 2008-2016 &copy; 4396游戏交易 网络文化经营许可证：
         苏网文 〔2018〕9230-174号
         网站备案-<a href="http://www.miitbeian.gov.cn" target="_blank" class="hs">苏B1-20110004-4 </a>
     </div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <ul class="item-list">
+        {% for account in accounts %}
+                        <li class="item-con">
+						<div class="item-img fl">
+							<a href="{% url 'transaction:details3' account.id %}"><img src="{{ account.account_photo }}" alt=""></a>
+						</div>
+						<div class="item-tit fl">
+							<div class="item-tit-d">
+
+								<span class="tit-text " ><a href="{% url 'transaction:details3' account.id %}">{{ account.account_describe }}</a></span>
+							</div>
+							<div class="district fl">
+								<span>游戏区服：</span><span>{{ account.gamearea }}</span>
+							</div>
+							<div class="stock fl">
+								<span class="fl">账号安全：</span><span>{{ account.safety_grade }}</span>
+
+							</div>
+						</div>
+						<div class="item-price fl">
+							￥{{ account.price }}
+						</div>
+						<div class="buy fl">
+							<a href="">
+								<div class="buy-btn"><a target="_self" href="{% url 'transaction:account_order' account.id %}">
+									立即抢购
+								</a></div>
+							</a>
+						</div>
+					</li>
+
+        {% endfor %}
+
+ </ul>
+<div class="page">
+
+</div>
+</body>
+</html>

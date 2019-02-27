@@ -23,28 +23,28 @@
 	<div class="header">
 		<div class="wrapper clearfix">
 			<ul class="nav">
-				<li><a target="_blank" href="{% url 'transaction:index' %}">首页</a></li>
-				<li><a target="_blank" href="{% url 'transaction:account_deal' %}">账号交易</a></li>
-				<li><a target="_blank" href="{% url 'transaction:account_purchase' %}">账号求购</a></li>
-				<li><a target="_blank" href="{% url 'transaction:material_deal' 10000 20000 1%}">材料交易</a></li>
-				<li><a target="_blank" href="{% url 'transaction:gold_deal' 10000 1 %}">金币交易</a></li>
-                <li><a target="_blank" href="{% url 'transaction:Add' %}">买卖发布</a></li>
+				<li><a target="_self" href="{% url 'transaction:index' %}">首页</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_deal' 10000 '1' %}">账号交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:account_purchase' 10000 '1' %}">账号求购</a></li>
+				<li><a target="_self" href="{% url 'transaction:material_deal' 10000 20000 1 %}">材料交易</a></li>
+				<li><a target="_self" href="{% url 'transaction:gold_deal' 10000 1  %}">金币交易</a></li>
+                <li><a target="_self" href="{% url 'transaction:Add' %}">买卖发布</a></li>
 
 			</ul>
 
 			<div class="user-info">
 
 				<!-- 我的订单 -->
-				<div class="register">
-					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>
-				</div>
+{#				<div class="register">#}
+{#					<a href="{% url 'transaction:register' %}"><p>免费注册</p></a>#}
+{#				</div>#}
 				<div class="login">
-					<a href="{% url 'transaction:login_' %}"><p>登录</p></a>
+					<a href="{% url 'transaction:logout' %}"><p>登出</p></a>
 				</div>
-				<div class="order active">
+{#				<div class="order active">#}
 {#                    <a target="_parent" href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>#}
-					<a target="_blank" href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>
-				</div>
+{#					<a target="_blank" href="{% url 'transaction:person_center' %}"><p>个人中心</p></a>#}
+{#				</div>#}
 			</div>
 		</div>
 	</div>
@@ -65,10 +65,10 @@
 				<!-- 用户账户信息 -->
 				<div class="account-card fl">
 					<div class="a-amount ainfo">
-						<span>账户资金：&nbsp;</span><span>0.00</span><span>元</span>
+						<span>账户资金：&nbsp;</span><span>{{ totalmoneys }}</span><span>元</span>
 					</div>
 					<div class="a-amount ainfo">
-						<span>可用资金：&nbsp;</span><span>0.00</span><span>元</span>
+						<span>可用资金：&nbsp;</span><span>{{ totalmoneys }}</span><span>元</span>
 					</div>
 					<div class="a-amount ainfo">
 						<span>冻结资金：&nbsp;</span><span>0.00</span><span>元</span>
@@ -86,13 +86,13 @@
 							</div>
 							<ul class="list-con">
 								<li class="list-type2 active" index="0">
-									我的订单
+									购买物品订单
 								</li>
 								<li class="list-type2" index="1">
-									求购管理
+									求购物品订单
 								</li>
 								<li class="list-type2" index="2">
-									售卖管理
+									出售物品订单
 								</li>
 								
 							</ul>
@@ -142,7 +142,7 @@
 					<!-- 订单标题 -->
 					<div class="center-list-title fl">
 						<div class="list-title-top m-order fl list-text active">
-							材料订单
+							金币材料订单
 							<div class="white-line"></div>
 						</div>
 						<div class="list-title-top a-order fl list-text">
@@ -200,31 +200,32 @@
 						<!-- 材料订单内容 -->
 						<div class="m-order-con fl" >
 							<div class="btn-tab-w">
-								<div class="m-btn active">材料订单</div>
-								<div class="m-btn">账号订单</div>
-								<div class="m-btn">成功订单</div>
-								<div class="m-btn">代发货</div>
+								<div class="m-btn active" id="u1">金币材料订单</div>
+{#								<div class="m-btn" id="u2">金币订单</div>#}
+{#								<div class="m-btn" id="u3">成功订单</div>#}
+{#								<div class="m-btn" id="u4">待发货</div>#}
 							</div>
+							{% for i in myorder %}
 							<div class="m-order-list">
 								<ul class="list-wrapper">
 									<li class="item-order">
 										<div class="item-order-info">
 
 											<div class="order-item o-text">
-												<span>订单编号：</span><span>201820182018</span>
+												<span>订单编号：</span><span>{{ i.order_num}}</span>
 											</div>
 											<div class="order-number o-text">
-												<span>创建时间</span><span>2018-4-25-18:00</span>
+												<span>创建时间</span><span>{{ i.order_time }}</span>
 
 											</div>
 										</div>
 										<div class="order-detail fl m-list-tit">
 											<div class="list-tit-type1 fl list-c-s ">
-												<span class="deal-type fl">【邮寄交易】10万金=0.19元</span>
-												<span class="game-area fl">游戏区服：地下城与勇士/湖北区/湖北三区</span>
+												<span class="deal-type fl">{{ i.materials.goodinfo }}&nbsp;{{ i.materials.gamearea }}</span>
+												<span class="game-area fl">{{ i.materials.meaterialsname }}</span>
 											</div>
 											<div class="list-tit-type2 fl list-c-s list-f">
-												<span>0.19</span>
+												<span>{{ i.total_price }}</span>
 												<span>元</span>
 											</div>
 											<div class="list-tit-type3 fl list-c-s list-f lo-text">
@@ -236,70 +237,86 @@
 												</div>
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f o-text2">
-												<span>代发货</span>
+												{% if i.order_tpye == 0 %}
+                                                        <span>交易完成</span>
+                                                        {% elif i.order_tpye == 1 %}
+                                                        <span>代发货</span>
+                                                        {% elif i.order_tpye == 2 %}
+                                                        <span>交易失败</span>
+												{% endif %}
 											</div>
 										</div>
-
-									</li>
+								</ul>
+							</div>
+							{% endfor %}
+                        	{% for i in goldorder1 %}
+							<div class="m-order-list">
+								<ul class="list-wrapper">
 									<li class="item-order">
 										<div class="item-order-info">
 
 											<div class="order-item o-text">
-												<span>订单编号：</span><span>201820182018</span>
+												<span>订单编号：</span><span>{{ i.order_num}}</span>
 											</div>
 											<div class="order-number o-text">
-												<span>创建时间</span><span>2018-4-25-18:00</span>
+												<span>创建时间</span><span>{{ i.order_time }}</span>
 
 											</div>
 										</div>
 										<div class="order-detail fl m-list-tit">
 											<div class="list-tit-type1 fl list-c-s ">
-												<span class="deal-type fl">【邮寄交易】10万金=0.19元</span>
-												<span class="game-area fl">游戏区服：地下城与勇士/湖北区/湖北三区</span>
+												<span class="deal-type fl">{{ i.gold.goodinfo }}&nbsp;{{ i.gold.gamearea }}</span>
+												<span class="game-area fl">{{ i.order_num }}</span>
 											</div>
 											<div class="list-tit-type2 fl list-c-s list-f">
-												<span>0.19</span>
+												<span>{{ i.total_price }}</span>
 												<span>元</span>
 											</div>
 											<div class="list-tit-type3 fl list-c-s list-f lo-text">
 												短信发送成功
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f">
-												<div class="list-btn">
+												<div class="list-btn binding">
 													绑定手机号
 												</div>
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f o-text2">
-												<span>代发货</span>
+												{% if i.order_tpye == 0 %}
+                                                        <span>交易完成</span>
+                                                        {% elif i.order_tpye == 1 %}
+                                                        <span>代发货</span>
+                                                        {% elif i.order_tpye == 2 %}
+                                                        <span>交易失败</span>
+												{% endif %}
 											</div>
 										</div>
-
-									</li>
 								</ul>
 							</div>
+							{% endfor %}
 						</div>
 						<!-- 账号订单内容 -->
 						<div class="a-order-con" style="display: none;">
+							{% for j in sellorder1 %}
 							<div class="a-order-list">
 								<ul class="list-wrapper">
 									<li class="item-order">
 										<div class="item-order-info">
 
 											<div class="order-item o-text">
-												<span>订单编号：</span><span>201820182018</span>
+												<span>订单编号：</span><span>{{ j.order_num }}</span>
 											</div>
 											<div class="order-number o-text">
-												<span>创建时间：</span><span>2018-4-25-18:00</span>
+												<span>创建时间：</span><span>{{ j.order_time }}</span>
 
 											</div>
 										</div>
 										<div class="order-detail fl a-list-tit">
 											<div class="list-tit-type1 fl list-c-s ">
-												<span class="deal-type fl">【邮寄交易】10万金=0.19元</span>
-												<span class="game-area fl">游戏区服：地下城与勇士/湖北区/湖北三区</span>
+												<span class="deal-type fl">{{ j.account1.gamearea }}&nbsp{{ j.account1.profession }}</span>
+												<span class="game-area fl">{{ j.account1.account_describe }}</span>
 											</div>
 											<div class="list-tit-type2 fl list-c-s list-f">
-												<span>0.19</span>
+												<span>{{ j.account1.price }}</span>
 												<span>元</span>
 											</div>
 											<div class="list-tit-type3 fl list-c-s list-f o-text2">
@@ -319,55 +336,21 @@
 												</div>
 											</div>
 											<div class="list-tit-type7 fl list-c-s list-f o-text2">
-												代发货
+												{% if j.order_state == 0 %}
+                                                        <span>交易完成</span>
+                                                        {% elif j.order_state == 1 %}
+                                                        <span>代发货</span>
+                                                        {% elif j.order_state == 2 %}
+                                                        <span>交易失败</span>
+                                                    {% endif %}
 											</div>
 										</div>
 
 									</li>
-									<li class="item-order">
-										<div class="item-order-info">
-
-											<div class="order-item o-text">
-												<span>订单编号：</span><span>201820182018</span>
-											</div>
-											<div class="order-number o-text">
-												<span>创建时间：</span><span>2018-4-25-18:00</span>
-
-											</div>
-										</div>
-										<div class="order-detail fl a-list-tit">
-											<div class="list-tit-type1 fl list-c-s ">
-												<span class="deal-type fl">【邮寄交易】10万金=0.19元</span>
-												<span class="game-area fl">游戏区服：地下城与勇士/湖北区/湖北三区</span>
-											</div>
-											<div class="list-tit-type2 fl list-c-s list-f">
-												<span>0.19</span>
-												<span>元</span>
-											</div>
-											<div class="list-tit-type3 fl list-c-s list-f o-text2">
-												1
-											</div>
-											<div class="list-tit-type4 fl list-c-s list-f lo-text">
-												短信发送成功
-											</div>
-											<div class="list-tit-type5 fl list-c-s list-f o-text2">
-												<div class="list-btn">
-													绑定手机号
-												</div>
-											</div>
-											<div class="list-tit-type6 fl list-c-s list-f o-text2">
-												<div class="list-btn">
-													客服服务
-												</div>
-											</div>
-											<div class="list-tit-type7 fl list-c-s list-f o-text2">
-												代发货
-											</div>
-										</div>
-
-									</li>
+									
 								</ul>
 							</div>
+							{% endfor %}
 						</div>
 					</div>
 					<!-- 翻页 -->
@@ -451,19 +434,19 @@
 				<div class="purchase panel" style="display: none;">
 					<!-- 求购标题 -->
 					<div class="center-list-title fl">
-						<div class="list-title-top  fl list-text active">
-							全部订单
-							<div class="white-line"></div>
-						</div>
-						<div class="list-title-top  fl list-text">
-							材料求购
-							<div class="white-line"></div>
-						</div>
-						<div class="list-title-top  fl list-text">
-							账号求购
-							<div class="white-line"></div>
-						</div>
-						
+{#						<div class="list-title-top  fl list-text active">#}
+{#							全部订单#}
+{#							<div class="white-line"></div>#}
+{#						</div>#}
+{#						<div class="list-title-top  fl list-text">#}
+{#							账号求购#}
+{#							<div class="white-line"></div>#}
+{#						</div>#}
+{#						<div class="list-title-top  fl list-text">#}
+{#							账号求购#}
+{#							<div class="white-line"></div>#}
+{#						</div>#}
+
 						<div class="list-title-bottom fl list-text">
 							<!-- 全部订单列表头 -->
 							<div class="m-list-tit list-tit fl p-a-list-t" >
@@ -524,6 +507,8 @@
 					<!-- 求购内容 -->
 					<div class="order-list-content fl">
 						<!-- 全部订单 -->
+                        {% for foo in purchaseorder1 %}
+
 						<div class="total-order">
 							<div class="select-area">
 								<input type="checkbox" name="" id="">
@@ -536,29 +521,35 @@
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
 												<input type="checkbox" name="" id="">
-												<span>创建时间：</span><span>2018-4-25-18:00</span>
+												<span>创建时间：</span><span>{{ foo.order_time }}</span>
 											</div>
 											<div class="order-item o-text">
-												<span>订单编号：</span><span>201820182018</span>
+												<span>订单编号：</span><span>{{ foo.order_num }}</span>
 											</div>
 										</div>
 										<div class="order-detail fl m-list-tit">
 											<div class="list-tit-type1 fl list-c-s ">
-												<span class="deal-type fl">【邮寄交易】10万金=0.19元</span>
-												<span class="game-area fl">游戏区服：地下城与勇士/湖北区/湖北三区</span>
+												<span class="deal-type fl">{{ foo.account2.account_message }}</span>
+												<span class="game-area fl">{{ foo.account2.gamearea }}</span>
 											</div>
 											<div class="list-tit-type2 fl list-c-s list-f">
-												<span>0.19</span>
+												<span>{{ foo.total_price }}</span>
 												<span>元</span>
 											</div>
 											<div class="list-tit-type3 fl list-c-s list-f o-text2">
 												1
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f">
-												
+
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f-c o-text2">
-												求购中
+												{% if foo.order_tpye == 0 %}
+                                                        <span>交易完成</span>
+                                                        {% elif foo.order_tpye == 1 %}
+                                                        <span>求购中</span>
+                                                        {% elif foo.order_tpye == 2 %}
+                                                        <span>交易失败</span>
+                                                    {% endif %}
 												<div class="list-btn">
 													修改
 												</div>
@@ -568,8 +559,9 @@
 
 								</ul>
 							</div>
+                            {% endfor %}
 						</div>
-						<!-- 材料求购 -->
+						<!-- 账号求购 -->
 						<div class="m-p-order" style="display: none;">
 							<div class="select-area">
 								<input type="checkbox" name="" id="">
@@ -577,25 +569,30 @@
 								<div class="o-btn fl">下架</div>
 
                             </div>
+                            {% for foo in purchaseorder1 %}
+                            
+
+                            
+                            
 							<div class="m-order-list">
 								<ul class="list-wrapper">
 									<li class="item-order">
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
 												<input type="checkbox" name="" id="">
-												<span>创建时间：</span><span>2018-4-25-18:00</span>
+												<span>创建时间：</span><span>{{ foo.order_time }}</span>
 											</div>
 											<div class="order-item o-text">
-												<span>订单编号：</span><span>201820182018</span>
+												<span>订单编号：</span><span>{{ foo.order_num }}</span>
 											</div>
 										</div>
 										<div class="order-detail fl m-list-tit">
 											<div class="list-tit-type1 fl list-c-s ">
-												<span class="deal-type fl">【邮寄交易】10万金=0.19元</span>
-												<span class="game-area fl">游戏区服：地下城与勇士/湖北区/湖北三区</span>
+												<span class="deal-type fl">{{ foo.account2.gamearea }}</span>
+												<span class="game-area fl">{{ foo.account2.account_message }}</span>
 											</div>
 											<div class="list-tit-type2 fl list-c-s list-f">
-												<span>0.19</span>
+												<span>{{ foo.account2.price }}</span>
 												<span>元</span>
 											</div>
 											<div class="list-tit-type3 fl list-c-s list-f o-text2">
@@ -605,7 +602,13 @@
 												
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f-c o-text2">
-												求购中
+												    {% if foo.order_tpye == 0 %}
+                                                        <span>交易完成</span>
+                                                        {% elif foo.order_tpye == 1 %}
+                                                        <span>求购中</span>
+                                                        {% elif foo.order_tpye == 2 %}
+                                                        <span>交易失败</span>
+                                                    {% endif %}
 												<div class="list-btn">
 													修改
 												</div>
@@ -615,8 +618,9 @@
 
 								</ul>
 							</div>
+                            {% endfor %}
 						</div>
-						<!-- 账号求购 -->
+						<!-- 材料求购 -->
 						<div class="account-p-order" style="display: none;">
 							<div class="select-area">
 								<input type="checkbox" name="" id="">
@@ -668,24 +672,24 @@
 					</div>
 				</div>
 
-				<!-- 售卖管理 -->
+				<!-- 购买管理 -->
 				<div class="sell panel">
 					<div class="center-list-title fl">
 						<div class="list-title-top  fl list-text active">
-							商品材料
+							购买材料
 							<div class="white-line"></div>
 						</div>
 						<div class="list-title-top  fl list-text">
-							商品账号
+							购买账号
 							<div class="white-line"></div>
 						</div>
 						<div class="list-title-top  fl list-text">
-							订单管理
+							购买金币
 							<div class="white-line"></div>
 						</div>
 						
 						<div class="list-title-bottom fl list-text">
-							<!-- 商品材料列表头 -->
+							<!-- 购买材料列表头 -->
 							<div class="m-list-tit list-tit fl p-a-list-t" >
 								<div class="list-tit-type1 list-tit-type">
 									商品名称
@@ -703,7 +707,7 @@
 									商品状态
 								</div>
 							</div>
-							<!-- 商品账号列表头 -->
+							<!-- 购买账号列表头 -->
 							<div class="m-list-tit list-tit fl p-a-list-t" style="display: none;">
 								<div class="list-tit-type1 list-tit-type">
 									商品名称
@@ -721,7 +725,7 @@
 									商品状态
 								</div>
 							</div>
-							<!-- 订单管理列表头 -->
+							<!-- 购买金币列表头 -->
 							<div class="m-list-tit list-tit fl p-a-list-t" style="display: none;">
 								<div class="list-tit-type1 list-tit-type">
 									商品名称
@@ -742,12 +746,16 @@
 						</div>
 					</div>
 					<div class="order-list-content fl">
-						<!-- 商品材料 -->
-						<div class="total-order">
+						<!-- 购买材料 -->
+						{% for foo in materialsorder2 %}
+
+
+
+                        <div class="total-order">
 							<div class="select-area">
 								<input type="checkbox" name="" id="">
-								<div class="o-btn fl">全选</div>
-								<div class="o-btn fl">下架</div>
+{#								<div class="o-btn fl">全选</div>#}
+{#								<div class="o-btn fl">下架</div>#}
 
 							</div>
 							<div class="m-order-list">
@@ -756,19 +764,19 @@
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
 												<input type="checkbox" name="" id="">
-												<span>创建时间：</span><span>2018-4-25-18:00</span>
+												<span>创建时间：</span><span>{{ foo.order_time }}</span>
 											</div>
 											<div class="order-item o-text">
-												<span>订单编号：</span><span>201820182018</span>
+												<span>订单编号：</span><span>{{ foo.order_num }}</span>
 											</div>
 										</div>
 										<div class="order-detail fl m-list-tit">
 											<div class="list-tit-type1 fl list-c-s ">
-												<span class="deal-type fl">【邮寄交易】10万金=0.19元</span>
-												<span class="game-area fl">游戏区服：地下城与勇士/湖北区/湖北三区</span>
+												<span class="deal-type fl">{{ foo.materials.gamearea }}</span>
+												<span class="game-area fl">{{ foo.materials.meaterialsname }}</span>
 											</div>
 											<div class="list-tit-type2 fl list-c-s list-f">
-												<span>0.19</span>
+												<span>{{ foo.total_price }}</span>
 												<span>元</span>
 											</div>
 											<div class="list-tit-type3 fl list-c-s list-f o-text2">
@@ -780,91 +788,102 @@
 												</div>
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f-c o-text2">
-												求购中
-												<div class="list-btn">
-													修改
-												</div>
+												{% if foo.order_tpye == 0 %}
+                                                        <span>交易完成</span>
+                                                        {% elif foo.order_tpye == 1 %}
+                                                        <span>交易中</span>
+                                                        {% elif foo.order_tpye == 2 %}
+                                                        <span>交易失败</span>
+                                                    {% endif %}
 											</div>
 										</div>
 									</li>
 
 								</ul>
 							</div>
+                            {% endfor %}
 						</div>
 						<!-- 商品账号 -->
+
+
 						<div class="m-p-order" style="display: none;">
 							<div class="select-area">
 								<input type="checkbox" name="" id="">
-								<div class="o-btn fl">全选</div>
-								<div class="o-btn fl">下架</div>
-								<div><a class=" o-btn publishBtn1" href="{% url 'transaction:AddCount' %}">重新发布</a></div>
                             </div>
+                        {% for foo in purchaseorder2 %}
 							<div class="m-order-list">
 								<ul class="list-wrapper">
 									<li class="item-order">
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
 												<input type="checkbox" name="" id="">
-												<span>创建时间：</span><span>2018-4-25-18:00</span>
+												<span>创建时间：</span><span>{{ foo.order_time }}</span>
 											</div>
 											<div class="order-item o-text">
-												<span>订单编号：</span><span>201820182018</span>
+												<span>订单编号：</span><span>{{ foo.order_num }}</span>
 											</div>
 										</div>
 										<div class="order-detail fl m-list-tit">
 											<div class="list-tit-type1 fl list-c-s ">
-												<span class="deal-type fl">【邮寄交易】10万金=0.19元</span>
-												<span class="game-area fl">游戏区服：地下城与勇士/湖北区/湖北三区</span>
+												<span class="deal-type fl">{{ foo.account2.gamearea }}</span>
+												<span class="game-area fl">{{ foo.account2.account_message }}</span>
 											</div>
 											<div class="list-tit-type2 fl list-c-s list-f">
-												<span>0.19</span>
+												<span>{{ foo.total_price }}</span>
 												<span>元</span>
 											</div>
 											<div class="list-tit-type3 fl list-c-s list-f o-text2">
-												1
+												 1
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f">
 												
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f-c o-text2">
-												求购中
-												<div class="list-btn">
-													修改
-												</div>
+												{% if foo.order_tpye == 0 %}
+                                                        <span>交易完成</span>
+                                                        {% elif foo.order_tpye == 1 %}
+                                                        <span>交易中</span>
+                                                        {% elif foo.order_tpye == 2 %}
+                                                        <span>交易失败</span>
+                                                    {% endif %}
 											</div>
 										</div>
 									</li>
 
 								</ul>
 							</div>
+                        {% endfor %}
 						</div>
-						<!-- 订单管理 -->
+
+						<!-- 金币管理 -->
 						<div class="account-p-order" style="display: none;">
-							<div class="btn-tab-w">
-								<div class="m-btn active">材料订单</div>
-								<div class="m-btn">账号订单</div>
-								<div class="m-btn">成功订单</div>
-								<div class="m-btn">代发货</div>
+                        <div class="btn-tab-w">
+{#								<div class="m-btn active">材料订单</div>#}
+{#								<div class="m-btn">账号订单</div>#}
+{#								<div class="m-btn">成功订单</div>#}
+{#								<div class="m-btn">代发货</div>#}
 							</div>
+                            {% for foo in goldorder2 %}
+
 							<div class="m-order-list">
 								<ul class="list-wrapper">
 									<li class="item-order">
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
 												<input type="checkbox" name="" id="">
-												<span>创建时间：</span><span>2018-4-25-18:00</span>
+												<span>创建时间：</span><span>{{ foo.order_time }}</span>
 											</div>
 											<div class="order-item o-text">
-												<span>订单编号：</span><span>201820182018</span>
+												<span>订单编号：</span><span>{{ foo.order_num }}</span>
 											</div>
 										</div>
 										<div class="order-detail fl m-list-tit">
 											<div class="list-tit-type1 fl list-c-s ">
-												<span class="deal-type fl">【邮寄交易】10万金=0.19元</span>
-												<span class="game-area fl">游戏区服：地下城与勇士/湖北区/湖北三区</span>
+												<span class="deal-type fl">{{ foo.gold.gamearea }}&nbsp;{{ foo.gold.goodsnum }}&nbsp{{ foo.gold.unitprice }}</span>
+												<span class="game-area fl">{{ foo.gold.delivery }}</span>
 											</div>
 											<div class="list-tit-type2 fl list-c-s list-f">
-												<span>0.19</span>
+												<span>{{ foo.total_price }}</span>
 												<span>元</span>
 											</div>
 											<div class="list-tit-type3 fl list-c-s list-f o-text2">
@@ -876,22 +895,28 @@
 												</div>
 											</div>
 											<div class="list-tit-type4 fl list-c-s list-f-c o-text2">
-												求购中
-												<div class="list-btn">
-													修改
-												</div>
+												{% if foo.order_tpye == 0 %}
+                                                        <span>交易完成</span>
+                                                        {% elif foo.order_tpye == 1 %}
+                                                        <span>交易中</span>
+                                                        {% elif foo.order_tpye == 2 %}
+                                                        <span>交易失败</span>
+                                                    {% endif %}
 											</div>
 										</div>
 									</li>
 
 								</ul>
 							</div>
+                            {% endfor %}
 						</div>
 					</div>
 				</div>
 
 
 				<!-- 资金明细 -->
+
+
 				<div class="funds-detail panel">
 					<div class="center-list-title fl">
 						<div class="list-title-top m-order fl list-text active">
@@ -922,52 +947,28 @@
 									状态
 								</div>
 							</div>
-							<div class="f-order-list">
-								<ul >
-									<li class="f-list-tit">
-										<div class="list-tit-type1 f-s">
-											1180426777777777
-										</div>
-										<div class="list-tit-type2 f-s">
-											2018-04-26 14:23:23
-										</div>
-										<div class="list-tit-type3 f-s">
-											-0.9
-										</div>
-										<div class="list-tit-type4 f-s">
-											交易完成
-										</div>
-									</li>
-									<li class="f-list-tit">
-										<div class="list-tit-type1 f-s">
-											1180426777777777
-										</div>
-										<div class="list-tit-type2 f-s">
-											2018-04-26 14:23:23
-										</div>
-										<div class="list-tit-type3 f-s">
-											-0.9
-										</div>
-										<div class="list-tit-type4 f-s">
-											交易完成
-										</div>
-									</li>
-									<li class="f-list-tit">
-										<div class="list-tit-type1 f-s">
-											1180426777777777
-										</div>
-										<div class="list-tit-type2 f-s">
-											2018-04-26 14:23:23
-										</div>
-										<div class="list-tit-type3 f-s">
-											-0.9
-										</div>
-										<div class="list-tit-type4 f-s">
-											交易完成
-										</div>
-									</li>
-								</ul>
-							</div>
+                            {% for i in moneys %}
+                                {% if i.dealstate == '1' %}
+                                <div class="f-order-list">
+                                    <ul >
+                                        <li class="f-list-tit">
+                                            <div class="list-tit-type1 f-s">
+                                                {{ i.number }}
+                                            </div>
+                                            <div class="list-tit-type2 f-s">
+                                                {{ i.finishtime }}
+                                            </div>
+                                            <div class="list-tit-type3 f-s">
+                                                {{ i.dealprice }}
+                                            </div>
+                                            <div class="list-tit-type4 f-s">
+                                                交易完成
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
 						</div>
 					</div>
 				</div>
@@ -1002,52 +1003,28 @@
 									状态
 								</div>
 							</div>
-							<div class="f-order-list">
-								<ul >
-									<li class="f-list-tit">
-										<div class="list-tit-type1 f-s">
-											1180426777777777
-										</div>
-										<div class="list-tit-type2 f-s">
-											2018-04-26 14:23:23
-										</div>
-										<div class="list-tit-type3 f-s">
-											-0.9
-										</div>
-										<div class="list-tit-type4 f-s">
-											交易完成
-										</div>
-									</li>
-									<li class="f-list-tit">
-										<div class="list-tit-type1 f-s">
-											1180426777777777
-										</div>
-										<div class="list-tit-type2 f-s">
-											2018-04-26 14:23:23
-										</div>
-										<div class="list-tit-type3 f-s">
-											-0.9
-										</div>
-										<div class="list-tit-type4 f-s">
-											交易完成
-										</div>
-									</li>
-									<li class="f-list-tit">
-										<div class="list-tit-type1 f-s">
-											1180426777777777
-										</div>
-										<div class="list-tit-type2 f-s">
-											2018-04-26 14:23:23
-										</div>
-										<div class="list-tit-type3 f-s">
-											-0.9
-										</div>
-										<div class="list-tit-type4 f-s">
-											交易完成
-										</div>
-									</li>
-								</ul>
-							</div>
+								{% for i in moneys %}
+                                {% if i.dealstate == '2' %}
+                                <div class="f-order-list">
+                                    <ul >
+                                        <li class="f-list-tit">
+                                            <div class="list-tit-type1 f-s">
+                                                {{ i.number }}
+                                            </div>
+                                            <div class="list-tit-type2 f-s">
+                                                {{ i.finishtime }}
+                                            </div>
+                                            <div class="list-tit-type3 f-s">
+                                                {{ i.dealprice }}
+                                            </div>
+                                            <div class="list-tit-type4 f-s">
+                                                交易完成
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
 						</div>
 					</div>
 				</div>
@@ -1068,7 +1045,7 @@
 							<div class="white-line"></div>
 						</div>
 						<div class="list-title-bottom fl list-text">
-							<!-- 材料订单列表头 -->
+							<!-- 充值订单列表头 -->
 							<div class="f-list-tit list-tit fl " >
 								<div class="list-tit-type1 list-tit-type">
 									订单号
@@ -1083,58 +1060,34 @@
 									状态
 								</div>
 							</div>
-							<div class="f-order-list">
-								<ul >
-									<li class="f-list-tit">
-										<div class="list-tit-type1 f-s">
-											1180426777777777
-										</div>
-										<div class="list-tit-type2 f-s">
-											2018-04-26 14:23:23
-										</div>
-										<div class="list-tit-type3 f-s">
-											-0.9
-										</div>
-										<div class="list-tit-type4 f-s">
-											交易完成
-										</div>
-									</li>
-									<li class="f-list-tit">
-										<div class="list-tit-type1 f-s">
-											1180426777777777
-										</div>
-										<div class="list-tit-type2 f-s">
-											2018-04-26 14:23:23
-										</div>
-										<div class="list-tit-type3 f-s">
-											-0.9
-										</div>
-										<div class="list-tit-type4 f-s">
-											交易完成
-										</div>
-									</li>
-									<li class="f-list-tit">
-										<div class="list-tit-type1 f-s">
-											1180426777777777
-										</div>
-										<div class="list-tit-type2 f-s">
-											2018-04-26 14:23:23
-										</div>
-										<div class="list-tit-type3 f-s">
-											-0.9
-										</div>
-										<div class="list-tit-type4 f-s">
-											交易完成
-										</div>
-									</li>
-								</ul>
-							</div>
+							{% for i in moneys %}
+                                {% if i.dealstate == '3' %}
+                                <div class="f-order-list">
+                                    <ul >
+                                        <li class="f-list-tit">
+                                            <div class="list-tit-type1 f-s">
+                                                {{ i.number }}
+                                            </div>
+                                            <div class="list-tit-type2 f-s">
+                                                {{ i.finishtime }}
+                                            </div>
+                                            <div class="list-tit-type3 f-s">
+                                                {{ i.dealprice }}
+                                            </div>
+                                            <div class="list-tit-type4 f-s">
+                                                交易完成
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
 						</div>
 					</div>
 				</div>
 
 				<!-- 修改登录密码 -->
-				<div class="reset-login-pw panel reset" style="display: none;">
+				<div class="reset-login-pw panel reset " id="h0" style="display: none;">
 					<div class="acount-t t-c">
 						账户设置
 					</div>
@@ -1151,34 +1104,36 @@
 							<div class="i-text fl">
 								<span class="fr t-c">当前密码：</span>
 							</div>
-							<input type="password" name="" id="" class="a-input fl">
+							<input type="password" name="password" id="h1" class="a-input fl"><span id="msg"></span>
 						</div>
 						<div class="info-list clearfix">
 							<div class="i-text fl">
 								<span class="fr t-c">新密码：</span>
 							</div>
-							<input type="password" name="" id="" class="a-input fl">
+							<input type="password" name="newpwd" id="h2" class="a-input fl">
 						</div>
 						<div class="info-list clearfix">
 							<div class="i-text fl">
 								<span class="fr t-c">确认新密码：</span>
 							</div>
-							<input type="password" name="" id="" class="a-input fl">
+							<input type="password" name="newpwd2" id="h3" class="a-input fl"><span id="ass"></span>
 						</div>
 						<div class="info-list clearfix">
 							<div class="i-text fl">
 								<span class="fr t-c">验证码：</span>
 							</div>
-							<input type="text" name="" id="" class="a-input fl">
+							<input type="text" name="code" id="h4" class="a-input fl">
 							<div class="code-img fl">
-								<img src="../static/images/code.png" alt="">
+								<img src="{% static 'images/code.png' %}" alt="666">
 								<span class="t-c">看不清，换一张</span>
 							</div>
 						</div>
 
 						<div class="submit-btn">
-							提交
-						</div>
+
+                            <input type="submit" value="提交" id="h5" style="color: #8a6d3b">
+
+                        </div>
 					</div>
 				</div>
 				<!-- 修改支付密码 -->
@@ -1297,7 +1252,7 @@
 						</div>
 						<div class="success-alert-w">
 							<div class="success-alert">
-								<img src="../static/images/icon5.png" alt="">
+								<img src="{% static 'images/icon5.png' %}" alt="">
 								<span>恭喜您，支付密码设置成功！</span>
 							</div>
 						</div>
